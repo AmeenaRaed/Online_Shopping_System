@@ -5,6 +5,46 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@layer base {
+    :root {
+      --muted-rose: #CB8D9A;
+      --soft-lilac: #9D98AE;
+      --dusky-blue: #8497B5;
+      --peach-glow: #EFAF96;
+      --warm-coral: #EA9087;
+      --very-light-pink:#FEF7FF;
+    }
+}  
+
+.bg-muted-rose {
+    background-color: var(--muted-rose);
+}
+
+
+.bg-soft-lilac {
+    background-color: var(--soft-lilac);
+}
+.bg-dusky-blue {
+    background-color: var(--dusky-blue);
+}
+.bg-peach-glow {
+    background-color: var(--peach-glow);
+}
+.bg-warm-coral {
+    background-color: var(--warm-coral);
+}
+
+.bg-very-light-pink {
+    background-color: var(--very-light-pink);
+}
+
+a:hover {
+    background-color: var(--warm-coral);
+    opacity: 0.50;
+
+  }
+  
+  
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
