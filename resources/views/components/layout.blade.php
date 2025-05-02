@@ -17,17 +17,17 @@
 <body class="bg-very-light-pink">
 
     <header>
-        <div class="felx flex-col justify-center items-center gap-4  m-4 p-4">
+        <div class="felx flex-col justify-center items-center gap-4  mx-4 p-2">
             <div class=" flex justify-between items-center mx-10">
                 <!-- Left-aligned logo -->
                 <div class="flex">
-                    <img src="images/logo2.png" alt="Logo" class="w-full max-w-[150px] h-auto" />
+                    <img src="images/shoplogo.png" alt="Logo" class="w-full max-w-[100px] h-auto" />
                   </div>
 
-                  <div class="flex items-center mx-5 max-w-4xl bg-muted-rose opacity-25 rounded-full shadow-md px-4 py-2">
+                  <div class="flex items-center mx-2 max-w-4xl bg-muted-rose opacity-70 rounded-full shadow-md px-8 py-2">
                     <!-- Search input -->
                     <input type="text" placeholder="Search..." 
-                           class="w-full bg-transparent focus:outline-none text-gray-800 placeholder-gray-900" />
+                           class="w-full bg-transparent focus:outline-none text-gray-900 placeholder-black" />
                   
                     <!-- Search icon -->
                     <button onclick=""><x-searchicon class="w-6 h-6 text-gray-600" /></button>
@@ -51,7 +51,7 @@
                 <!-- Left-aligned navigation -->
                 <nav class="flex gap-10 flex-wrap">
                   <ul class="flex space-x-4">
-                    <li><a href="/" class="px-4 py-2 rounded-md hover:bg-peach-glow">Home</a></li>
+                    <li><a href="/" class="px-4 py-2 rounded-md">Home</a></li>
                     <li><a href="/brands" class="px-4 py-2 rounded-md">Brands</a></li>
                     <li><a href="#" class="px-4 py-2 rounded-md">Other Links</a></li>
                   </ul>
@@ -79,18 +79,21 @@
 
    
 
-<footer class="bg-muted-rose rounded-lg shadow-sm bottom-1 fixed w-full opacity-70">
-    <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
-      <span class="text-sm text-gray-500 text-white sm:text-center">2025 <a href="#" class="hover:underline">OSS</a>. All Rights Reserved to us!!
-    </span>
-    <ul class="flex flex-wrap items-center mt-3 text-sm font-medium  text-white sm:mt-0">
-        <li>
-            <a href="/aboutus" class="hover:underline me-4 md:me-6">About</a>
-        </li>
-    </ul>
-    </div>
-</footer>
-
+    <footer class="bg-muted-rose shadow-sm fixed bottom-0 w-full opacity-70">
+        <div class="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center">
+            <!-- Centered text -->
+            <span class="text-sm text-white text-center">
+                2025 <a href="#" class="hover:underline">OSS</a>. All Rights Reserved to us!!
+            </span>
+    
+            <!-- Links (Aligned Below) -->
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white">
+                <li>
+                    <a href="/aboutus" class="hover:underline me-4 md:me-6">Learn more about us!</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
 
 </body>
 
