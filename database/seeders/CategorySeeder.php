@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 use App\Models\Category;
 
 class CategorySeeder extends Seeder
@@ -10,13 +12,14 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Electronics', 'description' => 'Devices and gadgets'],
-            ['name' => 'Clothing', 'description' => 'Men and Women Apparel'],
-            ['name' => 'Books', 'description' => 'Educational and Entertainment'],
+            ['name' => 'Women Clothes', 'description' => 'Fashion for women', 'image_url' => '/storage/categories/women.jpg'],
+            ['name' => 'Men Clothes', 'description' => 'Fashion for men', 'image_url' => '/storage/categories/men.jpg'],
+            ['name' => 'Bags', 'description' => 'Stylish bags', 'image_url' => '/storage/categories/bags.jpg'],
+            ['name' => 'Accessories', 'description' => 'Trendy accessories', 'image_url' => '/storage/categories/accessories.jpg'],
         ];
 
-        foreach ($categories as $cat) {
-            Category::create($cat);
+        foreach ($categories as $category) {
+            Category::create($category);
         }
     }
 }
