@@ -2,13 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\homeController;
 
 //get(routepath, handler function)
 
-Route::get('/', function () {
-    return view('home.welcome');
-});
+Route::get('/', [homeController::class,'index']);
 
 Route::get('/cart', function() {
     return view('cart');

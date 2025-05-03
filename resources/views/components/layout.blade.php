@@ -53,7 +53,6 @@
                   <ul class="flex space-x-4">
                     <li><a href="/" class="px-4 py-2 rounded-md">Home</a></li>
                     <li><a href="/brands" class="px-4 py-2 rounded-md">Brands</a></li>
-                    <li><a href="#" class="px-4 py-2 rounded-md">Other Links</a></li>
                   </ul>
                 </nav>
               
@@ -73,13 +72,13 @@
     </header>
 
 
-    <main class="container">
+    <main class="container  pb-24">
         {{ $slot }}
     </main>
 
    
 
-    <footer class="bg-muted-rose shadow-sm fixed bottom-0 w-full opacity-70">
+    <footer class="bg-muted-rose shadow-sm fixed bottom-0 w-full opacity-70 mt-50">
         <div class="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center">
             <!-- Centered text -->
             <span class="text-sm text-white text-center">
