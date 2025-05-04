@@ -16,8 +16,24 @@ Route::get('/wishlist', function() {
     return view('wishlist');
 });
 
+Route::get('/login/admin', function() { 
+    return view('registration.loginAdmin');
+});
+
 Route::get('/login', function() {
-    return view('registration.login');
+    return view('registration.index');
+});
+
+Route::get('/login/customer', function() {
+    return view('registration.loginCustomer');
+});
+
+Route::get('/login/customer/forgetpass', function() {
+    return view('registration.forgetCustomer');
+});
+
+Route::get('/login/admin/forgetpass', function() {
+    return view('registration.forgetAdmin');
 });
 
 Route::get('/register', function() {
