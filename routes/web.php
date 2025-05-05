@@ -7,6 +7,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentL
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\LoginCustomerController;
+use App\Http\Controllers\LoginAdminController;
 
 //get(routepath, handler function)
 
@@ -33,9 +35,14 @@ Route::get('/login/admin', function() {
     return view('registration.loginAdmin');
 });
 
+Route::post('/login/admin' , LoginAdminController::class)->name('loginAdmin.attempt');
+
 Route::get('/login', function() {
     return view('registration.index');
 });
+
+Route::post('/login/customer', LoginCustomerController::class)->name('loginCustomer.attempt');
+
 
 Route::get('/login/customer', function() {
     return view('registration.loginCustomer');

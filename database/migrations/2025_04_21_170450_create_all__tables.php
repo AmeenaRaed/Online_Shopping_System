@@ -24,17 +24,17 @@ return new class extends Migration {
         });
 
         // Admins
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
-        });
+        // Schema::create('admins', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
+        // });
 
         // Customers
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('address');
-        });
+        // Schema::create('customers', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->text('address');
+        // });
 
         // Suppliers
         Schema::create('suppliers', function (Blueprint $table) {

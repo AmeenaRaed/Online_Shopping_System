@@ -32,7 +32,7 @@ class UserFactory extends Factory
         'email_verified_at' => now(),
         'phone' => $this->faker->phoneNumber,
         'dob' => $this->faker->date('Y-m-d', '2005-01-01'),
-        'role' => $this->faker->randomElement(['admin', 'customer', 'supplier']),
+        'role' => 'supplier',
         'remember_token' => Str::random(10),
     ];
 }

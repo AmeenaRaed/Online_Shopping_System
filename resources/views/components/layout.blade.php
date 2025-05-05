@@ -47,7 +47,7 @@
     
             <hr class="border-b-1 m-4 border-gray-200" />
     
-            <div class="mb-5 flex justify-between items-center">
+            <div class="mb-5 flex justify-between items-center mx-10">
                 <!-- Left-aligned navigation -->
                 <nav class="flex gap-10 flex-wrap">
                   <ul class="flex space-x-4">
@@ -59,6 +59,8 @@
                 <!-- Right-aligned login/logout -->
                 <div class="flex space-x-4">
                     @if (Auth::check())
+                    {{-- <p>It's working {{Auth::user()->username}} yay!!</p> --}}
+
                     <form action="{{route('logout')}}" method="POST">
                         @csrf
                         <button type="submit">Logout</button>

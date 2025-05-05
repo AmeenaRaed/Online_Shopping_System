@@ -89,6 +89,12 @@
                         class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm file:bg-gray-100 file:border-0 file:px-2 file:py-1">
                 </div>
 
+                <div class="flex items-center space-x-4">
+                    <label for="address" class="w-32 text-sm font-medium text-gray-700 text-right">Address</label>
+                    <input type="text" name="address" id="address" required
+                        class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
+                </div>
+
                 <div class="flex justify-center pt-4 ">
                     <button type="submit"
                         class="px-6 py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-blue-500 text-sm">

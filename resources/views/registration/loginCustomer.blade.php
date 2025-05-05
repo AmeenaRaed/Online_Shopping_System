@@ -12,7 +12,19 @@
             <h2 class="text-lg font-semibold text-gray-800 mb-6">Please enter your information to Sign in</h2>
 
             <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form class="space-y-4" action="#" method="POST">
+
+                @if ($errors->any())
+                <div class="bg-dusky-blue text-white p-4 rounded mb-5">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
+                <form class="space-y-4" action="{{route('loginCustomer.attempt')}}" method="POST">
+                    @csrf
                     <div>
                         <label for="email" class="block text-xs font-medium text-gray-900 text-left">Email
                             address</label>
