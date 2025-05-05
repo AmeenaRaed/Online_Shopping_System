@@ -59,7 +59,10 @@
                 <!-- Right-aligned login/logout -->
                 <div class="flex space-x-4">
                     @if (Auth::check())
-                     <a href="#" class="px-4 py-2 rounded-md">Logout</a>
+                    <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
                     @else
                      <a href="/register" class="px-4 py-2 rounded-md">Register</a>
                      <a href="/login" class="px-4 py-2 rounded-md">Login</a>

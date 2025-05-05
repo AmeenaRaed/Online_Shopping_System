@@ -13,23 +13,36 @@
                     alt="Shopping" class="rounded-full shadow-md w-36 h-36">
             </div>
 
-            <form action="#" method="POST" class="space-y-4">
+            @if ($errors->any())
+                <div class="bg-dusky-blue text-white p-4 rounded mb-5">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
+            <form action="{{route('register.store')}}" method="POST" class="space-y-4" enctype="multipart/form-data">
+
+                @csrf
 
                 <div class="flex items-center space-x-4">
-                    <label for="firstname" class="w-32 text-sm font-medium text-gray-700 text-right">First name</label>
-                    <input type="text" name="firstname" id="firstname" required
+                    <label for="first_name" class="w-32 text-sm font-medium text-gray-700 text-right">First name</label>
+                    <input type="text" name="first_name" id="first_name" required
                         class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <label for="lastname" class="w-32 text-sm font-medium text-gray-700 text-right">Last name</label>
-                    <input type="text" name="lastname" id="lastname" required
+                    <label for="last_name" class="w-32 text-sm font-medium text-gray-700 text-right">Last name</label>
+                    <input type="text" name="last_name" id="last_name" required
                         class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <label for="date" class="w-32 text-sm font-medium text-gray-700 text-right">Date of birth</label>
-                    <input type="date" name="date" id="date" required
+                    <label for="dob" class="w-32 text-sm font-medium text-gray-700 text-right">Date of birth</label>
+                    <input type="date" name="dob" id="dob" required
                         class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
                 </div>
 
@@ -50,8 +63,8 @@
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <label for="userName" class="w-32 text-sm font-medium text-gray-700 text-right">Username</label>
-                    <input type="text" name="userName" id="userName" required
+                    <label for="username" class="w-32 text-sm font-medium text-gray-700 text-right">Username</label>
+                    <input type="text" name="username" id="username" required
                         class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
                 </div>
 
@@ -59,6 +72,21 @@
                     <label for="password" class="w-32 text-sm font-medium text-gray-700 text-right">Password</label>
                     <input type="password" name="password" id="password" required
                         class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <label for="password_confirmation" class="w-32 text-sm font-medium text-gray-700 text-right">Confirm
+                        Password</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" required
+                        class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm">
+                </div>
+
+
+                {{-- Avatar upload --}}
+                <div class="flex items-center space-x-4">
+                    <label for="avatar" class="w-32 text-sm font-medium text-gray-700 text-right">Avatar</label>
+                    <input type="file" name="avatar_url" id="avatar_url" accept="image/*"
+                        class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm file:bg-gray-100 file:border-0 file:px-2 file:py-1">
                 </div>
 
                 <div class="flex justify-center pt-4 ">
@@ -70,10 +98,8 @@
                 </div>
                 <div class="flex justify-center">
                     <p class="">Already have an account? <a href="/login"
-                        class="font-semibold text-indigo-600 hover:text-indigo-500">Login!</a> </p>
-
+                            class="font-semibold text-indigo-600 hover:text-indigo-500">Login!</a> </p>
                 </div>
-
 
             </form>
         </div>

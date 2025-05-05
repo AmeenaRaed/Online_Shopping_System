@@ -3,10 +3,23 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\homeController;
+use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
+use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 //get(routepath, handler function)
 
 Route::get('/', [homeController::class,'index']);
+
+Route::post('logout', function(){
+    Auth::guard('web')->logout();
+    Session::invalidate();
+    Session::regenerateToken();
+
+    return redirect('/');
+
+})->name('logout');
 
 Route::get('/cart', function() {
     return view('cart');
@@ -36,9 +49,11 @@ Route::get('/login/admin/forgetpass', function() {
     return view('registration.forgetAdmin');
 });
 
-Route::get('/register', function() {
+Route::get('/register', function(){
     return view('registration.register');
 });
+
+Route::post('/register' , RegisterController::class) -> name('register.store');
 
 Route::get('/aboutus', function() {
     return view('home.aboutus');
