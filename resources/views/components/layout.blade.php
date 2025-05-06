@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 @else
@@ -82,6 +83,13 @@
     </main>
 
    
+    <footer class="bg-muted-rose shadow-sm w-full mt-10">
+        <div class="w-full mx-auto max-w-screen-xl p-6 flex flex-col items-center text-white">
+            <span class="text-sm">2025 © OSS. All Rights Reserved.</span>
+            <a href="/aboutus" class="mt-2 hover:underline text-sm">Learn more about us!</a>
+        </div>
+      </footer>
+      
 
     {{-- <footer class="bg-muted-rose shadow-sm fixed bottom-0 w-full opacity-70 mt-50">
         <div class="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center">
