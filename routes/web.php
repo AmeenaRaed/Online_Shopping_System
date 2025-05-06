@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LoginCustomerController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\ProductController;
 
 //get(routepath, handler function)
 
@@ -85,7 +86,10 @@ Route::get('/profile/orderhistory', function() {
 });
 
 //Dynamic route for categories
-Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
+Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
+
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
 
 Route::get('/admin' , function() {
     return view('admin.dashboard');

@@ -22,8 +22,8 @@
             <div class=" flex justify-between items-center mx-10">
                 <!-- Left-aligned logo -->
                 <div class="flex">
-                    <img src="images/shoplogo.png" alt="Logo" class="w-full max-w-[100px] h-auto" />
-                  </div>
+                    <img src="{{ asset('images/shoplogo.png') }}" alt="Logo" class="w-full max-w-[100px] h-auto" />
+                </div>
 
                   <div class="flex items-center mx-2 max-w-4xl bg-muted-rose opacity-70 rounded-full shadow-md px-8 py-2">
                     <!-- Search input -->
@@ -37,11 +37,11 @@
               
                 <!-- Right-aligned icon -->
                 <div class="flex gap-7 items-center mx-5">
-                    <a href="/profile" class="rounded-full"><x-usericon></x-user-icon>
+                    <a href="/profile" class="rounded-full hover:bg-peach-glow"><x-usericon></x-user-icon>
                     </a>
-                    <a href="/wishlist" class="rounded-full"><x-hearticon></x-heart-icon>
+                    <a href="/wishlist" class="rounded-full hover:bg-peach-glow"><x-hearticon></x-heart-icon>
                     </a>
-                    <a href="/cart" class="rounded-full"><x-carticon></x-cart-icon></a>
+                    <a href="/cart" class="rounded-full hover:bg-peach-glow"><x-carticon></x-cart-icon></a>
                   
                 </div>
               </div>
@@ -52,8 +52,8 @@
                 <!-- Left-aligned navigation -->
                 <nav class="flex gap-10 flex-wrap">
                   <ul class="flex space-x-4">
-                    <li><a href="/" class="px-4 py-2 rounded-md">Home</a></li>
-                    <li><a href="/brands" class="px-4 py-2 rounded-md">Brands</a></li>
+                    <li><a href="/" class="px-4 py-2 rounded-md hover:bg-peach-glow">Home</a></li>
+                    <li><a href="/brands" class="px-4 py-2 rounded-md hover:bg-peach-glow">Brands</a></li>
                   </ul>
                 </nav>
               
@@ -64,11 +64,11 @@
 
                     <form action="{{route('logout')}}" method="POST">
                         @csrf
-                        <button type="submit">Logout</button>
+                        <button type="submit" class="hover:bg-peach-glow">Logout</button>
                     </form>
                     @else
-                     <a href="/register" class="px-4 py-2 rounded-md">Register</a>
-                     <a href="/login" class="px-4 py-2 rounded-md">Login</a>
+                     <a href="/register" class="px-4 py-2 rounded-md hover:bg-peach-glow">Register</a>
+                     <a href="/login" class="px-4 py-2 rounded-md hover:bg-peach-glow">Login</a>
                     @endif
                 </div>
               </div>

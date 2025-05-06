@@ -40,11 +40,6 @@
     background-color: var(--very-light-pink);
 }
 
-a:hover {
-    background-color: var(--warm-coral);
-    opacity: 0.50;
-
-}
 
 .hover\:bg-peach-glow:hover {
     background-color: var(--peach-glow);

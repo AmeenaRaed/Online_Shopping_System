@@ -97,7 +97,7 @@
 
                 <div class="flex justify-center pt-4 ">
                     <button type="submit"
-                        class="px-6 py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-blue-500 text-sm">
+                        class="px-6 py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-peach-glow text-sm">
                         Register
                     </button>
 

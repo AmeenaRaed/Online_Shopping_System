@@ -52,13 +52,13 @@
                     <div class="flex flex-col space-y-4 w-full px-6">
 
                         <button type="submit"
-                            class="py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-blue-500 transition text-sm">Sign
+                            class="py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-peach-glow transition text-sm">Sign
                             in</button>
 
 
                         <h1 class="text-lg font-semibold text-gray-800 mb-4">__________or___________</h1>
                         <a href="/register"
-                            class="py-2 bg-gray-800 text-white font-semibold rounded-md hover:bg-gray-700 transition text-sm">
+                            class="py-2 bg-gray-800 text-white font-semibold rounded-md hover:bg-peach-glow transition text-sm">
                             Create Account
                         </a>
                     </div>

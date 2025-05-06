@@ -20,7 +20,7 @@ return new class extends Migration
         // Schema::dropIfExists('admins');
 
         // // Drop the customers table
-        // Schema::dropIfExists('customers');
+        Schema::dropIfExists('customers');
     }
 
     /**

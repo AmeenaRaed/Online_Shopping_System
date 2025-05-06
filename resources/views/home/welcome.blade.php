@@ -56,11 +56,26 @@
         <!-- Categories -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
             @foreach ($categories as $category)
-                <div class="w-40 h-40 flex flex-col items-center justify-center bg-warm-coral opacity-40 rounded-full text-center shadow hover:shadow-lg transition duration-300">
-                    <h3 class="text-lg font-semibold">{{ $category->name }}</h3>
+            <a href="{{ route('category.show', $category->id) }}">
+
+                <div class="flex flex-col items-center text-center">
+                    <!-- Image Circle -->
+                    <div class="w-40 h-40 rounded-full shadow hover:shadow-lg transition duration-300 bg-cover bg-center"
+                         style="background-image: url('{{ asset($category->image_url) }}')">
+                    </div>
+            
+                    <!-- Name & Description -->
+                    <h3 class="mt-3 text-lg font-semibold">
+                            {{ $category->name }}
+                    </h3>
                     <p class="text-xs text-gray-600 mt-1 px-2">{{ $category->description }}</p>
                 </div>
+            </a>
+
             @endforeach
         </div>
+        
+        
+        
     </div>
 </x-layout>

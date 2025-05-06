@@ -8,11 +8,16 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function show($slug)
-    {
-        $category = Category::where('slug', $slug)->firstOrFail();
-        $products = $category->products;
+    public function show($id)
+{
+    // Find the category by its ID
+    $category = Category::findOrFail($id);
 
-        return view('categories.show', compact('category', 'products'));
-    }
+    // Get the associated products for that category
+    $products = $category->products;  //fetch the related products for the category
+
+    return view('category.show', compact('category', 'products'));
+}
+
+
 }

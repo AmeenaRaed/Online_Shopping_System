@@ -12,11 +12,11 @@
 
             <div class="flex flex-col space-y-4 w-full px-6">
                 <a href="/login/customer"
-                    class="py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-blue-500 transition text-lg">
+                    class="py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-peach-glow transition text-lg">
                     Customer
                 </a>
                 <a href="/login/admin"
-                    class="py-2 bg-gray-800 text-white font-semibold rounded-md hover:bg-gray-700 transition text-lg">
+                    class="py-2 bg-gray-800 text-white font-semibold rounded-md hover:bg-peach-glow transition text-lg">
                     Admin
                 </a>
             </div>
