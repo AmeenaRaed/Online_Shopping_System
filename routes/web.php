@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\homeController;
-use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -24,13 +24,23 @@ Route::post('logout', function(){
 
 })->name('logout');
 
-Route::get('/cart', function() {
-    return view('cart');
-});
+// Route::get('/cart', function() {
+//     return view('cart');
+// });
 
 Route::get('/wishlist', function() {
     return view('wishlist');
 });
+
+
+Route::prefix('cart')->group(function () {
+    Route::post('/add', [CartController::class, 'add'])->name('cart.add');
+    Route::put('/update/{productId}', [CartController::class, 'update'])->name('cart.update'); // Ensure the correct method and productId parameter
+    Route::delete('/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+});
+
+
 
 Route::get('/login/admin', function() { 
     return view('registration.loginAdmin');

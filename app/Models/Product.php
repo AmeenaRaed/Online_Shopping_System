@@ -16,9 +16,14 @@ class Product extends Model
     }
 
     public function supplier()
-{
-    return $this->belongsTo(Supplier::class);
-}
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'order_product');
+    }
 
     //
 }

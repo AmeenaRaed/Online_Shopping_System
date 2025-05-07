@@ -10,8 +10,6 @@ use App\Models\Supplier;
 
 use App\Models\Category;
 
-
-
 class ProductSeeder extends Seeder
 {
     public function run(): void

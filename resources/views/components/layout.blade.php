@@ -37,12 +37,13 @@
               
                 <!-- Right-aligned icon -->
                 <div class="flex gap-7 items-center mx-5">
+                    @if (Auth::check())
                     <a href="/profile" class="rounded-full hover:bg-peach-glow"><x-usericon></x-user-icon>
                     </a>
                     <a href="/wishlist" class="rounded-full hover:bg-peach-glow"><x-hearticon></x-heart-icon>
                     </a>
                     <a href="/cart" class="rounded-full hover:bg-peach-glow"><x-carticon></x-cart-icon></a>
-                  
+                    @endif
                 </div>
               </div>
     

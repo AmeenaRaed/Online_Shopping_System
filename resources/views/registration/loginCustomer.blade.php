@@ -14,7 +14,7 @@
             <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
 
                 @if ($errors->any())
-                <div class="bg-dusky-blue text-white p-4 rounded mb-5">
+                <div class="bg-red-100 text-red-800 p-4 rounded mb-5">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
