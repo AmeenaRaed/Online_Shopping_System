@@ -116,10 +116,12 @@ Route::get('/admin/orders' , function() {
     return view('admin.orders');
 });
 
-Route::get('/payment', function() {
-    return view('chechout.payment');
-} );
+Route::get('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
 
-Route::get('/payment', function() {
-    return view('checkout.payment');
-} );
+
+
+
+
+

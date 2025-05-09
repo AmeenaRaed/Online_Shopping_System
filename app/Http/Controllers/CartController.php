@@ -133,4 +133,50 @@ class CartController extends Controller
         $cart->total = $total;
         $cart->save();
     }
+
+    // Checkout redirect
+    public function payment()
+    {
+        $user = Auth::user();
+        $cart = Order::where('user_id', $user->id)->where('order_status', 'cart')->firstOrFail();
+    
+        if ($cart->products->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty. Add items before proceeding to payment.');
+        }
+    
+        return view('payment.payment', ['cart' => $cart]); // Matches the correct view location
+    }
+
+    public function processPayment(Request $request)
+    {
+        $user = Auth::user();
+    
+        // Validate payment input
+        $request->validate([
+            'sender_name' => 'required|string|max:255',
+            'amount_paid' => 'required|numeric|min:10.0',
+            'payment_method' => 'required|in:master,paypal,apple',
+        ]);
+    
+        // Fetch the user's active cart
+        $cart = Order::where('user_id', $user->id)
+                    ->where('order_status', 'cart')
+                    ->first();
+    
+        if (!$cart || $cart->products->isEmpty()) {
+            return redirect()->route('cart.index')
+                             ->with('error', 'Your cart is empty. Add items before proceeding.');
+        }
+    
+        // Payment processing logic here (e.g., saving data, sending payment request)
+        
+        // If payment processing is successful, redirect to the shipment page.
+        return redirect()->route('shipment')
+                         ->with('success', 'Payment processed successfully!');
+    }
+    
+
+    
+
 }
+
