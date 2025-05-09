@@ -39,11 +39,11 @@ class LoginAdminController extends Controller
                 'email' => 'Only admins can log in from here.',
             ])->onlyInput('email');
         }
-
+        
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/');
+        return redirect()->intended('/admin');
     }
     //
 }
