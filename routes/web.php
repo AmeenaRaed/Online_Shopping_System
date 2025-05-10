@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LoginCustomerController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 //get(routepath, handler function)
 
@@ -121,6 +122,9 @@ Route::post('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
 
 
+Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.show')->middleware('auth');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
 
 
 

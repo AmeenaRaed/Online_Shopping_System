@@ -4,11 +4,8 @@
         <div class="w-full max-w-md rounded-2xl p-8 mr-8 shadow-lg border border-dusky-blue">
             {{-- Profile Picture --}}
             <div class="flex justify-center mb-6">
-                <img 
-                    src="{{ asset('images/pinkprofile2.jpg') }}" 
-                    alt="Profile Picture" 
-                    class="w-32 h-32 rounded-full object-cover shadow-md border-1 border-dusky-blue"
-                >
+                <img src="{{ asset('images/pinkprofile2.jpg') }}" alt="Profile Picture"
+                    class="w-32 h-32 rounded-full object-cover shadow-md border-1 border-dusky-blue">
             </div>
 
             {{-- User Name and Email --}}
@@ -49,22 +46,103 @@
 
             <!-- Navigation Buttons -->
             <div class="mb-6 text-center">
-                <button id="slide-1" class="px-4 py-2 text-sm bg-dusky-blue text-white rounded-full border border-peach-glow hover:bg-warm-coral transition-all duration-300 shadow-sm mr-2">Dashboard</button>
-                <button id="slide-2" class="px-4 py-2 text-sm bg-dusky-blue text-white rounded-full border border-peach-glow hover:bg-warm-coral transition-all duration-300 shadow-sm mr-2">Orders</button>
-                <button id="slide-3" class="px-4 py-2 text-sm bg-dusky-blue text-white rounded-full border border-peach-glow hover:bg-warm-coral transition-all duration-300 shadow-sm">Settings</button>
+                <button id="slide-1"
+                    class="px-4 py-2 text-sm bg-dusky-blue text-white rounded-full border border-peach-glow hover:bg-warm-coral transition-all duration-300 shadow-sm mr-2">Dashboard</button>
+                <button id="slide-2"
+                    class="px-4 py-2 text-sm bg-dusky-blue text-white rounded-full border border-peach-glow hover:bg-warm-coral transition-all duration-300 shadow-sm mr-2">Orders</button>
+                <button id="slide-3"
+                    class="px-4 py-2 text-sm bg-dusky-blue text-white rounded-full border border-peach-glow hover:bg-warm-coral transition-all duration-300 shadow-sm">Settings</button>
             </div>
 
             <!-- Slide Content -->
             <div class="slide-content text-center">
-                <div id="slide-1-content" class="slide-item mb-4 p-4 rounded-lg text-muted-rose">
-                    <p class="text-sm font-medium">dashboard overview: liked items, number of orders, and more insights.</p>
+                <div id="slide-1-content" class="slide-item mb-4 p-6 rounded-lg text-muted-rose">
+                    <p class="text-xl font-semibold text-center mb-6">Dashboard Overview</p>
+
+                    <!-- Display summary of orders -->
+                    <div class="flex flex-col justify-center items-center gap-6">
+                        <!-- Total Orders Card -->
+                        <div
+                            class="bg-gradient-to-r from-soft-lilac to-rose-100 p-5 rounded-full border border-soft-lilac shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out text-center w-64">
+                            <strong class="text-lg font-medium text-dusky-blue">Total Orders</strong>
+                            <div class="text-xl text-muted-rose font-bold">{{ $totalOrders }}</div>
+                        </div>
+
+                        <!-- Items in Cart Card -->
+                        <div
+                            class="bg-gradient-to-r from-soft-lilac to-rose-100 p-5 rounded-full border border-soft-lilac shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out text-center w-64">
+                            <strong class="text-lg font-medium text-dusky-blue">Items in Cart</strong>
+                            <div class="text-xl text-muted-rose font-bold">{{ $cartItemsCount }}</div>
+                        </div>
+                    </div>
                 </div>
-                <div id="slide-2-content" class="slide-item hidden mb-4 p-4 rounded-lg  text-muted-rose">
-                    <p class="text-sm font-medium">recent orders</p>
+
+
+                {{-- orders --}}
+                <div id="slide-2-content" class="slide-item hidden mb-4 p-4 rounded-lg text-muted-rose">
+                    <p class="text-xl font-semibold text-center mb-6">Orders Summary</p>
+
+                    @if($orders->count())
+                        <ul class="space-y-3">
+                            @foreach($orders as $order)
+                                <li class="bg-white/80 p-3 rounded-lg border border-soft-lilac shadow text-left">
+                                    <div><strong>Order ID:</strong> {{ $order->id }}</div>
+                                    <div><strong>Status:</strong> {{ ucfirst($order->order_status) }}</div>
+                                    <div><strong>Total:</strong> ${{ number_format($order->total, 2) }}</div>
+                                    <div><strong>Placed on:</strong> {{ $order->created_at->format('M d, Y H:i') }}</div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p class="text-gray-600">You haven't placed any orders yet.</p>
+                    @endif
                 </div>
+
+
+                {{-- settings --}}
                 <div id="slide-3-content" class="slide-item hidden mb-4 p-4 rounded-lg text-muted-rose">
-                    <p class="text-sm font-medium">account settings and preferences.</p>
+                    <form method="POST" action="{{ route('profile.update') }}" class="space-y-4 text-left">
+                        @csrf
+                        @method('PUT')
+
+                        <div>
+                            <label for="first_name" class="block font-semibold">First Name</label>
+                            <input type="text" name="first_name" id="first_name"
+                                value="{{ old('first_name', Auth::user()->first_name) }}"
+                                class="w-full p-2 border rounded">
+                        </div>
+
+                        <div>
+                            <label for="last_name" class="block font-semibold">Last Name</label>
+                            <input type="text" name="last_name" id="last_name"
+                                value="{{ old('last_name', Auth::user()->last_name) }}"
+                                class="w-full p-2 border rounded">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block font-semibold">Email</label>
+                            <input type="email" name="email" id="email" value="{{ old('email', Auth::user()->email) }}"
+                                class="w-full p-2 border rounded">
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block font-semibold">Phone</label>
+                            <input type="text" name="phone" id="phone" value="{{ old('phone', Auth::user()->phone) }}"
+                                class="w-full p-2 border rounded">
+                        </div>
+
+                        <div>
+                            <label for="dob" class="block font-semibold">Date of Birth</label>
+                            <input type="date" name="dob" id="dob" value="{{ old('dob', Auth::user()->dob) }}"
+                                class="w-full p-2 border rounded">
+                        </div>
+
+                        <button type="submit"
+                            class="bg-dusky-blue text-white px-4 py-2 rounded hover:bg-warm-coral transition-all">Save
+                            Changes</button>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>
