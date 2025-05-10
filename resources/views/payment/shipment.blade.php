@@ -1,7 +1,4 @@
-<?php
-// resources/views/payment/shipment.php
-// This view is written in plain PHP (without Blade directives) to match the requested format.
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Session;
 
 class ShipmentController extends Controller
 {
+    public function show() {
+        return view("payment.shipment");
+    }
     public function processShipment(Request $request)
     {
         $validatedData = $request->validate([
