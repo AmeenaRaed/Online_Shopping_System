@@ -134,12 +134,12 @@ ob_end_flush();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-@vite(['resources/css/app.css'])
+@vite(['resources/css/payment.css'])
   <meta charset="UTF-8">
   <title>Payment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Tailwind CSS (compiled to public/css/app.css) -->
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <!-- Inline CSS to remove spinner arrows for number input -->

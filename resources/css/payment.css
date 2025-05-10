@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@layer base {
+    :root {
+        --muted-rose: #CB8D9A;
+        --soft-lilac: #9D98AE;
+        --dusky-blue: #8497B5;
+        --peach-glow: #EFAF96;
+        --warm-coral: #EA9087;
+        --very-light-pink: #FEF7FF;
+    }
+}
+
+.bg-muted-rose {
+    background-color: var(--muted-rose);
+}
+
+.bg-soft-lilac {
+    background-color: var(--soft-lilac);
+}
+
+.bg-dusky-blue {
+    background-color: var(--dusky-blue);
+}
+
+.bg-peach-glow {
+    background-color: var(--peach-glow);
+}
+
+.bg-warm-coral {
+    background-color: var(--warm-coral);
+}
+
+.bg-very-light-pink {
+    background-color: var(--very-light-pink);
+}
+
+
+.hover\:bg-peach-glow:hover {
+    background-color: var(--peach-glow);
+}
+
+.hover\:bg-muted-rose:hover {
+    background-color: var(--muted-rose);
+}
+
+.hover\:bg-soft-lilac:hover {
+    background-color: var(--soft-lilac);
+}
+
+.hover\:bg-dusky-blue:hover {
+    background-color: var(--dusky-blue);
+}
+
+
+.hover\:bg-warm-coral:hover {
+    background-color: var(--warm-coral);
+}
+
+.hover\:bg-very-light-pink:hover {
+    background-color: var(--very-light-pink);
+}
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+body {
+    background-color: var(--very-light-pink);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: var(--dusky-blue);
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid var(--soft-lilac);
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px;
+    background-color: var(--warm-coral);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border: none; /* Removes border */
+}
+
+button:hover {
+    background-color: var(--peach-glow);
+}
+
+/* Ensuring proper spacing between buttons */
+.flex-space-x-4 {
+    display: flex;
+    gap: 12px; /* Adds space between buttons */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--dusky-blue);
+    font-weight: 600;
+}
+
+.alert {
+    background-color: var(--muted-rose);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}

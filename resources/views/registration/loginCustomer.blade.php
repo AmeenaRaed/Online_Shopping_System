@@ -29,7 +29,7 @@
                         <label for="email" class="block text-xs font-medium text-gray-900 text-left">Email
                             address</label>
                         <div class="mt-2">
-                            <input type="email" name="email" id="email" autocomplete="email" required
+                            <input type="email" name="email" id="email" autocomplete="email" value="{{old('email')}}" required
                                 class="block w-full rounded-md bg-white px-3 py-2 text-sm text-gray-900 border border-black placeholder:text-gray-400 focus:border-black focus:outline-none">
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="mt-2">
-                            <input type="password" name="password" id="password" autocomplete="current-password"
+                            <input type="password" name="password" id="password" autocomplete="current-password" 
                                 required
                                 class="block w-full rounded-md bg-white px-3 py-2 text-sm text-gray-900 border border-black placeholder:text-gray-400 focus:border-black focus:outline-none">
                         </div>
