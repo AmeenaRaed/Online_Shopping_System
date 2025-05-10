@@ -100,7 +100,6 @@ Route::get('/category/{id}', [CategoryController::class, 'show'])->name('categor
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
-
 Route::get('/admin' , function() {
     return view('admin.dashboard');
 
@@ -119,9 +118,3 @@ Route::get('/admin/orders' , function() {
 Route::get('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
-
-
-
-
-
-
