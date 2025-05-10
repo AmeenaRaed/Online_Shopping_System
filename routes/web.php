@@ -139,3 +139,13 @@ Route::get('/admin/reports' , function() {
     return view('admin.reports');
 
 });
+//
+Route::get('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
+
+
+
+
+
+
