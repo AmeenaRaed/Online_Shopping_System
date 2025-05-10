@@ -26,15 +26,6 @@ Route::post('logout', function(){
 
 })->name('logout');
 
-// Route::get('/cart', function() {
-//     return view('cart');
-// });
-
-Route::get('/wishlist', function() {
-    return view('wishlist');
-});
-
-
 Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'add'])->name('cart.add');
     Route::put('/update/{productId}', [CartController::class, 'update'])->name('cart.update'); // Ensure the correct method and productId parameter
@@ -79,22 +70,10 @@ Route::get('/aboutus', function() {
     return view('home.aboutus');
 });
 
-Route::get('/brands', function() {
-    return view('home.brands');
-});
+Route::get('/products', [ProductController::class,'showAll']);
 
 Route::get('/profile', function() {
     return view('profile.dashboard');
-});
-
-Route::get('/profile', function() {
-    return view('profile.dashboard');
-});
-
-//TO ADD: Dynamic route for the orders
-
-Route::get('/profile/orderhistory', function() {
-    return view('profile.orderhistory');
 });
 
 //Dynamic route for categories

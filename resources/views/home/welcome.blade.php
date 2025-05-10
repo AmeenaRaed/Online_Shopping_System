@@ -43,7 +43,7 @@
                         <div class="relative z-30 flex flex-col items-center justify-center h-full text-white text-center px-6">
                             <h1 class="text-3xl md:text-5xl font-extrabold mb-4 drop-shadow-lg" x-text="slide.title"></h1>
                             <p class="mb-6 text-base md:text-xl font-light" x-text="slide.desc"></p>
-                            <a href="/brands"
+                            <a href="/products"
                                 class="bg-peach-glow text-white px-6 py-2 rounded-full font-medium hover:bg-warm-coral transition shadow-md">
                                 Shop Now
                             </a>
