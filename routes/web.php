@@ -133,7 +133,9 @@ Route::post('/payment/process', [CartController::class, 'processPayment'])->name
 Route::post('/shipment/process', [ShipmentController::class, 'processShipment'])->name('shipment.process');
 Route::get('/shipment/confirmation', [ShipmentController::class, 'confirmation'])->name('shipment.confirmation');
 
-
+Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.show')->middleware('auth');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
 
 
 
