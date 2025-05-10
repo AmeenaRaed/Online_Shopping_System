@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginCustomerController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\ProfileController;
 
 //get(routepath, handler function)
 
