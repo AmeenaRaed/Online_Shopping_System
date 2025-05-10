@@ -12,7 +12,7 @@ class PaymentController extends Controller
     {
         $validatedData = $request->validate([
             'sender_name' => 'required|string|max:255',
-            'amount_paid' => 'required|numeric|min:0.5',
+            'amount_paid' => 'required|numeric|min:5.00',
             'discount_code' => 'nullable|string|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4}$/',
             'payment_method' => 'required|in:master,paypal,apple',
             'card_number' => 'sometimes|required_if:payment_method,master|digits:16',
@@ -35,7 +35,7 @@ class PaymentController extends Controller
             ]);
 
             Session::put('receipt', $payment);
-            return redirect()->route('receipt.show');
+            return redirect()->route('shipment.page');
 
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'System error. Please try again later.']);

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LoginCustomerController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShipmentController;
 
 //get(routepath, handler function)
 
@@ -116,9 +117,21 @@ Route::get('/admin/orders' , function() {
     return view('admin.orders');
 });
 
+// payment Page
+Route::get('/payment', function () {
+    return view('payment.payment');
+})->name('payment');
+
+// Shipment Details Page
+Route::get('/shipment', function () {
+    return view('payment.shipment');
+})->name('shipment.page');
+
 Route::get('/payment', [CartController::class, 'payment'])->name('payment');
-Route::post('/payment', [CartController::class, 'payment'])->name('payment');
-Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
+Route::post('/payment/process', [CartController::class, 'processPayment'])->name('payment.process');
+Route::post('/shipment/process', [ShipmentController::class, 'processShipment'])->name('shipment.process');
+Route::get('/shipment/confirmation', [ShipmentController::class, 'confirmation'])->name('shipment.confirmation');
+
 
 
 
