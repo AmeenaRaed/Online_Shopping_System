@@ -100,11 +100,9 @@ Route::get('/admin/orders' , function() {
     return view('admin.orders');
 });
 
-<<<<<<< HEAD
 Route::get('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
-=======
 // // payment Page
 // Route::get('/payment', function () {
 //     return view('payment.payment');
@@ -135,4 +133,3 @@ Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.sum
 
 
 
->>>>>>> origin/main
