@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class order extends Model
+class Order extends Model
 {
     protected $fillable = [
         'user_id',
@@ -13,8 +13,6 @@ class order extends Model
         'order_status',
         'discount_id',
     ];
-
-
 
     public function products()
     {

@@ -3,7 +3,7 @@
 <div class="flex justify-center">
     <div class="w-[800px] h-[600px] rounded-xl flex flex-col items-center justify-between p-6 text-center">
       
-        <h1 class="text-xl font-semibold text-gray-800 mb-4">Have a great shopping experience with us!</h1>
+        <h1 class="text-xl font-semibold text-gray-800 mb-4">Admin Login Page</h1>
   
         <img 
           src="https://img.freepik.com/premium-vector/multiple-gears-connection-logo_658271-8237.jpg" 
@@ -28,7 +28,7 @@
             <div>
               <label for="email" class="block text-xs font-medium text-gray-900 text-left">Email address</label>
               <div class="mt-2">
-                <input type="email" name="email" id="email" autocomplete="email" required class="block w-full rounded-md bg-white px-3 py-2 text-sm text-gray-900 border border-black placeholder:text-gray-400 focus:border-black focus:outline-none">
+                <input type="email" name="email" id="email" autocomplete="email" value="{{old('email')}}" required class="block w-full rounded-md bg-white px-3 py-2 text-sm text-gray-900 border border-black placeholder:text-gray-400 focus:border-black focus:outline-none">
               </div>
             </div>
       

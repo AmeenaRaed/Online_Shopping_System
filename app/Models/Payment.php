@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $fillable = [
-        'payment_id',
-        'amount',
-        'payment_status',
         'order_id',
+        'method',
+        'amount',
+        'paid_at',
+        'payment_status'
     ];
 
-
-
-
-    //
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

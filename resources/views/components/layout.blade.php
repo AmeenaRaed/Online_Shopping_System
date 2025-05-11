@@ -54,7 +54,7 @@
                 <nav class="flex gap-10 flex-wrap">
                   <ul class="flex space-x-4">
                     <li><a href="/" class="px-4 py-2 rounded-md hover:bg-peach-glow">Home</a></li>
-                    <li><a href="/brands" class="px-4 py-2 rounded-md hover:bg-peach-glow">Brands</a></li>
+                    <li><a href="/products" class="px-4 py-2 rounded-md hover:bg-peach-glow">All Products</a></li>
                   </ul>
                 </nav>
               

@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LoginCustomerController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 //get(routepath, handler function)
 
@@ -23,15 +26,6 @@ Route::post('logout', function(){
     return redirect('/');
 
 })->name('logout');
-
-// Route::get('/cart', function() {
-//     return view('cart');
-// });
-
-Route::get('/wishlist', function() {
-    return view('wishlist');
-});
-
 
 Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'add'])->name('cart.add');
@@ -77,22 +71,10 @@ Route::get('/aboutus', function() {
     return view('home.aboutus');
 });
 
-Route::get('/brands', function() {
-    return view('home.brands');
-});
+Route::get('/products', [ProductController::class,'showAll']);
 
 Route::get('/profile', function() {
     return view('profile.dashboard');
-});
-
-Route::get('/profile', function() {
-    return view('profile.dashboard');
-});
-
-//TO ADD: Dynamic route for the orders
-
-Route::get('/profile/orderhistory', function() {
-    return view('profile.orderhistory');
 });
 
 //Dynamic route for categories
@@ -118,6 +100,39 @@ Route::get('/admin/orders' , function() {
     return view('admin.orders');
 });
 
+<<<<<<< HEAD
 Route::get('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
+=======
+// // payment Page
+// Route::get('/payment', function () {
+//     return view('payment.payment');
+// })->name('payment');
+
+// Shipment Details Page
+Route::get('/shipment', function () {
+    return view('payment.shipment');
+})->name('shipment.page');
+
+Route::get('/payment', [PaymentController::class, 'showForm'])->name('payment.form');
+Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
+Route::get('/payment/receipt', [PaymentController::class, 'receipt'])->name('payment.receipt');
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+Route::post('/payment/cancel', [PaymentController::class, 'cancelPayment'])->name('payment.cancel');
+Route::get('/payment/{orderId}', [PaymentController::class, 'showForm'])->name('payment.form');
+
+
+Route::get('/shipment', [ShipmentController::class, 'show'])->name('shipment.show');
+Route::post('/shipment/process', [ShipmentController::class, 'processShipment'])->name('shipment.process');
+Route::get('/shipment/confirmation', [ShipmentController::class, 'confirmation'])->name('shipment.confirmation');
+
+Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.show')->middleware('auth');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
+
+
+
+
+
+>>>>>>> origin/main
