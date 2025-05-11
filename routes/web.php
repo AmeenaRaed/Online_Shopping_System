@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LoginCustomerController;
 use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\UserController;
 //get(routepath, handler function)
 
 Route::get('/', [homeController::class,'index']);
@@ -104,6 +104,9 @@ Route::get('/admin' , function() {
     return view('admin.dashboard');
 
 });
+
+Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+
 
 Route::get('/admin/users' , function() {
     return view('admin.users');

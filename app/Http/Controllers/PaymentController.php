@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Session;
 
-class PaymentController extends Controller
-{
+class PaymentController extends Controller{
     public function processPayment(Request $request)
     {
         $validatedData = $request->validate([

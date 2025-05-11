@@ -5,27 +5,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 class UserController extends Controller{
-    public function index(Request $request) {
-        $query = User::query();
-    
-        // Ensure correct column names for searching
-        if ($request->filled('search')) {
-            $searchTerm = $request->search;
-            $query->where(function($q) use ($searchTerm) {
-                $q->where('username', 'LIKE', "%{$searchTerm}%")
-                  ->orWhere('email', 'LIKE', "%{$searchTerm}%");
-            });
-        }
-    
-        // Apply role filter
-        if ($request->filled('role') && $request->role !== 'all') {
-            $query->where('role', $request->role);
-        }
-    
-        $users = $query->paginate(10);
-        return view('admin.users', compact('users'));
+    public function index() {
+        $users = User::all(); // Fetch all users
+        return view('admin.users', compact('users')); // Ensure it's passed correctly
     }
-    
     
     
     
