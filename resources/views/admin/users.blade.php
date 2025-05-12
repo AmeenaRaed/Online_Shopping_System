@@ -17,7 +17,7 @@
                   </svg>&nbsp; Dashboard</div>
                 </a>
                   <!-- Profile -->
-                  <a href="/admin/Profile">
+                  <a href="/admin/profile">
                  <div class="flex items-center p-3 rounded-lg hover:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                     class="w-5 h-5">
@@ -41,21 +41,18 @@
                       clip-rule="evenodd"></path>
                   </svg>&nbsp; Orders</div>
                 </a>
-                  <!--Reports-->
+                  <!--Settings-->
+                  <a href="/admin/products">
+                <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16">
+                   <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z"/>
+                 </svg>&nbsp; Products</div>
+                </a> 
+                <!--Reports-->
                   <a href="/admin/reports">
                 <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
                     <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
                     <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1"/>
                   </svg>&nbsp;Reports</div>
-                </a>
-                  <!--Settings-->
-                  <a href="/admin/settings">
-                <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                    class="w-5 h-5">
-                    <path fill-rule="evenodd"
-                      d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z"
-                      clip-rule="evenodd"></path>
-                  </svg>&nbsp; Settings</div>
                 </a>
                   <!--Logout-->
                   <a href="/login/admin">
@@ -71,51 +68,54 @@
 
         <!-- Main Content -->
         <div class="ml-[14rem] flex-grow h-screen p-6 bg-white">
-            <div class="flex justify-between items-center p-4 bg-red-200 rounded-lg shadow-md gap-3">
-                <!-- Search Bar -->
-                <input type="text" placeholder="Search users..." class="p-2 rounded-md border border-white text-center">
-                <button onclick="searchUsers()" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                      </svg>
-                </button>
-                <!-- Filter Dropdown -->
-                <select class="p-2 rounded-md border border-gray-300">
-                    <option value="">All Roles</option>
-                    <option value="admin">Admin</option>
-                    <option value="user">Supplier</option>
-                    <option value="user">Customer</option>
-                </select>
-            
-                <!-- Add User Button -->
-                <button onclick="showAddUserModal()" class="bg-green-300 text-pink-500 px-4 py-2 rounded-md hover:bg-blue-600 "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                  </svg></button>
-                  
-                
-            </div>
+            <div class="flex justify-between items-center p-4 bg-black rounded-lg shadow-md">
+    <!-- Left Side: Search & Filter -->
+    <div class="flex items-center gap-2">
+        <input id="searchInput" type="text" placeholder="Search users..." class="p-2 border border-black bg-white rounded-md text-center">
+        
+        <select id="roleFilter" class="p-2 border border-black bg-white text-gray-500 rounded-md text-center">
+            <option value="all">All Roles</option>
+            <option value="admin">Admin</option>
+            <option value="supplier">Supplier</option>
+            <option value="customer">Customer</option>
+        </select>
+        <button onclick="searchUsers()" class="bg-purple-300  px-4 py-2 rounded-md hover:bg-purple-600">
+           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+           </svg>
+        </button>
+    </div>
+
+    <!-- Right Side: Add User Button -->
+    <button onclick="showAddUserModal()" class="bg-green-300  px-4 py-2 rounded-md hover:bg-green-600">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+  <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+</svg> 
+    </button>
+</div>
+
             <table class="w-full mt-6 bg-white shadow-md rounded-lg">
-                    <thead class="bg-gray-100">
+                    <thead class="bg-red-100">
                         <tr>
-                            <th class="p-3 text-left">Name</th>
-                            <th class="p-3 text-left">Email</th>
-                            <th class="p-3 text-left">Role</th>
-                            <th class="p-3 text-left">Actions</th>
+                            <th class="p-3 text-center">Name</th>
+                            <th class="p-3 text-center">Email</th>
+                            <th class="p-3 text-center">Role</th>
+                            <th class="p-3 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if(isset($users) && $users->count() > 0)
                         <tbody>
                             @foreach ($users as $user)
-                            <tr class="border-t">
+                            <tr class="border-t text-center">
                                 <td class="p-3">{{ $user->username }}</td>
                                 <td class="p-3">{{ $user->email }}</td>
                                 <td class="p-3">{{ ucfirst($user->role) }}</td>
                                 <td class="p-3">
-                                    <button class="text-yellow-500 hover:text-yellow-700">✏️ Edit</button>
-                                    <button class="text-red-500 hover:text-red-700 ml-2">🗑️ Delete</button>
-                                    <button class="text-blue-500 hover:text-blue-700 ml-2">👀 View</button>
+                                    <button onclick="editUserDetails({{ $user->id }})" class="text-yellow-500 hover:text-yellow-700">Edit</button>
+                                    <button onclick="confirmDeleteUser('{{ $user->id }}', '{{ $user->name }}')" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
+                                    <button onclick="viewUserDetails({{ $user->id }})" class="text-blue-500 hover:text-blue-700 ml-2">View</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -128,33 +128,154 @@
                     </tbody>
                 </table>
     </div>
-    <!-- Pop-Up Modal -->
-<div id="addUserModal" class="fixed inset-0 bg-gray-500 bg-opacity-50  items-center justify-center hidden">
+<!-- Pop-Up Modal -->
+<div id="addUserModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
         <h2 class="text-2xl font-bold mb-4">Add a New User</h2>
 
         <!-- Input Fields in Two Columns -->
-        <div class="grid grid-cols-2 gap-4">
-            <input type="text" placeholder="First Name" class="p-2 border border-gray-300 rounded-md">
-            <input type="text" placeholder="Last Name" class="p-2 border border-gray-300 rounded-md">
-            <input type="date" placeholder="DOB" class="p-2 border border-gray-300 rounded-md">
-            <input type="text" placeholder="Phone" class="p-2 border border-gray-300 rounded-md">
-            <input type="email" placeholder="Email" class="p-2 border border-gray-300 rounded-md">
-            <input type="text" placeholder="Username" class="p-2 border border-gray-300 rounded-md">
-            <input type="password" placeholder="Password" class="p-2 border border-gray-300 rounded-md">
-            <input type="file" placeholder="Avatar" class="p-2 border border-gray-300 rounded-md">
+<form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+    @csrf
+    <!-- Two Columns Layout -->
+    <div class="grid grid-cols-2 gap-4">
+        <input type="text" name="first_name" placeholder="First Name" class="p-2 border border-gray-300 rounded-md" required>
+        <input type="text" name="last_name" placeholder="Last Name" class="p-2 border border-gray-300 rounded-md" required>
+        <input type="date" name="dob" placeholder="Date of Birth" class="p-2 border border-gray-300 rounded-md" required>
+        <input type="text" name="phone" placeholder="Phone" class="p-2 border border-gray-300 rounded-md" required>
+        <input type="email" name="email" placeholder="Email" class="p-2 border border-gray-300 rounded-md" required>
+        <input type="text" name="username" placeholder="Username" class="p-2 border border-gray-300 rounded-md" required>
+        <input type="password" name="password" placeholder="Password" class="p-2 border border-gray-300 rounded-md" required>
+        <input type="file" name="avatar" accept="image/*" class="p-2 border border-gray-300 rounded-md">
+    </div>
+
+    <!-- Role Selection -->
+    <div class="mt-4">
+        <label class="font-bold">Select Role:</label>
+        <select name="role" class="w-full p-2 border border-gray-300 rounded-md" required>
+            <option value="admin">Admin</option>
+            <option value="supplier">Supplier</option>
+        </select>
+    </div>
+
+    <!-- Address Field -->
+    <textarea name="address" placeholder="Address" class="w-full p-2 border border-gray-300 rounded-md mt-4"></textarea>
+
+    <!-- Buttons -->
+    <div class="flex justify-between mt-4">
+        <button type="button" onclick="closeAddUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600">
+           Cancel
+        </button>
+        <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600">
+           Add User
+        </button>
+    </div>
+</form>
+
+</div>
+</div>
+<!-- User Details Modal -->
+<div id="viewUserModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
+        <h2 class="text-2xl font-bold mb-4">User Details</h2>
+        <!-- Avatar & Address -->
+        <div class="mt-4 flex gap-6 items-center">
+            <img id="modalUserAvatar" class="w-24 h-24 rounded-full border">
+            <p><strong>Address:</strong> <span id="modalUserAddress"></span></p>
         </div>
 
-        <!-- Address Field Below -->
-        <textarea placeholder="Address" class="w-full p-2 border border-gray-300 rounded-md mt-4"></textarea>
+        <!-- User Info Grid -->
+        <div class="grid grid-cols-2 gap-4">
+            <p><strong>First Name:</strong> <span id="modalUserFirstName"></span></p>
+            <p><strong>Last Name:</strong> <span id="modalUserLastName"></span></p>
+            <p><strong>DOB:</strong> <span id="modalUserDOB"></span></p>
+            <p><strong>Phone:</strong> <span id="modalUserPhone"></span></p>
+            <p><strong>Email:</strong> <span id="modalUserEmail"></span></p>
+            <p><strong>Username:</strong> <span id="modalUserUsername"></span></p>
+            <p><strong>Role:</strong> <span id="modalUserRole"></span></p>
+        </div>
 
-        <!-- Add Button -->
-        <div class="flex justify-end mt-4 gap-120">
-            <button onclick="closeAddUserModal()" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Cancel</button>
-            <button class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Add </button>
+        <!-- Close Button -->
+        <div class="flex justify-end mt-4">
+            <button onclick="closeViewUserModal()" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Close</button>
         </div>
     </div>
 </div>
+<!-- Delete Confirmation Modal -->
+<div id="deleteUserModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[30rem]">
+        <h2 class="text-2xl font-bold mb-4 text-red-600">⚠️ Confirm Deletion</h2>
+        <p class="text-gray-800">Are you sure you want to delete <strong id="modalUserName"></strong>? This action cannot be undone.</p>
+
+        <!-- Buttons -->
+        <div class="flex justify-between mt-4">
+            <button onclick="closeDeleteUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600">
+                Cancel
+            </button>
+            <form id="deleteUserForm" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 text-white px-6 py-3 rounded-md hover:bg-red-600">
+                    Yes, Delete
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Edit User Modal -->
+<div id="editUserModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
+        <h2 class="text-2xl font-bold mb-4">Edit User</h2>
+
+        <!-- Friendly Message for Customers -->
+        <div id="customerWarning" class="hidden text-center text-red-600 font-bold mb-4">
+            ⚠️ This user is a customer and can only update their profile.
+        </div>
+
+        <!-- Edit Form -->
+        <form id="editUserForm" method="POST">
+            @csrf
+            @method('PUT')
+
+            <!-- Two Columns Layout -->
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" name="first_name" id="editFirstName" placeholder="First Name" class="p-2 border border-gray-300 rounded-md" required>
+                <input type="text" name="last_name" id="editLastName" placeholder="Last Name" class="p-2 border border-gray-300 rounded-md" required>
+                <input type="date" name="dob" id="editDOB" placeholder="Date of Birth" class="p-2 border border-gray-300 rounded-md" required>
+                <input type="text" name="phone" id="editPhone" placeholder="Phone" class="p-2 border border-gray-300 rounded-md" required>
+                <input type="email" name="email" id="editEmail" placeholder="Email" class="p-2 border border-gray-300 rounded-md" required>
+                <input type="text" name="username" id="editUsername" placeholder="Username" class="p-2 border border-gray-300 rounded-md" required>
+                <input type="file" name="avatar" accept="image/*" class="p-2 border border-gray-300 rounded-md">
+            </div>
+
+            <!-- Role Selection (Disabled for Customers) -->
+            <div class="mt-4">
+                <label class="font-bold">Select Role:</label>
+                <select name="role" id="editRole" class="w-full p-2 border border-gray-300 rounded-md" required>
+                    <option value="admin">Admin</option>
+                    <option value="supplier">Supplier</option>
+                    <option value="customer">Customer</option>
+                </select>
+            </div>
+
+            <!-- Address Field -->
+            <textarea name="address" id="editAddress" placeholder="Address" class="w-full p-2 border border-gray-300 rounded-md mt-4"></textarea>
+
+            <!-- Buttons -->
+            <div class="flex justify-between mt-4">
+                <button type="button" onclick="closeEditUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600">
+                   Cancel
+                </button>
+                <button type="submit" id="editUserSubmit" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+
+
 
     <script>
         function showAddUserModal() {
@@ -164,5 +285,71 @@
 function closeAddUserModal() {
     document.getElementById("addUserModal").classList.add("hidden");
 }
+function searchUsers() {
+    let searchTerm = document.getElementById("searchInput").value;
+    let selectedRole = document.getElementById("roleFilter").value;
+    window.location.href = `/admin/users?search=${searchTerm}&role=${selectedRole}`;
+}
+function viewUserDetails(userId) {
+    fetch(`/admin/users/${userId}`)
+        .then(response => response.json())
+        .then(user => {
+            document.getElementById("modalUserFirstName").innerText = user.first_name;
+            document.getElementById("modalUserLastName").innerText = user.last_name;
+            document.getElementById("modalUserDOB").innerText = user.dob;
+            document.getElementById("modalUserPhone").innerText = user.phone;
+            document.getElementById("modalUserEmail").innerText = user.email;
+            document.getElementById("modalUserUsername").innerText = user.username;
+            document.getElementById("modalUserRole").innerText = user.role;
+            document.getElementById("modalUserAvatar").src = user.avatar;
+            document.getElementById("modalUserAddress").innerText = user.address;
+
+            document.getElementById("viewUserModal").classList.remove("hidden");
+        });
+}
+
+function closeViewUserModal() {
+    document.getElementById("viewUserModal").classList.add("hidden");
+}
+function confirmDeleteUser(userId, userName) {
+    document.getElementById("modalUserName").innerText = userName;
+    document.getElementById("deleteUserForm").action = `/admin/users/delete/${userId}`;
+    document.getElementById("deleteUserModal").classList.remove("hidden");
+}
+
+function closeDeleteUserModal() {
+    document.getElementById("deleteUserModal").classList.add("hidden");
+}
+function editUserDetails(userId) {
+    fetch(`/admin/users/${userId}`)
+        .then(response => response.json())
+        .then(user => {
+            document.getElementById("editFirstName").value = user.first_name;
+            document.getElementById("editLastName").value = user.last_name;
+            document.getElementById("editDOB").value = user.dob;
+            document.getElementById("editPhone").value = user.phone;
+            document.getElementById("editEmail").value = user.email;
+            document.getElementById("editUsername").value = user.username;
+            document.getElementById("editRole").value = user.role;
+            document.getElementById("editAddress").value = user.address;
+
+            // Disable editing for customers and show a friendly warning
+            if (user.role === "customer") {
+                document.getElementById("customerWarning").classList.remove("hidden");
+                document.getElementById("editUserSubmit").classList.add("hidden");
+            } else {
+                document.getElementById("customerWarning").classList.add("hidden");
+                document.getElementById("editUserSubmit").classList.remove("hidden");
+            }
+
+            document.getElementById("editUserModal").classList.remove("hidden");
+        });
+}
+
+function closeEditUserModal() {
+    document.getElementById("editUserModal").classList.add("hidden");
+}
+
+
     </script>
 </x-layoutGuest>

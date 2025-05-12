@@ -3,7 +3,7 @@
     <div class="flex h-screen w-screen">
 
         <!-- Sidebar -->
-<div class="fixed left-0 top-0 h-screen w-[15rem] bg-black text-white p-6 shadow-lg">
+        <div class="fixed left-0 top-0 h-screen w-[15rem] bg-black text-white p-6 shadow-lg">
             <h5 class="text-2xl font-bold mb-6">Admin Panel</h5>
             <nav class="space-y-3">
                 
@@ -68,44 +68,84 @@
 
         <!-- Main Content -->
         <div class="ml-[14rem] flex-grow h-screen p-6 bg-white">
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem] text-center">
+        <h2 class="text-2xl font-bold mb-4">Admin Profile</h2>
 
-            
-            <!-- Hero Section -->
-            <div class="bg-red-300 text-pink-600 p-10 rounded-lg shadow-lg flex items-center justify-between">
-                <div>
-                    <h1 class="text-4xl font-bold">Welcome Back, {{$adminName ?? 'Admin'}}!</h1>
-                    <p class="text-lg mt-2">Here’s what’s happening in your dashboard today.</p>
-                </div>
-                <div>
-                    <img src="https://static.vecteezy.com/system/resources/thumbnails/012/486/318/small_2x/3d-character-of-business-man-metaverse-png.png" alt="Dashboard illustration" class="w-40">
-                </div>
-            </div>
+        <!-- Avatar -->
+        <div class="flex justify-center mb-4">
+            <img id="profileAvatar" src="{{ $user->avatar ?? '/default-avatar.png' }}" class="w-24 h-24 rounded-full border">
+        </div>
 
-            <!-- Stats Section -->
-            <div class="grid grid-cols-3 gap-6 mt-8">
-                <!-- New Users -->
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <h3 class="text-xl font-semibold">New Users</h3>
-                    <p class="text-3xl font-bold text-blue-500">
-                        {{ $newUsers ?? 'No new users today!' }}
-                    </p>
-                </div>
-            
-                <!-- New Orders -->
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <h3 class="text-xl font-semibold">New Orders</h3>
-                    <p class="text-3xl font-bold text-green-500">
-                        {{ $newOrders ?? 'No new orders yet!' }}
-                    </p>
-                </div>
-            
-                <!-- Revenue -->
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                    <h3 class="text-xl font-semibold">Revenue</h3>
-                    <p class="text-3xl font-bold text-yellow-500">
-                        {{ $revenue ?? 'No revenue today!' }}
-                    </p>
-                </div>
-            </div>
+        <!-- User Information -->
+        <div class="text-center mb-6">
+            <p><strong>Name:</strong> {{ $user->first_name }} {{ $user->last_name }}</p>
+            <p><strong>Date of Birth:</strong> {{ $user->dob }}</p>
+            <p><strong>Phone:</strong> {{ $user->phone }}</p>
+            <p><strong>Email:</strong> {{ $user->email }}</p>
+            <p><strong>Username:</strong> {{ $user->username }}</p>
+            <p><strong>Role:</strong> Admin</p>
+            <p><strong>Address:</strong> {{ $user->address }}</p>
+        </div>
+
+        <!-- Edit Profile Button -->
+        <button onclick="openEditProfileModal()" class="bg-yellow-500 text-white px-6 py-3 rounded-md hover:bg-yellow-600">
+            Edit Profile
+        </button>
     </div>
+</div>
+
+</div>
+
+</div>
+
+            </div>
+            <!-- Edit Profile Modal -->
+<div id="editProfileModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
+        <h2 class="text-2xl font-bold mb-4">Edit Profile</h2>
+
+        <form id="editProfileForm" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" name="first_name" id="editFirstName" value="{{ $user->first_name }}" class="p-2 border border-gray-300 rounded-md">
+                <input type="text" name="last_name" id="editLastName" value="{{ $user->last_name }}" class="p-2 border border-gray-300 rounded-md">
+                <input type="date" name="dob" id="editDOB" value="{{ $user->dob }}" class="p-2 border border-gray-300 rounded-md">
+                <input type="text" name="phone" id="editPhone" value="{{ $user->phone }}" class="p-2 border border-gray-300 rounded-md">
+                <input type="email" name="email" id="editEmail" value="{{ $user->email }}" class="p-2 border border-gray-300 rounded-md">
+                <input type="text" name="username" id="editUsername" value="{{ $user->username }}" class="p-2 border border-gray-300 rounded-md">
+                <input type="file" name="avatar" accept="image/*" class="p-2 border border-gray-300 rounded-md">
+            </div>
+
+            <!-- Address Field -->
+            <textarea name="address" id="editAddress" class="w-full p-2 border border-gray-300 rounded-md mt-4">{{ $user->address }}</textarea>
+
+            <!-- Buttons -->
+            <div class="flex justify-between mt-4">
+                <button type="button" onclick="closeEditProfileModal()" class="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600">
+                    Cancel
+                </button>
+                <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    </div>
+    <script>
+   function openEditProfileModal() {
+    document.getElementById("editProfileModal").classList.remove("hidden");
+}
+
+function closeEditProfileModal() {
+    document.getElementById("editProfileModal").classList.add("hidden");
+}
+
+
+    </script>
 </x-layoutGuest>

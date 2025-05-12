@@ -14,6 +14,10 @@ use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\ReportController;
 //get(routepath, handler function)
 
 Route::get('/', [homeController::class,'index']);
@@ -82,23 +86,31 @@ Route::get('/category/{id}', [CategoryController::class, 'show'])->name('categor
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
-Route::get('/admin' , function() {
-    return view('admin.dashboard');
-
-});
+Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 
+Route::post('/admin/users/add', [UserController::class, 'store'])->name('admin.users.store');
 
-Route::get('/admin/users' , function() {
-    return view('admin.users');
+Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
 
-});
+Route::delete('/admin/users/delete/{user}', [UserController::class, 'destroy'])->name('admin.users.delete');
+
+Route::put('/admin/users/edit/{user}', [UserController::class, 'update'])->name('admin.users.update');
+
+Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders');
+
+
+Route::put('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
+
+Route::put('/admin/orders/edit/{order}', [OrderController::class, 'update'])->name('admin.orders.update');
+
+Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+
+Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
 //TO ADD: Dynamic route for managing users
-Route::get('/admin/orders' , function() {
-    return view('admin.orders');
-});
+
 
 Route::get('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'payment'])->name('payment');
