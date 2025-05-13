@@ -109,12 +109,12 @@ Route::get('/shipment', function () {
 })->name('shipment.page');
 
 Route::get('/payment', [PaymentController::class, 'showForm'])->name('payment.form');
+Route::get('/payment/{orderId}', [PaymentController::class, 'showForm'])->name('payment.form.withId');
 Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 Route::get('/payment/receipt', [PaymentController::class, 'receipt'])->name('payment.receipt');
 Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
 Route::post('/payment/cancel', [PaymentController::class, 'cancelPayment'])->name('payment.cancel');
-Route::get('/payment/{orderId}', [PaymentController::class, 'showForm'])->name('payment.form');
-
+Route::get('/payment/{orderId}', [PaymentController::class, 'showForm'])->name('payment.form.');
 
 Route::get('/shipment', [ShipmentController::class, 'show'])->name('shipment.show');
 Route::post('/shipment/process', [ShipmentController::class, 'processShipment'])->name('shipment.process');

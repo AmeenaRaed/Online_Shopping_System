@@ -60,4 +60,44 @@ class ShipmentController extends Controller
     {
         return view('payment.shipment-confirmation');
     }
+
+ public function showReceiptTracking()
+{
+    return view('receipt_tracking', [
+        'receipt' => session('receipt') ?? null,
+        'fakeDeliveryBoy' => [
+            "name" => "Matt",
+            "status" => "On the way",
+            "distance_km" => rand(1, 10),
+            "time_minutes" => rand(5, 30),
+            "location" => ["lat" => 26.2285, "lng" => 50.5860],
+        ],
+        'orderProcess' => [
+            ["step" => "Packaging Order", "estimate" => "10 mins"],
+            ["step" => "On the Way", "estimate" => "25 mins"],
+            ["step" => "Delivered", "location" => "House 12, Street 45, Al-Hidd"],
+        ]
+    ]);
+    return view('receipt_tracking', compact('fakeDeliveryBoy'));
+}
+
+ public function store(Request $request)
+    {
+        // Validate user input
+        $validatedData = $request->validate([
+            'recipient_name' => 'required|string|max:255',
+            'contact_number' => 'required|digits:8',
+            'street' => 'required|string|max:255',
+            'road' => 'required|string|max:255',
+            'house_number' => 'required|string|max:10',
+            'region' => 'required|string',
+            'receipt_ref_number' => 'required|string',
+        ]);
+
+        // Save shipment details into the database
+        Shipments::create($validatedData);
+
+        // Redirect with success message
+        return redirect()->route('shipment.page')->with('success', 'Shipment details saved successfully!');
+    }
 }

@@ -14,11 +14,9 @@ use App\Models\Order;
 class PaymentController extends Controller
 {
     public function showForm($orderId)
-    {
-        return view('payment.payment', ['orderId' => $orderId]);
-    }
-
-
+{
+    return view('payment.payment', ['orderId' => $orderId]);
+}
 
     public function process(Request $request)
     {
