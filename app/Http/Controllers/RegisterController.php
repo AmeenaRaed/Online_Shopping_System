@@ -11,7 +11,6 @@ class RegisterController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // Validate the incoming data
         $userData = $request->validate([
             "first_name" => "required|string|max:255",
             "last_name" => "required|string|max:255",
@@ -23,25 +22,21 @@ class RegisterController extends Controller
             "avatar_url" => "nullable|image|max:2048",
         ]);
 
-        // Handle avatar upload
-        if ($request->hasFile('avatar')) {
-            // Store the avatar and get the file path
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-            $userData['avatar'] = $avatarPath; // Store the file path
+        if ($request->hasFile('avatar_url')) {
+            // Store the file in the 'public/avatars' folder
+            $path = $request->file('avatar_url')->store('avatars', 'public');
 
-            // Generate the URL for the avatar
-            $userData['avatar_url'] = Storage::disk('public')->url(path: $avatarPath); // Save the URL
+            // Get the publicly accessible URL (e.g., /storage/avatars/xyz.jpg)
+            $userData['avatar_url'] = Storage::url($path);
         }
 
-        // Set default role as 'customer'
         $userData['role'] = 'customer';
+        $userData['password'] = bcrypt($userData['password']);
 
-        // Create the user
         $user = User::create($userData);
-
-        // Log the user in
         Auth::login($user);
 
         return redirect()->intended('/');
     }
 }
+
