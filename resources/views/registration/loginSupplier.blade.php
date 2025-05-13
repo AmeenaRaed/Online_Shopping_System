@@ -3,11 +3,11 @@
 <div class="flex justify-center">
     <div class="w-[800px] h-[600px] rounded-xl flex flex-col items-center justify-between p-6 text-center">
       
-        <h1 class="text-xl font-semibold text-gray-800 mb-4">Admin Login Page</h1>
+        <h1 class="text-xl font-semibold text-gray-800 mb-4">Supplier Login Page</h1>
   
         <img 
-          src="https://img.freepik.com/premium-vector/multiple-gears-connection-logo_658271-8237.jpg" 
-          alt="Gears" 
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxQK27cOj9n4FPKYU4paUbBTOt2ZvlyL0bqg&s" 
+          alt="supplier" 
           class="mb-4 rounded-full shadow-md w-36 h-36" 
         >
   
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
             @endif
-          <form class="space-y-4" action="{{route('loginAdmin.attempt')}}" method="POST">
+          <form class="space-y-4" action="{{route('loginSupplier.attempt')}}" method="POST">
             @csrf
             <div>
               <label for="email" class="block text-xs font-medium text-gray-900 text-left">Email address</label>

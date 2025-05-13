@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Order;
+
 
 class User extends Authenticatable
 {
@@ -53,16 +55,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function isAdmin() {
-        return $this->role === 'admin';
-    }
-    
-    public function isSupplier() {
-        return $this->role === 'supplier';
-    }
-    
-    public function isCustomer() {
-        return $this->role === 'customer';
+
+    public function orders() {
+        return $this->hasMany(Order::class);
     }
     
 }

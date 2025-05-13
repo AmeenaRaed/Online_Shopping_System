@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class order extends Model
+class Order extends Model
 {
     protected $fillable = [
         'user_id',
@@ -14,14 +14,9 @@ class order extends Model
         'discount_id',
     ];
 
-
-
     public function products()
     {
         return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity');
     }
-
-
-
     //
 }

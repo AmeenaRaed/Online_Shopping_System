@@ -13,5 +13,12 @@ class ProductController extends Controller
         return view('category.product', ['product' => $product]);
     }
 
+    public function showAll(){
+        $products = Product::all(); 
+
+        return view('home.products', compact('products'));
+
+    }
+
     //
 }
