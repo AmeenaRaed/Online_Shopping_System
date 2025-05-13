@@ -102,8 +102,8 @@
             <td class="p-3 text-center">{{ $order->customer_name }}</td>
             <td class="p-3 text-center">{{ ucfirst($order->status) }}</td>
             <td class="p-3 text-center">
-                <button onclick="update" class="text-yellow-500 hover:text-yellow-700">Edit</button>
-                <button onclick="viewOrderDetails({{ $order->id }})" class="text-blue-500 hover:text-blue-700">View</button>
+                <button onclick="update" class="text-yellow-500 hover:text-yellow-700 rounded">Edit</button>
+                <button onclick="viewOrderDetails({{ $order->id }})" class="text-blue-500 hover:text-blue-700 rounded">View</button>
             </td>
         </tr>
         @endforeach

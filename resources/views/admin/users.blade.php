@@ -107,9 +107,9 @@
                                 <td class="p-3">{{ $user->email }}</td>
                                 <td class="p-3">{{ ucfirst($user->role) }}</td>
                                 <td class="p-3">
-                                    <button onclick="editUserDetails({{ $user->id }})" class="text-yellow-500 hover:text-yellow-700">Edit</button>
-                                    <button onclick="confirmDeleteUser('{{ $user->id }}', '{{ $user->name }}')" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
-                                    <button onclick="viewUserDetails({{ $user->id }})" class="text-blue-500 hover:text-blue-700 ml-2">View</button>
+                                    <button onclick="editUserDetails({{ $user->id }})" class="text-yellow-500 hover:text-yellow-700 rounded">Edit</button>
+                                    <button onclick="confirmDeleteUser('{{ $user->id }}', '{{ $user->name }}')" class="text-red-500 hover:text-red-700 ml-2 rounded">Delete</button>
+                                    <button onclick="viewUserDetails({{ $user->id }})" class="text-blue-500 hover:text-blue-700 ml-2 rounded">View</button>
                                 </td>
                             </tr>
                             @endforeach
