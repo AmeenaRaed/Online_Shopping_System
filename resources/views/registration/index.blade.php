@@ -19,6 +19,10 @@
                     class="py-2 bg-gray-800 text-white font-semibold rounded-md hover:bg-peach-glow transition text-lg">
                     Admin
                 </a>
+                 <a href="/login/supplier"
+                    class="py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-peach-glow transition text-lg">
+                    Supplier
+                </a>
             </div>
         </div>
 
