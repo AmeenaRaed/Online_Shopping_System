@@ -139,7 +139,7 @@
                                 class="w-full p-2 border rounded">
                         </div>
 
-                        <button type="submit"
+                        <button type="submit" id="save-profile-changes-btn"
                             class="bg-dusky-blue text-white px-4 py-2 rounded hover:bg-warm-coral transition-all">Save
                             Changes</button>
                     </form>

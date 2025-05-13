@@ -54,12 +54,15 @@
                             </div>
 
 
-                            <form action="{{ route('cart.remove', $product->id) }}" method="POST">
+                            <form action="{{ route('cart.remove', $product->id) }}" method="POST" class="removecart-form">
                                 @csrf
-                                @method('DELETE') <!-- To indicate the method is DELETE -->
+                                @method('DELETE')
                                 <button type="submit"
-                                    class="text-sm text-red-500 hover:underline mt-4 md:mt-0 md:ml-4">Remove</button>
+                                    class="removecart-btn text-sm text-red-500 hover:underline mt-4 md:mt-0 md:ml-4">
+                                    Remove
+                                </button>
                             </form>
+
 
                         </div>
                     @endforeach

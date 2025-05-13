@@ -41,11 +41,11 @@
 
                 <ul class="text-lg leading-relaxed space-y-2 text-dusky-blue z-10 relative font-medium">
                     <li><span class="text-peach-glow font-semibold">Project:</span> Online Shopping System</li>
-                    <li><span class="text-peach-glow font-semibold">Course:</span> ITCS489 – Software Two</li>
+                    <li><span class="text-peach-glow font-semibold">Course:</span> ITCS489 – Software Engineering Two</li>
                     <li><span class="text-peach-glow font-semibold">Semester:</span> II, Academic Year 2024–2025</li>
                     <li><span class="text-peach-glow font-semibold">Instructor:</span> Dr. Taher Saleh</li>
                     <li><span class="text-peach-glow font-semibold">Institution:</span> University of Bahrain</li>
-                    <li><span class="text-peach-glow font-semibold">Github Repo:</span> University of Bahrain</li>
+                    <li><span class="text-peach-glow font-semibold"></span> <a href="https://github.com/AmeenaRaed/Online_Shopping_System.git" class="underline hover:bg-peach-glow">Check our Github repo!</a></li>
 
                 </ul>
             </div>
