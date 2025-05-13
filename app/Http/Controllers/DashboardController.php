@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\order;
+use Illuminate\Support\Facades\Auth;
+
 class DashboardController extends Controller{
    
     
@@ -12,7 +14,7 @@ class DashboardController extends Controller{
         }
     
         $adminName = auth()->user()->username ?? 'Admin'; // Fallback name
-        $newUsers = User::whereDate('', today())->count();
+        $newUsers = User::whereDate('created_at', today())->count();
         $newOrders = order::whereDate('created_at', today())->count();
         $revenue = order::sum('total'); // Sum of all orders today
     

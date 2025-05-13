@@ -107,6 +107,7 @@ Route::put('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('a
 Route::put('/admin/orders/edit/{order}', [OrderController::class, 'update'])->name('admin.orders.update');
 
 Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
 
 Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 

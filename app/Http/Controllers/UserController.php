@@ -50,10 +50,6 @@ class UserController extends Controller{
 
     
 public function store(Request $request) {
-    // Ensure the user has permission to add users
-    if (!Gate::allows('isAdmin')) {
-        abort(403, 'Access Denied');
-    }
 
     // Validate the form data
     $validated = $request->validate([
@@ -64,7 +60,7 @@ public function store(Request $request) {
         'email' => 'required|email|unique:users',
         'username' => 'required|string|unique:users',
         'password' => 'required|min:6',
-        'role' => 'required|in:admin,supplier,customer',
+        'role' => 'required|in:admin,supplier',
         'address' => 'nullable|string',
         'avatar' => 'nullable|image|max:2048',
     ]);
