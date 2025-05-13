@@ -1,27 +1,24 @@
 <?php
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Models\User;
-
 use App\Models\order;
+use Illuminate\Support\Facades\Auth;
 
-use App\Models\payment;
-
-use Carbon\Carbon;
-
-class DashboardController extends Controller
-{
+class DashboardController extends Controller{
    
     
-
     public function index() {
+        if (!auth()->check()) {
+            return redirect()->route('loginAdmin.attempt')->with('error', 'Please login!');
+        }
     
-        $newUsers = User::where('email_verified_at', '>=', Carbon::now()->startOfWeek())->get() ?? collect([]);
-        $newOrders = Payment::where('paid_at', '>=', Carbon::now()->startOfWeek())->get() ?? collect([]);
-        $revenueDetails = Order::where('created_at', '>=', Carbon::now()->startOfWeek())->get() ?? collect([]);
+        $adminName = auth()->user()->username ?? 'Admin'; // Fallback name
+        $newUsers = User::whereDate('created_at', today())->count();
+        $newOrders = order::whereDate('created_at', today())->count();
+        $revenue = order::sum('total'); // Sum of all orders today
     
-        return view('admin.dashboard', compact('newUsers', 'newOrders', 'revenueDetails'));
+        return view('admin.dashboard', compact('adminName', 'newUsers', 'newOrders', 'revenue'));
     }
-    
-
+     
 }

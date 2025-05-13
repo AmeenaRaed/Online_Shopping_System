@@ -26,9 +26,6 @@ class UserController extends Controller{
         return view('admin.users', compact('users'));
     }
     
-    
-    
-    
     public function destroy(User $user) {
         if (!Gate::allows('isAdmin')) {
             abort(403, 'Access Denied');

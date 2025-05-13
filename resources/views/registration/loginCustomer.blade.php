@@ -9,7 +9,7 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoQlX3YAdnF7tHjfrzC1jfP4TPBR6gcKaBbyxK0OcOKf4k4rCG"
                 alt="Shopping cart" class="mb-4 rounded-full shadow-md w-36 h-36">
 
-            <h2 class="text-lg font-semibold text-gray-800 mb-6">Please enter your information to Sign in</h2>
+            <h2 class="text-lg font-semibold text-gray-800 mb-6">Please enter your information to Login</h2>
 
             <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
 
@@ -52,8 +52,7 @@
                     <div class="flex flex-col space-y-4 w-full px-6">
 
                         <button type="submit"
-                            class="py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-peach-glow transition text-sm">Sign
-                            in</button>
+                            class="py-2 bg-dusky-blue text-white font-semibold rounded-md hover:bg-peach-glow transition text-sm">Login</button>
 
 
                         <h1 class="text-lg font-semibold text-gray-800 mb-4">__________or___________</h1>

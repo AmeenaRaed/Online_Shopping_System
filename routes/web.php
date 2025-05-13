@@ -15,6 +15,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\ReportController;
 
 //get(routepath, handler function)
 
@@ -99,12 +103,12 @@ Route::get('/payment', function() {
     return view('checkout.payment');
 } );
 
-//Admin Routes Goes Here:
-Route::post('/login/admin' , LoginAdminController::class)->name('loginAdmin.attempt');
-Route::post('/admin/users' , LoginAdminController::class)->name('admin.users');
-Route::get('/admin/orders' , function() {
-    return view('admin.orders');
-});
+// //Admin Routes Goes Here:
+// Route::post('/login/admin' , LoginAdminController::class)->name('loginAdmin.attempt');
+// Route::post('/admin/users' , LoginAdminController::class)->name('admin.users');
+// Route::get('/admin/orders' , function() {
+//     return view('admin.orders');
+// });
 
 Route::get('/login/admin/forgetpass', function() {
     return view('registration.forgetAdmin');
@@ -116,30 +120,28 @@ Route::get('/login/admin', function() {
 
 Route::get('/admin',[DashboardController::class,'index']);
 
-Route::get('/admin' , function() {
-    return view('admin.dashboard');
+Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 
-});
+Route::post('/admin/users/add', [UserController::class, 'store'])->name('admin.users.store');
 
-Route::get('/admin/users' , function() {
-    return view('admin.users');
+Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
 
-});
+Route::delete('/admin/users/delete/{user}', [UserController::class, 'destroy'])->name('admin.users.delete');
 
-Route::get('/admin/users', [UserController::class, 'index'])
-    ->middleware('auth')
-    ->can('isAdmin');
+Route::put('/admin/users/edit/{user}', [UserController::class, 'update'])->name('admin.users.update');
+
+Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders');
 
 
-Route::get('/admin/settings' , function() {
-    return view('admin.settings');
+Route::put('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
 
-});
+Route::put('/admin/orders/edit/{order}', [OrderController::class, 'update'])->name('admin.orders.update');
 
-Route::get('/admin/reports' , function() {
-    return view('admin.reports');
+Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
+Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
 
-});
+Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
+
 //
 Route::get('/payment', [CartController::class, 'payment'])->name('payment');
 Route::post('/payment', [CartController::class, 'payment'])->name('payment');
@@ -171,6 +173,10 @@ Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.s
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
 
+//
+Route::get('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post('/payment', [CartController::class, 'processPayment'])->name('payment.process');
 
 
 

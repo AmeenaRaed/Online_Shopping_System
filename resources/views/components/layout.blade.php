@@ -18,7 +18,7 @@
 <body class="bg-very-light-pink">
 
     <header>
-        <div class="felx flex-col justify-center items-center gap-4  mx-4 p-2">
+        <div class="felx flex-col justify-center items-center ">
             <div class=" flex justify-between items-center mx-10">
                 <!-- Left-aligned logo -->
                 <div class="flex">
