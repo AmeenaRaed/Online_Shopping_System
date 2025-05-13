@@ -91,7 +91,7 @@
        if (session()->has('receipt')) {
            $receipt = session('receipt');
            ?>
-           <div class="alert" style="background-color: #28a745;"> <!-- You may adjust the color as needed -->
+           <div class="alert" style="background-color: #CB8D9A;"> <!-- You may adjust the color as needed -->
                <h3>Payment Receipt</h3>
                <p><strong>Reference Number:</strong> <?php echo htmlspecialchars($receipt['ref_number']); ?></p>
                <p><strong>Payment Time:</strong> <?php echo htmlspecialchars($receipt['payment_time']); ?></p>
