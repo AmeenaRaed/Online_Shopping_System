@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ReportController;
+
 //get(routepath, handler function)
 
 Route::get('/', [homeController::class,'index']);

@@ -43,12 +43,6 @@
                       clip-rule="evenodd"></path>
                   </svg>&nbsp; Orders</div>
                 </a>
-                  <!--Settings-->
-                  <a href="/admin/products">
-                <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16">
-                   <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z"/>
-                 </svg>&nbsp; Products</div>
-                </a> 
                 <!--Reports-->
                   <a href="/admin/reports">
                 <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
@@ -70,7 +64,8 @@
 
         <!-- Main Content -->
         <div class="ml-[14rem] flex-grow h-screen p-6 bg-white">
-            <div class="flex justify-center items-center gap-4 p-4 bg-black rounded-lg shadow-md">
+            <div class="flex justify-between items-center p-4 bg-black rounded-lg shadow-md">
+                <div class="flex items-center gap-2">
     <input type="date" id="startDate" class="p-2 border bg-white rounded-md">
     <input type="date" id="endDate" class="p-2 border bg-white rounded-md">
     <select id="orderStatusFilter" class="p-2 border bg-white rounded-md text-center">
@@ -79,12 +74,14 @@
         <option value="shipped">Shipped</option>
         <option value="delivered">Delivered</option>
     </select>
+
     <button onclick="filterReports()" class="bg-purple-300 px-4 py-2 rounded-md hover:bg-purple-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
 </svg>
     </button>
-    <button onclick="printReport()" class="bg-green-500  px-4 py-2 rounded-md hover:bg-green-600">
+</div>
+    <button onclick="printReport()" class="bg-green-300  px-4 py-2 rounded-md hover:bg-green-600">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
   <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1"/>
   <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
@@ -93,7 +90,7 @@
 </div>
             @if($salesData->isEmpty())
             <div class=" flex-grow p-6 bg-white shadow-md rounded-lg mt-5 mb-5">
-    <p class="text-gray-500 text-center p-4">No sales data available yet.</p>
+    <p class="text-gray-500 text-center p-4">No sales data available yet</p>
             </div>
 @else
     <div class="mx-auto">
