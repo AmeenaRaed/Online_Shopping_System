@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LoginCustomerController;
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\LoginSupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ProfileController;
