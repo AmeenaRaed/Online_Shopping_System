@@ -42,6 +42,12 @@ Route::get('/login/admin', function() {
 
 Route::post('/login/admin' , LoginAdminController::class)->name('loginAdmin.attempt');
 
+Route::get('/login/supplier', function() { 
+    return view('registration.loginSupplier');
+});
+
+Route::post('/login/supplier' , LoginSupplierController::class)->name('loginSupplier.attempt');
+
 Route::get('/login', function() {
     return view('registration.index');
 });
@@ -59,6 +65,10 @@ Route::get('/login/customer/forgetpass', function() {
 
 Route::get('/login/admin/forgetpass', function() {
     return view('registration.forgetAdmin');
+});
+
+Route::get('/login/supplier/forgetpass', function() {
+    return view('registration.forgetSupplier');
 });
 
 Route::get('/register', function(){
