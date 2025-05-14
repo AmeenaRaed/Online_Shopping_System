@@ -6,7 +6,7 @@
         <h1 class="text-xl font-semibold text-gray-800 mb-4">Supplier Login Page</h1>
   
         <img 
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxQK27cOj9n4FPKYU4paUbBTOt2ZvlyL0bqg&s" 
+          src="https://i.pinimg.com/originals/b2/20/4d/b2204d4fe721c0549a942be769714652.jpg" 
           alt="supplier" 
           class="mb-4 rounded-full shadow-md w-36 h-36" 
         >
