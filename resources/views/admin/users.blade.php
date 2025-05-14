@@ -233,7 +233,7 @@
         </div>
 
         <!-- Edit Form -->
-        <form id="editUserForm" method="POST">
+        <form id="editUserForm" method="POST" action="{{ route('admin.users.update', $user->id) }}">
             @csrf
             @method('PUT')
 
