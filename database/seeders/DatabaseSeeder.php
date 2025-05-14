@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(count: 1)->create();
+        // User::factory(count: 1)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
@@ -23,18 +23,19 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
-        //Make one admin
-        User::create([
-            'first_name' => 'Admin',
-            'last_name' => 'User',
-            'username' => 'adminuser',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password123'), 
-            'dob' => '1990-01-01',
-            'phone' => '12345678',
-            'role' => 'admin',
-        ]);
+        // //Make one admin
+        // User::create([
+        //     'first_name' => 'Admin',
+        //     'last_name' => 'User',
+        //     'username' => 'adminuser',
+        //     'email' => 'admin@example.com',
+        //     'password' => Hash::make('password123'), 
+        //     'dob' => '1990-01-01',
+        //     'phone' => '12345678',
+        //     'role' => 'admin',
+        // ]);
 
+        
 
         $this->call([
             CategorySeeder::class,

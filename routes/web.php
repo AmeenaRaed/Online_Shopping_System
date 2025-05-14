@@ -135,10 +135,9 @@ Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('ad
 
 Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
-// // payment Page
-// Route::get('/payment', function () {
-//     return view('payment.payment');
-// })->name('payment');
+Route::get('/supplier', function() {
+    return view('supplier.dashboard');
+});
 
 // Shipment Details Page
 Route::get('/shipment', function () {
