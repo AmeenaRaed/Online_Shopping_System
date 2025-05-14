@@ -2,93 +2,20 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipment Confirmation</title>
+    <title>Manage Users</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-      :root {
-        --muted-rose: #CB8D9A;
-        --soft-lilac: #9D98AE;
-        --dusky-blue: #8497B5;
-        --peach-glow: #EFAF96;
-        --warm-coral: #EA9087;
-        --very-light-pink: #FEF7FF;
-      }
-
-      body {
-        background-color: var(--very-light-pink);
-        font-family: Arial, sans-serif;
-      }
-
-      .container {
-        max-width: 600px;
-        margin: 40px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      h2 {
-        text-align: center;
-        color: var(--dusky-blue);
-        font-weight: bold;
-      }
-
-      input {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border: 1px solid var(--soft-lilac);
-        border-radius: 5px;
-      }
-
-      button {
-        padding: 12px;
-        background-color: var(--warm-coral);
-        color: white;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        border: none;
-        /* Removes border */
-      }
-
-      button:hover {
-        background-color: var(--peach-glow);
-      }
-
-      /* Ensuring proper spacing between buttons */
-      .flex-space-x-4 {
-        display: flex;
-        gap: 12px;
-        /* Adds space between buttons */
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 6px;
-        color: var(--dusky-blue);
-        font-weight: 600;
-      }
-
-      .alert {
-        background-color: var(--muted-rose);
-        color: white;
-        padding: 10px;
-        border-radius: 4px;
-        text-align: center;
-      }
-    </style>
+   
   </head>
     <!-- Main Container -->
     <div class="flex h-screen w-screen">
 
         <!-- Sidebar -->
         <div class="fixed left-0 top-0 h-screen w-[15rem] bg-black text-white p-6 shadow-lg">
-            <h5 class="text-2xl font-bold mb-6">Admin Panel</h5>
+            <h5 class="text-2xl font-bold mb-6 text-center">Admin Panel</h5>
             <nav class="space-y-3">
                 
                 <!--Dashboard-->
-                <a href="/admin">
+                <a href="/admin" class="text-white text-decoration-none">
                 <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                     class="w-5 h-5">
                     <path fill-rule="evenodd"
@@ -97,7 +24,7 @@
                   </svg>&nbsp; Dashboard</div>
                 </a>
                   <!-- Profile -->
-                  <a href="/admin/profile">
+                  <a href="/admin/profile" class="text-white text-decoration-none">
                  <div class="flex items-center p-3 rounded-lg hover:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                     class="w-5 h-5">
@@ -107,13 +34,13 @@
                   </svg>&nbsp; Profile</div>
                 </a>
                   <!--Users-->
-                  <a href="/admin/users">
+                  <a href="/admin/users" class="text-white text-decoration-none">
                 <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                     <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
                   </svg>&nbsp;Users</div>
                 </a>
                   <!--Orders-->
-                  <a href="/admin/orders">
+                  <a href="/admin/orders" class="text-white text-decoration-none">
                 <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                     class="w-5 h-5">
                     <path fill-rule="evenodd"
@@ -122,14 +49,14 @@
                   </svg>&nbsp; Orders</div>
                 </a>
                 <!--Reports-->
-                  <a href="/admin/reports">
+                  <a href="/admin/reports" class="text-white text-decoration-none">
                 <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data-fill" viewBox="0 0 16 16">
                     <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
                     <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm4-3a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1"/>
                   </svg>&nbsp;Reports</div>
                 </a>
                   <!--Logout-->
-                  <a href="/login/admin">
+                  <a href="/login/admin" class="text-white text-decoration-none">
                 <div class="flex items-center p-3 rounded-lg hover:bg-red-600"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                     class="w-5 h-5">
                     <path fill-rule="evenodd"
@@ -141,7 +68,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="ml-[14rem] flex-grow h-screen p-6 bg-white">
+        <div class="ml-13 flex-box w-310 h-screen p-6 bg-white">
             <div class="flex justify-between items-center p-4 bg-black rounded-lg shadow-md">
     <!-- Left Side: Search & Filter -->
     <div class="flex items-center gap-2">
@@ -153,7 +80,7 @@
             <option value="supplier">Supplier</option>
             <option value="customer">Customer</option>
         </select>
-        <button onclick="searchUsers()" class="bg-purple-300  px-4 py-2 rounded-md hover:bg-purple-600">
+        <button onclick="searchUsers()" class="bg-purple-300  px-4 py-2 rounded hover:bg-purple-600">
            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
            </svg>
@@ -161,7 +88,7 @@
     </div>
 
     <!-- Right Side: Add User Button -->
-    <button onclick="showAddUserModal()" class="bg-green-300  px-4 py-2 rounded-md hover:bg-green-600">
+    <button onclick="showAddUserModal()" class="bg-green-300  px-4 py-2 rounded hover:bg-green-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
   <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
   <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
@@ -236,10 +163,10 @@
 
     <!-- Buttons -->
     <div class="flex justify-between mt-4">
-        <button type="button" onclick="closeAddUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600">
+        <button type="button" onclick="closeAddUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded hover:bg-gray-600">
            Cancel
         </button>
-        <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600">
+        <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600">
            Add User
         </button>
     </div>
@@ -270,7 +197,7 @@
 
         <!-- Close Button -->
         <div class="flex justify-end mt-4">
-            <button onclick="closeViewUserModal()" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Close</button>
+            <button onclick="closeViewUserModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Close</button>
         </div>
     </div>
 </div>
@@ -282,13 +209,13 @@
 
         <!-- Buttons -->
         <div class="flex justify-between mt-4">
-            <button onclick="closeDeleteUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600">
+            <button onclick="closeDeleteUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded hover:bg-gray-600">
                 Cancel
             </button>
             <form id="deleteUserForm" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="bg-red-500 text-white px-6 py-3 rounded-md hover:bg-red-600">
+                <button type="submit" class="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-600">
                     Yes, Delete
                 </button>
             </form>
@@ -336,10 +263,10 @@
 
             <!-- Buttons -->
             <div class="flex justify-between mt-4">
-                <button type="button" onclick="closeEditUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600">
+                <button type="button" onclick="closeEditUserModal()" class="bg-gray-500 text-white px-6 py-3 rounded hover:bg-gray-600">
                    Cancel
                 </button>
-                <button type="submit" id="editUserSubmit" class="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600">
+                <button type="submit" id="editUserSubmit" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600">
                     Save Changes
                 </button>
             </div>

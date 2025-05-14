@@ -14,9 +14,13 @@ class DashboardController extends Controller{
         }
     
         $adminName = auth()->user()->username ?? 'Admin'; // Fallback name
-        $newUsers = User::whereDate('created_at', today())->count();
-        $newOrders = order::whereDate('created_at', today())->count();
-        $revenue = order::sum('total'); // Sum of all orders today
+        // Define the date range: last 7 days
+    $startDate = now()->subDays(7)->startOfDay();
+    $endDate = now()->endOfDay();
+
+    $newUsers = User::whereBetween('created_at', [$startDate, $endDate])->count();
+    $newOrders = Order::whereBetween('created_at', [$startDate, $endDate])->count();
+    $revenue = Order::whereBetween('created_at', [$startDate, $endDate])->sum('total');
     
         return view('admin.dashboard', compact('adminName', 'newUsers', 'newOrders', 'revenue'));
     }
