@@ -97,8 +97,8 @@
 
                                 <!-- Edit Product Form -->
                                 <div class="flex space-x-2">
-                                    <form>
-                                        <button type="submit"
+                                    <form action="{{ route('supplier.edit', $product->id) }}" method="POST">
+                                        <button type="button" onclick='openEditModal(@json($product))'
                                             class="bg-dusky-blue text-white px-3 py-1 rounded hover:bg-peach-glow text-sm">
                                             Edit
                                         </button>
@@ -111,8 +111,6 @@
                                             Delete
                                         </button>
                                     </form>
-
-
                                 </div>
 
                             </td>
@@ -123,5 +121,99 @@
 
             </table>
         </div>
+
+
     </div>
+
+
+    <!-- Edit Product Modal -->
+    <div id="editModal"
+        class="fixed inset-0 z-50 hidden bg-muted-rose bg-opacity-30 flex items-center justify-center flex-col">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl relative">
+            <button onclick="closeEditModal()"
+                class="absolute top-2 right-2 text-gray-500 hover:text-red-600 text-xl">&times;</button>
+            <h2 class="text-xl font-semibold mb-4">Edit Product</h2>
+            <form id="editProductForm" method="POST" enctype="multipart/form-data"
+                class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="product_id" id="edit_product_id">
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Product Name</label>
+                    <input type="text" name="name" id="edit_name" class="w-full mt-1 p-2 border rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Price BD</label>
+                    <input type="number" step="0.01" name="price" id="edit_price"
+                        class="w-full mt-1 p-2 border rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Stock</label>
+                    <input type="number" name="stock_quantity" id="edit_stock_quantity"
+                        class="w-full mt-1 p-2 border rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Image</label>
+                    <input type="file" name="image_url" class="w-full mt-1 p-2 border rounded-lg">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea name="description" id="edit_description"
+                        class="w-full mt-1 p-2 border rounded-lg"></textarea>
+                </div>
+
+
+
+                {{-- <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Category</label>
+                    <select name="category_id" id="edit_category_id" class="w-full mt-1 p-2 border rounded-lg">
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+
+
+                </div> --}}
+
+                <div class="text-right md:col-span-2">
+                    <button type="submit"
+                        class="bg-dusky-blue text-white px-4 py-2 rounded hover:bg-peach-glow">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function openEditModal(product) {
+            // Set values in the form
+            document.getElementById('edit_product_id').value = product.id;
+            document.getElementById('edit_name').value = product.name;
+            document.getElementById('edit_price').value = product.price;
+            document.getElementById('edit_stock_quantity').value = product.stock_quantity;
+            document.getElementById('edit_description').value = product.description;
+
+            document.getElementById('editModal').classList.remove('hidden');
+
+            console.log("Setting category:", product.category_id);
+
+
+            const form = document.getElementById('editProductForm');
+            form.action = `/supplier/edit/${product.id}`;
+
+            document.getElementById('editModal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.add('hidden');
+        }
+    </script>
+
 </x-layoutGuest>

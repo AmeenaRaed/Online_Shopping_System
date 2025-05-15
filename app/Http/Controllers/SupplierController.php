@@ -74,7 +74,7 @@ class SupplierController extends Controller
         ]);
 
         // Attach to category
-        $product->categories()->attach($validated['category_id']);
+        $product->categories()->attach(ids: $validated['category_id']);
 
         return redirect()->back()->with('success', 'Product added successfully.');
     }
@@ -99,7 +99,7 @@ class SupplierController extends Controller
             $productData['image_url'] = Storage::url($path);
         }
 
-        $product = Product::find($request->id);
+        $product = Product::find($request->product_id);
         if ($product) {
             $product->update($productData);
         } else {

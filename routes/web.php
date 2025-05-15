@@ -142,6 +142,7 @@ Route::prefix('/supplier')->group(function () {
     Route::get('/', [SupplierController::class, 'index'])->name('supplier.index');
     Route::get('/supplier/reports', [SupplierController::class, 'reports'])->name('supplier.reports');
     Route::post('/add', [SupplierController::class, 'add'])->name('supplier.add');
+    Route::put('/edit/{productid}', [SupplierController::class, 'edit'])->name('supplier.edit');
 });
 
 // Shipment Details Page
@@ -164,36 +165,36 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
 
 
-//forget password
-Route::get('/login/admin', function () {
-    return view('registration.forgetAdmin');
-})->name('admin.forgot-password');
+// //forget password
+// Route::get('/login/admin', function () {
+//     return view('registration.forgetAdmin');
+// })->name('admin.forgot-password');
 
-Route::get('/login/admin/show', function () {
-    return view('registration.loginAdmin');
-})->name('loginAdmin.show');
+// Route::get('/login/admin/show', function () {
+//     return view('registration.loginAdmin');
+// })->name('loginAdmin.show');
 
-Route::get('/login/supplier', function () {
-    return view('registration.forgetSupplier');
-})->name('supplier.forgot-password');
+// Route::get('/login/supplier', function () {
+//     return view('registration.forgetSupplier');
+// })->name('supplier.forgot-password');
 
-Route::get('/login/supplier/show', function () {
-    return view('registration.loginSupplier');
-})->name('loginSupplier.show');
+// Route::get('/login/supplier/show', function () {
+//     return view('registration.loginSupplier');
+// })->name('loginSupplier.show');
 
-Route::get('/login/customer/show', function () {
-    return view('registration.loginCustomer');
-})->name('loginCustomer.show'); //new
+// Route::get('/login/customer/show', function () {
+//     return view('registration.loginCustomer');
+// })->name('loginCustomer.show'); //new
 
-Route::get('/login/customer', function () {
-    return view('registration.forgetCustomer');
-})->name('customer.forgot-password');
+// Route::get('/login/customer', function () {
+//     return view('registration.forgetCustomer');
+// })->name('customer.forgot-password');
 
-Route::get('/login/admin', [ForgotAdminController::class, 'showForm'])->name('admin.forgot-password');
-Route::post('/reset-password/admin', [ForgotAdminController::class, 'reset'])->name('admin.reset-password');
+// Route::get('/login/admin', [ForgotAdminController::class, 'showForm'])->name('admin.forgot-password');
+// Route::post('/reset-password/admin', [ForgotAdminController::class, 'reset'])->name('admin.reset-password');
 
-Route::get('/login/supplier', [ForgotSupplierController::class, 'showForm'])->name('supplier.forgot-password');
-Route::post('/reset-password/supplier', [ForgotSupplierController::class, 'reset'])->name('supplier.reset-password');
+// Route::get('/login/supplier', [ForgotSupplierController::class, 'showForm'])->name('supplier.forgot-password');
+// Route::post('/reset-password/supplier', [ForgotSupplierController::class, 'reset'])->name('supplier.reset-password');
 
-Route::get('/login/customer', [ForgotCustomerController::class, 'showForm'])->name('customer.forgot-password');
-Route::post('/reset-password/customer', [ForgotCustomerController::class, 'reset'])->name('customer.reset-password');
+// Route::get('/login/customer', [ForgotCustomerController::class, 'showForm'])->name('customer.forgot-password');
+// Route::post('/reset-password/customer', [ForgotCustomerController::class, 'reset'])->name('customer.reset-password');
