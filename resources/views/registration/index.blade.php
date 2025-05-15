@@ -5,10 +5,10 @@
 
             <h1 class="text-2xl font-bold text-gray-800 mb-8">Welcome</h1>
 
-            <img src="https://www.shutterstock.com/image-vector/fast-shopping-logo-template-design-260nw-772870519.jpg"
+            <img src="https://i.pinimg.com/736x/5d/b6/dd/5db6ddb1b5e73a367a7ced08aa9fbbfc.jpg"
                 alt="Role Illustration" class="mb-8 rounded-full shadow-md w-60 h-60">
 
-            <h1 class="text-2xl font-bold text-gray-800 mb-8">Sign in as</h1>
+            <h1 class="text-2xl font-bold text-gray-800 mb-8">Login as</h1>
 
             <div class="flex flex-col space-y-4 w-full px-6">
                 <a href="/login/customer"

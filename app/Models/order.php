@@ -18,5 +18,10 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity');
     }
-    //
+    protected function casts(): array
+    {
+        return [
+            'created_at' => 'datetime'
+        ];
+    }
 }

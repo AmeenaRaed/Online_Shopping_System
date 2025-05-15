@@ -18,7 +18,7 @@
 <body class="bg-very-light-pink">
 
     <header>
-        <div class="felx flex-col justify-center items-center gap-4  mx-4 p-2">
+        <div class="felx flex-col justify-center items-center gap-4 mx-4 p-2">
             <div class=" flex justify-between items-center mx-10">
                 <!-- Left-aligned logo -->
                 <div class="flex">
@@ -40,8 +40,7 @@
                     @if (Auth::check())
                     <a href="/profile" class="rounded-full hover:bg-peach-glow"><x-usericon></x-user-icon>
                     </a>
-                    <a href="/wishlist" class="rounded-full hover:bg-peach-glow"><x-hearticon></x-heart-icon>
-                    </a>
+                  
                     <a href="/cart" class="rounded-full hover:bg-peach-glow"><x-carticon></x-cart-icon></a>
                     @endif
                 </div>
@@ -63,10 +62,11 @@
                     @if (Auth::check())
                     {{-- <p>It's working {{Auth::user()->username}} yay!!</p> --}}
 
-                    <form action="{{route('logout')}}" method="POST">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="hover:bg-peach-glow">Logout</button>
+                        <button type="button" id="logout-btn" class="hover:bg-peach-glow">Logout</button>
                     </form>
+
                     @else
                      <a href="/register" class="px-4 py-2 rounded-md hover:bg-peach-glow">Register</a>
                      <a href="/login" class="px-4 py-2 rounded-md hover:bg-peach-glow">Login</a>
@@ -109,5 +109,8 @@
     </footer> --}}
 
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </html>

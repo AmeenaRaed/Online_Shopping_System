@@ -4,9 +4,11 @@
         <div class="w-full max-w-md rounded-2xl p-8 mr-8 shadow-lg border border-dusky-blue">
             {{-- Profile Picture --}}
             <div class="flex justify-center mb-6">
-                <img src="{{ asset('images/pinkprofile2.jpg') }}" alt="Profile Picture"
+                <img src="{{ $user->avatar_url ? asset($user->avatar_url) : asset('images/pinkprofile2.jpg') }}"
+                    alt="Profile Picture"
                     class="w-32 h-32 rounded-full object-cover shadow-md border-1 border-dusky-blue">
             </div>
+
 
             {{-- User Name and Email --}}
             <div class="text-center mb-6">
@@ -137,7 +139,7 @@
                                 class="w-full p-2 border rounded">
                         </div>
 
-                        <button type="submit"
+                        <button type="submit" id="save-profile-changes-btn"
                             class="bg-dusky-blue text-white px-4 py-2 rounded hover:bg-warm-coral transition-all">Save
                             Changes</button>
                     </form>
