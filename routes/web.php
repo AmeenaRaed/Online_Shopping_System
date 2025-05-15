@@ -140,9 +140,10 @@ Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.re
 
 Route::prefix('/supplier')->group(function () {
     Route::get('/', [SupplierController::class, 'index'])->name('supplier.index');
-    Route::get('/supplier/reports', [SupplierController::class, 'reports'])->name('supplier.reports');
+    Route::get('/reports', [SupplierController::class, 'reports'])->name('supplier.reports');
     Route::post('/add', [SupplierController::class, 'add'])->name('supplier.add');
     Route::put('/edit/{productid}', [SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::delete('/delete/{productid}', [SupplierController::class, 'delete'])->name('supplier.delete');
 });
 
 // Shipment Details Page

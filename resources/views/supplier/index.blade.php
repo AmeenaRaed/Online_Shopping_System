@@ -1,5 +1,6 @@
 <x-layoutGuest>
     <x-SupplierSideBar />
+  
 
     {{-- TO-DO
     Fetch dropdown categories from the database ✔
@@ -7,6 +8,17 @@
     --}}
 
     <div class="ml-[15rem] p-8 space-y-10">
+           @if (session('success'))
+                <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="bg-red-100 text-red-800 p-2 rounded mb-4">
+                    {{ session('error') }}
+                </div>
+            @endif
         <!-- Page Header -->
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-800">Supplier Panel</h1>
@@ -105,7 +117,9 @@
                                     </form>
 
                                     <!-- Delete Product -->
-                                    <form>
+                                    <form action="{{route('supplier.delete', $product->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit"
                                             class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">
                                             Delete
@@ -167,8 +181,6 @@
                         class="w-full mt-1 p-2 border rounded-lg"></textarea>
                 </div>
 
-
-
                 {{-- <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Category</label>
                     <select name="category_id" id="edit_category_id" class="w-full mt-1 p-2 border rounded-lg">
@@ -176,8 +188,6 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
-
-
                 </div> --}}
 
                 <div class="text-right md:col-span-2">

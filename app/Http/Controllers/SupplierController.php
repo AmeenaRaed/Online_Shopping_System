@@ -111,13 +111,16 @@ class SupplierController extends Controller
 
     public function delete(Request $request)
     {
-        $product = Product::find($request->id);
+        
+        $product = Product::find($request->productid);
         if ($product) {
             $product->delete();
             return redirect()->back()->with('success', 'Product deleted successfully.');
         } else {
             return redirect()->back()->with('errro', 'Product not found.');
         }
+
+
     }
 
     public function Reports()
