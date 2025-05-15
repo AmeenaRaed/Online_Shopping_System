@@ -140,7 +140,18 @@ class SupplierController extends Controller
 
     public function Reports()
     {
-        return view('supplier.reports');
+        $user = Auth::user();
+
+        $products = Product::where('supplier_id', $user->id)->get();
+
+        $totalProducts = $products->count();
+        $totalStock = $products->sum('stock_quantity');
+        //Sum of product*Stock
+        $totalValue = $products->sum(fn($p) => $p->price * $p->stock_quantity);
+
+        $lowStockProducts = $products->where('stock_quantity', '<', 10); 
+
+        return view('supplier.reports', compact('totalProducts', 'totalStock', 'totalValue', 'lowStockProducts'));
     }
     //
 }
