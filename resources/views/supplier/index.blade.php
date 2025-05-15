@@ -1,11 +1,9 @@
 <x-layoutGuest>
     <x-SupplierSideBar />
 
-    {{-- TO-DO 
-    Fetch dropdown categories from the database
+    {{-- TO-DO
+    Fetch dropdown categories from the database ✔
     Add validation for the price
-    
-    
     --}}
 
     <div class="ml-[15rem] p-8 space-y-10">
@@ -48,11 +46,11 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Category</label>
                     <select name="category" class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
-                        <option value="">Select Category</option>
-                        <option value="">Makeup</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->name}}">{{$category->name}}</option>
+                        @endforeach
 
                     </select>
-
                 </div>
                 <div class="md:col-span-2 text-right">
                     <button type="submit"
@@ -71,42 +69,56 @@
                         <th class="px-6 py-3 font-semibold text-sm text-gray-700">Product</th>
                         <th class="px-6 py-3 font-semibold text-sm text-gray-700">Price</th>
                         <th class="px-6 py-3 font-semibold text-sm text-gray-700">Stock</th>
-                        <th class="px-6 py-3 font-semibold text-sm text-gray-700">Actions</th>
+                        <th class="px-6 py-3 font-semibold text-sm text-gray-700"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="border-t ">
-                        <td class="px-6 py-4">
-                            <div class="font-medium text-gray-900">Coffee Beans</div>
-                            <div class="text-sm text-gray-500">Freshly roasted</div>
-                        </td>
-                        <td class="px-6 py-4 text-gray-700">$12.99</td>
-                        <td class="px-6 py-4 text-gray-700">50</td>
-                        <td class="px-6 py-4 space-x-2">
 
-                            <!-- Edit Product Form -->
-                            <div class="flex space-x-2">
-                                <form>
-                                    <button type="submit"
-                                        class="bg-dusky-blue text-white px-3 py-1 rounded hover:bg-peach-glow text-sm">
-                                        Edit
-                                    </button>
-                                </form>
+                @if ($products->count() == 0)
 
-                                <!-- Delete Product -->
-                                <form>
-                                    <button type="submit"
-                                        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">
-                                        Delete
-                                    </button>
-                                </form>
+                    <tbody>
+                        <tr>
+                            <td colspan="4" class="text-center py-4 text-gray-500">No products available.</td>
+                        </tr>
+                    </tbody>
+
+                @endif
+                @foreach ($products as $product)
+                    <tbody>
+                        <tr class="border-t ">
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-900">{{$product->name}}</div>
+                                <div class="text-sm text-gray-500">{{$product->description}}</div>
+                            </td>
+                            <td class="px-6 py-4 text-gray-700">{{$product->price}}</td>
+                            <td class="px-6 py-4 text-gray-700">{{$product->stock_quantity}}</td>
+                            <td class="px-6 py-4 space-x-2">
+
+                                <!-- Edit Product Form -->
+                                <div class="flex space-x-2">
+                                    <form>
+                                        <button type="submit"
+                                            class="bg-dusky-blue text-white px-3 py-1 rounded hover:bg-peach-glow text-sm">
+                                            Edit
+                                        </button>
+                                    </form>
+
+                                    <!-- Delete Product -->
+                                    <form>
+                                        <button type="submit"
+                                            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">
+                                            Delete
+                                        </button>
+                                    </form>
 
 
-                            </div>
+                                </div>
 
-                        </td>
-                    </tr>
-                </tbody>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                @endforeach
+
             </table>
         </div>
     </div>
