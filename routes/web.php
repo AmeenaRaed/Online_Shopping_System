@@ -19,7 +19,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\SupplierController;
 
 //get(routepath, handler function)
 
@@ -135,9 +135,10 @@ Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('ad
 
 Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
-Route::get('/supplier', function() {
-    return view('supplier.dashboard');
-});
+Route::get('/supplier',[SupplierController::class, 'index'])->name('supplier.index');
+
+Route::get('/supplier/reports',[SupplierController::class, 'reports'])->name('supplier.reports');
+
 
 // Shipment Details Page
 Route::get('/shipment', function () {
