@@ -109,8 +109,20 @@
                     <tbody>
                         <tr class="border-t ">
                             <td class="px-6 py-4">
-                                <div class="font-medium text-gray-900">{{$product->name}}</div>
-                                <div class="text-sm text-gray-500">{{$product->description}}</div>
+
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-24 h-24 flex-shrink-0">
+                                        <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
+                                            class="w-full h-full object-cover rounded-md" />
+                                    </div>
+
+                                    <div class="flex flex-col">
+                                        <div class="font-medium text-gray-900">{{ $product->name }}</div>
+                                        <div class="text-sm text-gray-500">{{ $product->description }}</div>
+                                    </div>
+                                </div>
+
+
                             </td>
                             <td class="px-6 py-4 text-gray-700">{{$product->price}}</td>
                             <td class="px-6 py-4 text-gray-700">{{$product->stock_quantity}}</td>

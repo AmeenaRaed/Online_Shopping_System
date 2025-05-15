@@ -48,7 +48,17 @@
             <tbody>
                 @forelse ($lowStockProducts as $product)
                     <tr>
-                        <td class="px-4 py-2">{{ $product->name }}</td>
+                        <td class="px-4 py-2">
+
+                            <div class="flex items-center space-x-4">
+                                <div class="w-24 h-24 flex-shrink-0">
+                                    <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
+                                        class="w-full h-full object-cover rounded-md" />
+                                </div>
+
+                                    <div class="font-medium text-gray-900">{{ $product->name }}</div>
+                            </div>
+                        </td>
                         <td class="px-4 py-2">{{ $product->stock_quantity }}</td>
                         <td class="px-4 py-2">{{ number_format($product->price, 2) }} BD</td>
                     </tr>
@@ -81,6 +91,7 @@
             <tbody>
                 @foreach ($lowStockProducts as $product)
                     <tr>
+
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->stock_quantity }}</td>
                         <td>{{ number_format($product->price, 2) }} BD</td>
