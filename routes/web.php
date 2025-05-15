@@ -23,15 +23,14 @@ use App\Http\Controllers\SupplierController;
 
 //get(routepath, handler function)
 
-Route::get('/', [homeController::class,'index']);
+Route::get('/', [homeController::class, 'index']);
 
-Route::post('logout', function(){
+Route::post('logout', function () {
     Auth::guard('web')->logout();
     Session::invalidate();
     Session::regenerateToken();
 
     return redirect('/');
-
 })->name('logout');
 
 Route::prefix('cart')->group(function () {
@@ -43,51 +42,51 @@ Route::prefix('cart')->group(function () {
 
 
 
-Route::get('/login/admin', function() { 
+Route::get('/login/admin', function () {
     return view('registration.loginAdmin');
 });
 
-Route::post('/login/admin' , LoginAdminController::class)->name('loginAdmin.attempt');
+Route::post('/login/admin', LoginAdminController::class)->name('loginAdmin.attempt');
 
-Route::get('/login/supplier', function() { 
+Route::get('/login/supplier', function () {
     return view('registration.loginSupplier');
 });
 
-Route::post('/login/supplier' , LoginSupplierController::class)->name('loginSupplier.attempt');
+Route::post('/login/supplier', LoginSupplierController::class)->name('loginSupplier.attempt');
 
-Route::get('/login', function() {
+Route::get('/login', function () {
     return view('registration.index');
 });
 
 Route::post('/login/customer', LoginCustomerController::class)->name('loginCustomer.attempt');
 
 
-Route::get('/login/customer', function() {
+Route::get('/login/customer', function () {
     return view('registration.loginCustomer');
 });
 
-Route::get('/login/customer/forgetpass', function() {
+Route::get('/login/customer/forgetpass', function () {
     return view('registration.forgetCustomer');
 });
 
 
-Route::get('/login/supplier/forgetpass', function() {
+Route::get('/login/supplier/forgetpass', function () {
     return view('registration.forgetSupplier');
 });
 
-Route::get('/register', function(){
+Route::get('/register', function () {
     return view('registration.register');
 });
 
-Route::post('/register' , RegisterController::class) -> name('register.store');
+Route::post('/register', RegisterController::class)->name('register.store');
 
-Route::get('/aboutus', function() {
+Route::get('/aboutus', function () {
     return view('home.aboutus');
 });
 
-Route::get('/products', [ProductController::class,'showAll']);
+Route::get('/products', [ProductController::class, 'showAll']);
 
-Route::get('/profile', function() {
+Route::get('/profile', function () {
     return view('profile.dashboard');
 });
 
@@ -103,15 +102,15 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 //     return view('admin.orders');
 // });
 
-Route::get('/login/admin/forgetpass', function() {
+Route::get('/login/admin/forgetpass', function () {
     return view('registration.forgetAdmin');
 });
 
-Route::get('/login/admin', function() { 
+Route::get('/login/admin', function () {
     return view('registration.loginAdmin');
 });
 
-Route::get('/admin',[DashboardController::class,'index']);
+Route::get('/admin', [DashboardController::class, 'index']);
 
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 
@@ -135,10 +134,12 @@ Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('ad
 
 Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
-Route::get('/supplier',[SupplierController::class, 'index'])->name('supplier.index');
 
-Route::get('/supplier/reports',[SupplierController::class, 'reports'])->name('supplier.reports');
-
+Route::prefix('/supplier')->group(function () {
+    Route::get('/', [SupplierController::class, 'index'])->name('supplier.index');
+    Route::get('/supplier/reports', [SupplierController::class, 'reports'])->name('supplier.reports');
+    Route::post('/add', [SupplierController::class, 'add'])->name('supplier.add');
+});
 
 // Shipment Details Page
 Route::get('/shipment', function () {
@@ -158,8 +159,3 @@ Route::get('/shipment/confirmation', [ShipmentController::class, 'confirmation']
 Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.show')->middleware('auth');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
-
-
-
-
-

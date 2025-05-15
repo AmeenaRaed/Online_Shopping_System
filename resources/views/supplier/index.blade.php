@@ -15,7 +15,9 @@
         <!-- Add Product Form -->
         <div class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-lg font-semibold text-gray-800 mb-4 ">Add New Product</h2>
-            <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-4" action="{{route('supplier.add') }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Product Name</label>
                     <input type="text" name="name" placeholder="e.g. Eyeliner"
@@ -28,7 +30,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Stock</label>
-                    <input type="number" name="stock" placeholder="e.g. 50"
+                    <input type="number" name="stock_quantity" placeholder="e.g. 50"
                         class="w-full mt-1 p-2 border border-gray-300 rounded-lg" />
                 </div>
 
@@ -40,14 +42,14 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Image</label>
-                    <input type="file" name="image" accept="image/*"
+                    <input type="file" name="image_url" accept="image/*"
                         class="w-full mt-1 p-2 border border-gray-300 rounded-lg" />
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Category</label>
-                    <select name="category" class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                    <select name="category_id" class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
                         @foreach ($categories as $category)
-                            <option value="{{$category->name}}">{{$category->name}}</option>
+                            <option value="{{ $category->id }}">{{$category->name}}</option>
                         @endforeach
 
                     </select>
