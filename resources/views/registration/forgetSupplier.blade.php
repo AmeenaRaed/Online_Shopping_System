@@ -13,10 +13,10 @@
           class="mb-4 rounded-full shadow-md w-36 h-36" 
         >
   
-     
+ 
         <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-4" action="{{ route('admin.reset-password') }}" method="POST">
-        @csrf
+<form class="space-y-4" action="{{ route('supplier.reset-password') }}" method="POST">
+      @csrf
 
             <div>
               <label for="email" class="block text-xs font-medium text-gray-900 text-left">Email address</label>

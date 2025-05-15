@@ -20,6 +20,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ForgotCustomerController;
+use App\Http\Controllers\ForgotAdminController;
+use App\Http\Controllers\ForgotSupplierController;
 
 //get(routepath, handler function)
 
@@ -159,3 +162,40 @@ Route::get('/shipment/confirmation', [ShipmentController::class, 'confirmation']
 Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.show')->middleware('auth');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
+
+
+//forget password
+Route::get('/login/admin', function () {
+    return view('registration.forgetAdmin');
+})->name('admin.forgot-password');
+
+Route::get('/login/admin/show', function () {
+    return view('registration.loginAdmin');
+})->name('loginAdmin.show');
+
+Route::get('/login/supplier', function () {
+    return view('registration.forgetSupplier');
+})->name('supplier.forgot-password');
+
+Route::get('/login/supplier/show', function () {
+    return view('registration.loginSupplier');
+})->name('loginSupplier.show');
+
+Route::get('/login/customer/show', function () {
+    return view('registration.loginCustomer');
+})->name('loginCustomer.show');//new
+
+Route::get('/login/customer', function () {
+    return view('registration.forgetCustomer');
+})->name('customer.forgot-password');
+
+Route::get('/login/admin', [ForgotAdminController::class, 'showForm'])->name('admin.forgot-password');
+Route::post('/reset-password/admin', [ForgotAdminController::class, 'reset'])->name('admin.reset-password');
+
+Route::get('/login/supplier', [ForgotSupplierController::class, 'showForm'])->name('supplier.forgot-password');
+Route::post('/reset-password/supplier', [ForgotSupplierController::class, 'reset'])->name('supplier.reset-password');
+
+Route::get('/login/customer', [ForgotCustomerController::class, 'showForm'])->name('customer.forgot-password');
+Route::post('/reset-password/customer', [ForgotCustomerController::class, 'reset'])->name('customer.reset-password');
+
+
