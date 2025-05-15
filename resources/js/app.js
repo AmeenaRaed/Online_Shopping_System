@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutForm = document.getElementById('logout-form');
     const saveprofileChangesBtn = document.getElementById('save-profile-changes-btn');
 
+
     if (logoutBtn && logoutForm) {
         logoutBtn.addEventListener('click', function (e) {
             e.preventDefault();
@@ -14,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 text: "You will be logged out.",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
+                confirmButtonColor: '#EA9087',
+                cancelButtonColor: '#8497B5',
                 confirmButtonText: 'Yes, logout'
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -34,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 text: "Are you sure you want to remove this product from the cart?",
                 icon: 'warning',
                 showCancelButton: true,
+                confirmButtonColor: '#EA9087',
+                cancelButtonColor: '#8497B5',
                 confirmButtonText: 'Yes, remove it!',
                 cancelButtonText: 'Cancel'
             }).then((result) => {
@@ -48,18 +51,27 @@ document.addEventListener('DOMContentLoaded', () => {
         saveprofileChangesBtn.addEventListener('click', function (e) {
             e.preventDefault();
             Swal.fire({
-                title: 'Save changes?',
-                text: "Are you sure you want to save the changes?",
-                icon: 'warning',
+                title: "Are you sure you want to save the changes?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
                 showCancelButton: true,
-                confirmButtonText: 'Yes, save it!',
-                cancelButtonText: 'Cancel'
+                confirmButtonColor: '#EA9087',
+                cancelButtonColor: '#8497B5',
+                confirmButtonText: "Yes, Save!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('profile-form').submit();
+
+                    Swal.fire({
+                        title: "Saved!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
                 }
             });
         });
     }
+
+
 
 });

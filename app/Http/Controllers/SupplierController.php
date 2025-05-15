@@ -55,12 +55,12 @@ class SupplierController extends Controller
         }
 
 
-
         $productData['supplier_id'] = $user->id;
 
 
+        Product::create($productData);
+        return redirect()->back()->with('success', 'Product added successfully.');
 
-        $product = Product::create($productData);
     }
 
     public function edit(Request $request)
@@ -85,9 +85,10 @@ class SupplierController extends Controller
         if ($product) {
             $product->update($productData);
         } else {
-            return response()->json(['error' => 'Product not found'], 404);
+                return redirect()->back()->with('error', 'Product not found.');
+
         }
-        return response()->json(['message' => 'Product updated successfully']);
+    return redirect()->back()->with('success', 'Product updated successfully.');
     }
 
 
@@ -96,9 +97,9 @@ class SupplierController extends Controller
         $product = Product::find($request->id);
         if ($product) {
             $product->delete();
-            return response()->json(['message' => 'Product deleted successfully']);
+    return redirect()->back()->with('success', 'Product deleted successfully.');
         } else {
-            return response()->json(['error' => 'Product not found'], 404);
+    return redirect()->back()->with('errro', 'Product not found.');
         }
     }
 

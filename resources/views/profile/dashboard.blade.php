@@ -103,7 +103,7 @@
 
                 {{-- settings --}}
                 <div id="slide-3-content" class="slide-item hidden mb-4 p-4 rounded-lg text-muted-rose">
-                    <form method="POST" action="{{ route('profile.update') }}" class="space-y-4 text-left">
+                    <form method="POST" action="{{ route('profile.update') }}" class="space-y-4 text-left" id="profile-form">
                         @csrf
                         @method('PUT')
 
