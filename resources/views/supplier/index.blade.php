@@ -1,6 +1,6 @@
 <x-layoutGuest>
     <x-SupplierSideBar />
-  
+
 
     {{-- TO-DO
     Fetch dropdown categories from the database ✔
@@ -8,17 +8,17 @@
     --}}
 
     <div class="ml-[15rem] p-8 space-y-10">
-           @if (session('success'))
-                <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
-                    {{ session('success') }}
-                </div>
-            @endif
+        @if (session('success'))
+            <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
 
-            @if (session('error'))
-                <div class="bg-red-100 text-red-800 p-2 rounded mb-4">
-                    {{ session('error') }}
-                </div>
-            @endif
+        @if (session('error'))
+            <div class="bg-red-100 text-red-800 p-2 rounded mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
         <!-- Page Header -->
         <div class="flex justify-between items-center">
             <h1 class="text-2xl font-bold text-gray-800">Supplier Panel</h1>
@@ -37,12 +37,12 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Price BD</label>
-                    <input type="number" name="price" step="0.01" placeholder="e.g. 12.99"
-                        class="w-full mt-1 p-2 border border-gray-300 rounded-lg" />
+                    <input type="number" name="price" step="0.01" placeholder="e.g. 12.99" min="0.1"
+                        class="w-full mt-1 p-2 border border-gray-300 rounded-lg max" />
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Stock</label>
-                    <input type="number" name="stock_quantity" placeholder="e.g. 50"
+                    <input type="number" name="stock_quantity" placeholder="e.g. 50" min="1"
                         class="w-full mt-1 p-2 border border-gray-300 rounded-lg" />
                 </div>
 
@@ -59,12 +59,21 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Category</label>
-                    <select name="category_id" class="w-full mt-1 p-2 border border-gray-300 rounded-lg">
+                    <select name="category_id" class="w-full mt-1 p-2 border border-gray-300 rounded-lg"
+                        id="category_select" onchange="toggleNewCategoryInput()" required>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{$category->name}}</option>
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
-
+                        <option value="other">+ Add new category</option>
                     </select>
+
+                    <input type="text" name="new_category_name" id="new_category_input"
+                        class="w-full mt-2 p-2 border border-gray-300 rounded-lg hidden"
+                        placeholder="Enter new category name">
+
+                    <input type="file" name="new_category_image" id="new_category_image"
+                        class="w-full mt-2 p-2 border border-gray-300 rounded-lg hidden" accept="image/*">
+
                 </div>
                 <div class="md:col-span-2 text-right">
                     <button type="submit"
@@ -201,6 +210,8 @@
 
 
 
+
+
     <script>
         function openEditModal(product) {
             // Set values in the form
@@ -223,6 +234,20 @@
 
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');
+        }
+
+        function toggleNewCategoryInput() {
+            const select = document.getElementById('category_select');
+            const nameInput = document.getElementById('new_category_input');
+            const imageInput = document.getElementById('new_category_image');
+
+            const show = select.value === 'other';
+
+            nameInput.classList.toggle('hidden', !show);
+            nameInput.required = show;
+
+            imageInput.classList.toggle('hidden', !show);
+            imageInput.required = false;
         }
     </script>
 
