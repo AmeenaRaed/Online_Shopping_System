@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class ForgotAdminController extends Controller{
+
+        public function showForm()
+{
+    return view('registration.forgetAdmin');
+}
+    
 public function reset(Request $request)
 {
     // Validate input
