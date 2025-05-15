@@ -24,6 +24,7 @@ use App\Http\Controllers\ForgotCustomerController;
 use App\Http\Controllers\ForgotAdminController;
 use App\Http\Controllers\ForgotSupplierController;
 
+
 //get(routepath, handler function)
 
 Route::get('/', [homeController::class, 'index']);
@@ -137,7 +138,6 @@ Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('ad
 
 Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
-
 Route::prefix('/supplier')->group(function () {
     Route::get('/', [SupplierController::class, 'index'])->name('supplier.index');
     Route::get('/supplier/reports', [SupplierController::class, 'reports'])->name('supplier.reports');
@@ -183,7 +183,7 @@ Route::get('/login/supplier/show', function () {
 
 Route::get('/login/customer/show', function () {
     return view('registration.loginCustomer');
-})->name('loginCustomer.show');//new
+})->name('loginCustomer.show'); //new
 
 Route::get('/login/customer', function () {
     return view('registration.forgetCustomer');
@@ -197,5 +197,3 @@ Route::post('/reset-password/supplier', [ForgotSupplierController::class, 'reset
 
 Route::get('/login/customer', [ForgotCustomerController::class, 'showForm'])->name('customer.forgot-password');
 Route::post('/reset-password/customer', [ForgotCustomerController::class, 'reset'])->name('customer.reset-password');
-
-

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class ForgotCustomerController extends Controller{
+class ForgotSupplierController extends Controller{
 public function reset(Request $request)
 {
     // Validate input
