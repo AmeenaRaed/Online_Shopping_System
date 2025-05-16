@@ -79,7 +79,7 @@
     </header>
 
 
-    <main class="container  pb-24">
+    <main class="container pb-24">
         {{ $slot }}
     </main>
 
