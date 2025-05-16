@@ -12,17 +12,17 @@
                 <!-- Centered Product Info -->
                 <div class="flex-grow flex flex-col justify-center items-center text-center">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">{{ $product->name }}</h1>
+                        <h1 class="text-3xl font-bold text-gray-900 product-name">{{ $product->name }}</h1>
                         <p class="text-gray-700 mt-4">{{ $product->description ?? 'No description available.' }}</p>
 
                         <div class="mt-6 space-y-2">
-                            <p class="text-xl text-primary font-semibold">
+                            <p class="text-xl text-primary font-semibold product-price">
                                 Price: {{ number_format($product->price, 2) }} BD
                             </p>
                             <p class="text-md text-gray-800">
                                 Stock:
                                 @if ($product->stock_quantity > 0)
-                                    <span class="text-green-600 font-medium">{{ $product->stock_quantity }} available</span>
+                                    <span class="text-green-600 font-medium stock-quantity">{{ $product->stock_quantity }} available</span>
                                 @else
                                     <span class="text-red-600 font-medium">Out of stock</span>
                                 @endif
