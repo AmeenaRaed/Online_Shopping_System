@@ -70,27 +70,44 @@
 
                 <!-- Order Summary -->
                 <div class="bg-white rounded-xl shadow-md p-6">
-                    <h2 class="text-2xl font-bold text-muted-rose mb-4">Order Summary</h2>
+                    <h2 class="text-2xl font-bold text-muted-rose mb-4 text-center">Order Summary</h2>
 
-                    <div class="flex justify-between py-2 text-gray-700">
-                        <span>Subtotal</span>
-                        <span>{{ number_format($cart->total, 2) }} BD</span>
-                    </div>
-                    <div class="flex justify-between py-2 text-gray-700">
-                        <span>Shipping</span>
-                        <span>4.99 BD</span>
-                    </div>
-                    <div class="flex justify-between py-2 font-semibold text-gray-800 border-t pt-4">
-                        <span>Total</span>
-                        <span>{{ number_format($cart->total + 4.99, 2) }} BD</span>
-                    </div>
+                    @if ($cart->products->isEmpty())
+                        <p class="text-center text-gray-500">Your cart is empty.</p>
+                        <p class="text-center text-gray-500">Add products to your cart!!!</p>
 
-                    <a href="{{ route('payment.form', ['orderId' => $cart->id]) }}">
-                        <button
-                            class="mt-6 w-full bg-peach-glow hover:bg-warm-coral text-white font-medium py-3 rounded-full transition shadow-md">
-                            Proceed to Checkout
-                        </button>
-                    </a>
+                        <a href="/products">
+                            <button
+                                class="mt-6 w-full bg-peach-glow hover:bg-warm-coral text-white font-medium py-3 rounded-full transition shadow-md">
+                                Continue Shopping
+                            </button>
+                        </a>
+
+                    @else
+                        <div class="flex justify-between py-2 text-gray-700">
+                            <span>Subtotal</span>
+                            <span>{{ number_format($cart->total, 2) }} BD</span>
+                        </div>
+                        <div class="flex justify-between py-2 text-gray-700">
+                            <span>Shipping</span>
+                            <span>4.99 BD</span>
+                        </div>
+                        <div class="flex justify-between py-2 font-semibold text-gray-800 border-t pt-4">
+                            <span>Total</span>
+                            <span>{{ number_format($cart->total + 4.99, 2) }} BD</span>
+                        </div>
+
+                        <a href="{{ route('payment.form', ['orderId' => $cart->id]) }}">
+                            <button
+                                class="mt-6 w-full bg-peach-glow hover:bg-warm-coral text-white font-medium py-3 rounded-full transition shadow-md">
+                                Proceed to Checkout
+                            </button>
+                        </a>
+
+                    @endif
+
+
+
 
 
 
