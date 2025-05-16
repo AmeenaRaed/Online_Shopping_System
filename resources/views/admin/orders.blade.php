@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Shipment Confirmation</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         
@@ -83,15 +84,15 @@
         <div class="ml-13 flex-box w-310 h-screen p-6 bg-white">
             <div class="flex justify-center items-center gap-4 p-4 bg-black rounded-lg shadow-md">
                 <!-- Search by Order ID -->
-                <input id="searchInput" type="text" placeholder="Search by Order ID"
+                <input id="searchOrderId" type="text" placeholder="Search by Order ID"
                     class="p-2 border bg-white rounded-md text-center">
 
 
                 <!-- Date Filter -->
-                <input type="date" id="dateFilter" class="p-2 border bg-white rounded-md ">
+                <input type="date" id="searchOrderDate" class="p-2 border bg-white rounded-md ">
 
                 <!-- Status Filter -->
-                <select id="statusFilter" class="p-2 border bg-white rounded-md text-center">
+                <select id="searchOrderStatus" class="p-2 border bg-white rounded-md text-center">
                     <option value="all">All Statuses</option>
                     <option value="pending">Pending</option>
                     <option value="shipped">Shipped</option>
@@ -111,7 +112,7 @@
                     <thead>
                         <tr class="bg-blue-200">
                             <th class="p-3 text-center">Order ID</th>
-                            <th class="p-3 text-center">Customer Name</th>
+                            <th class="p-3 text-center">Customer Username</th>
                             <th class="p-3 text-center">Status</th>
                             <th class="p-3 text-center">Actions</th>
                         </tr>
@@ -121,10 +122,10 @@
                             @foreach ($orders as $order)
                                 <tr class="border-t">
                                     <td class="p-3 text-center">{{ $order->id }}</td>
-                                    <td class="p-3 text-center">{{ $order->customer_name }}</td>
-                                    <td class="p-3 text-center">{{ ucfirst($order->status) }}</td>
+                                    <td class="p-3 text-center">{{ $order->user->username}}</td>
+                                    <td class="p-3 text-center">{{ ucfirst($order->order_status) }}</td>
                                     <td class="p-3 text-center">
-                                        <button onclick="update"
+                                        <button onclick="editOrderDetails({{ $order->id }})"
                                             class="text-yellow-500 hover:text-yellow-700 rounded">Edit</button>
                                         <button onclick="viewOrderDetails({{ $order->id }})"
                                             class="text-blue-500 hover:text-blue-700 rounded">View</button>
@@ -143,131 +144,156 @@
 
         </div>
         <!-- View Order Modal -->
-        <div id="viewOrderModal"
-            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
-                <h2 class="text-2xl font-bold mb-4">Order Details</h2>
+<div id="viewOrderModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
+        <h2 class="text-2xl font-bold mb-4">Order Details</h2>
 
-                <!-- Order Info Grid -->
-                <div class="grid grid-cols-2 gap-4">
-                    <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
-                    <p><strong>Customer Name:</strong> <span id="modalCustomerName"></span></p>
-                    <p><strong>Status:</strong> <span id="modalOrderStatus"></span></p>
-                    <p><strong>Payment Method:</strong> <span id="modalPaymentMethod"></span></p>
-                    <p><strong>Shipping Address:</strong> <span id="modalShippingAddress"></span></p>
-                </div>
-
-                <!-- Ordered Items -->
-                <div class="mt-4">
-                    <h3 class="font-bold">Items:</h3>
-                    <ul id="modalOrderItems" class="list-disc pl-4"></ul>
-                </div>
-
-                <!-- Close Button -->
-                <div class="flex justify-end mt-4">
-                    <button onclick="closeViewOrderModal()"
-                        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Close</button>
-                </div>
-            </div>
-
+        <!-- Order Info Grid -->
+        <div class="grid grid-cols-2 gap-4">
+            <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+            <p><strong>Username:</strong> <span id="modalCustomerName"></span></p>
+            <p><strong>Discount ID:</strong> <span id="modalDiscountId"></span></p>
+            <p><strong>Total:</strong> <span id="modalTotal"></span></p>
+            <p><strong>Status:</strong> <span id="modalOrderStatus"></span></p>
+            <p><strong>Created At:</strong> <span id="modalCreatedAt"></span></p>
+            <p><strong>Updated At:</strong> <span id="modalUpdatedAt"></span></p>
         </div>
-        <!-- Edit Order Status Modal -->
-        <div id="editOrderModal"
-            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-[30rem]">
-                <h2 class="text-2xl font-bold mb-4">Update Order Status</h2>
 
-                <!-- Order ID (Read-Only) -->
-                <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
-                <p><strong>Customer Name:</strong> <span id="modalCustomerName"></span></p>
+        <!-- Close Button -->
+        <div class="flex justify-end mt-4">
+            <button onclick="closeViewOrderModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
 
-                <!-- Status Dropdown -->
-                <div class="mt-4">
-                    <label class="font-bold">Change Status:</label>
-                    <select id="editOrderStatus" class="w-full p-2 border border-gray-300 rounded-md">
-                        <option value="pending">Pending</option>
-                        <option value="shipped">Shipped</option>
-                        <option value="delivered">Delivered</option>
-                    </select>
-                </div>
+        <!-- Edit Order Modal -->
+<div id="editOrderModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[30rem]">
+        <h2 class="text-2xl font-bold mb-4">Update Order Status</h2>
 
-                <!-- Buttons -->
-                <div class="flex justify-end mt-4">
-                    <button onclick="closeEditOrderModal()"
-                        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
-                        Cancel
-                    </button>
-                    <button onclick="updateOrderStatus()"
-                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                        Update Status
-                    </button>
-                </div>
-            </div>
+        <!-- Order ID (Read-Only) -->
+        <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+        <p><strong>Customer Name:</strong> <span id="modalCustomerName"></span></p>
+
+        <!-- Status Dropdown -->
+        <div class="mt-4">
+            <label class="font-bold">Change Status:</label>
+            <select id="editOrderStatus" class="w-full p-2 border border-gray-300 rounded-md">
+                <option value="pending">Pending</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+    <div class="flex justify-between mt-4">
+    <button onclick="closeEditOrderModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-4">
+        Cancel
+    </button>
+    <button onclick="updateOrderStatus()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+        Update Status
+    </button>
+</div>
+    </div>
+</div>
 
         </div>
 
     </div>
     <script>
+        function searchOrders() {
+    let searchId = document.getElementById("searchOrderId").value.trim();
+    let searchDate = document.getElementById("searchOrderDate").value;
+    let searchStatus = document.getElementById("searchOrderStatus").value;
+
+    window.location.href = `/admin/orders?search_id=${searchId}&search_date=${searchDate}&search_status=${searchStatus}`;
+}
+
+
         function viewOrderDetails(orderId) {
-            fetch(`/admin/orders/${orderId}`)
-                .then(response => response.json())
-                .then(order => {
-                    document.getElementById("modalOrderId").innerText = order.id;
-                    document.getElementById("modalCustomerName").innerText = order.customer_name;
-                    document.getElementById("modalOrderStatus").innerText = order.status;
-                    document.getElementById("modalPaymentMethod").innerText = order.payment_method;
-                    document.getElementById("modalShippingAddress").innerText = order.shipping_address;
+    fetch(`/admin/orders/show/${orderId}`)
+        .then(response => response.json())
+        .then(order => {
+            document.getElementById("modalOrderId").innerText = order.id;
+            document.getElementById("modalCustomerName").innerText = order.username;
+            document.getElementById("modalDiscountId").innerText = order.discount_id;
+            document.getElementById("modalTotal").innerText = order.total;
+            document.getElementById("modalOrderStatus").innerText = order.order_status;
+            document.getElementById("modalCreatedAt").innerText = order.created_at;
+            document.getElementById("modalUpdatedAt").innerText = order.updated_at;
 
-                    // List ordered items
-                    let itemsList = document.getElementById("modalOrderItems");
-                    itemsList.innerHTML = "";
-                    order.items.forEach(item => {
-                        let li = document.createElement("li");
-                        li.innerText = `${item.name} (Qty: ${item.quantity})`;
-                        itemsList.appendChild(li);
-                    });
+            document.getElementById("viewOrderModal").classList.remove("hidden");
+        })
+        .catch(error => {
+            console.error("Error fetching order details:", error);
+            alert("Failed to fetch order details. Please try again.");
+        });
+}
 
-                    document.getElementById("viewOrderModal").classList.remove("hidden");
-                });
-        }
+function closeViewOrderModal() {
+    document.getElementById("viewOrderModal").classList.add("hidden");
+}
 
-        function closeViewOrderModal() {
-            document.getElementById("viewOrderModal").classList.add("hidden");
-        }
-        function editOrderDetails(orderId) {
-            fetch(`/admin/orders/${orderId}`)
-                .then(response => response.json())
-                .then(order => {
-                    document.getElementById("modalOrderId").innerText = order.id;
-                    document.getElementById("modalCustomerName").innerText = order.customer_name;
-                    document.getElementById("editOrderStatus").value = order.status;
+       function editOrderDetails(orderId) {
+    fetch(`/admin/orders/show/${orderId}`)
+        .then(response => response.json())
+        .then(order => {
+            document.getElementById("modalOrderId").innerText = order.id;
+            document.getElementById("modalCustomerName").innerText = order.username;
+            document.getElementById("editOrderStatus").value = order.order_status;
 
-                    document.getElementById("editOrderModal").classList.remove("hidden");
-                });
-        }
+            document.getElementById("editOrderModal").classList.remove("hidden");
+        })
+        .catch(error => {
+            console.error("Error fetching order details:", error);
+            alert("Failed to fetch order details. Please try again.");
+        });
+}
 
-        function updateOrderStatus() {
-            let orderId = document.getElementById("modalOrderId").innerText;
-            let newStatus = document.getElementById("editOrderStatus").value;
+function closeEditOrderModal() {
+    document.getElementById("editOrderModal").classList.add("hidden");
+}
 
-            fetch(`/admin/orders/edit/${orderId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-                },
-                body: JSON.stringify({ status: newStatus })
-            }).then(response => response.json())
-                .then(data => {
-                    alert("Order status updated successfully!");
-                    closeEditOrderModal();
-                    location.reload(); // Refresh the orders table
-                });
-        }
 
-        function closeEditOrderModal() {
-            document.getElementById("editOrderModal").classList.add("hidden");
-        }
+       function updateOrderStatus() {
+    let orderIdElement = document.getElementById("modalOrderId");
+    
+    if (!orderIdElement) {
+        console.error("Error: modalOrderId element not found!");
+        return;
+    }
+    
+    let orderId = orderIdElement.innerText;
+    let newStatus = document.getElementById("editOrderStatus").value;
+
+    let csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+    
+    if (!csrfTokenElement) {
+        console.error("Error: CSRF token meta tag missing!");
+        return;
+    }
+    
+    let csrfToken = csrfTokenElement.getAttribute("content");
+
+    fetch(`/admin/orders/edit/${orderId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken
+        },
+        body: JSON.stringify({ order_status: newStatus })
+    }).then(response => response.json())
+      .then(data => {
+          console.log("Order status updated successfully!");
+          closeEditOrderModal();
+          location.reload();
+      }).catch(error => {
+          console.error("Error updating order status:", error);
+          alert("Failed to update order status. Please try again.");
+      });
+}
 
     </script>
 
