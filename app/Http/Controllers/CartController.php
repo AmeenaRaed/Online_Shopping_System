@@ -110,25 +110,41 @@ class CartController extends Controller
         $user = Auth::user();
         $action = $request->input('action');
 
-        $cart = Order::where('user_id', $user->id)->where('order_status', 'cart')->firstOrFail();
-        $pivot = $cart->products()->find($productId)?->pivot;
+        $cart = Order::with('products')
+            ->where('user_id', $user->id)
+            ->where('order_status', 'cart')
+            ->firstOrFail();
+
+        // Find the product to check stock
+        $product = Product::findOrFail($productId);
+
+        // Find pivot info for product in cart
+        $pivot = $cart->products->find($productId)?->pivot;
 
         if (!$pivot) {
             return redirect()->route('cart.index')->with('error', 'Product not in cart.');
         }
 
-        $quantity = $pivot->quantity;
+        $availableStock = $product->stock_quantity;
+        $currentCartQty = $pivot->quantity;
 
         if ($action === 'increase') {
-            $quantity++;
+            if ($currentCartQty >= $availableStock) {
+                return redirect()->route('cart.index')->with('error', 'Cannot increase quantity beyond available stock.');
+            }
+            $currentCartQty++;
         } elseif ($action === 'decrease') {
-            if ($quantity <= 1) {
+            if ($currentCartQty <= 1) {
                 return redirect()->route('cart.index')->with('error', 'Quantity cannot be less than 1. Remove the item instead!');
             }
-            $quantity--;
+            $currentCartQty--;
+        } else {
+            return redirect()->route('cart.index')->with('error', 'Invalid action.');
         }
 
-        $cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
+        // Update quantity in pivot table
+        $cart->products()->updateExistingPivot($productId, ['quantity' => $currentCartQty]);
+
         $this->updateCartTotal($cart);
 
         return redirect()->route('cart.index')->with('success', 'Cart updated.');
