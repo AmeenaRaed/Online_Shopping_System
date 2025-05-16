@@ -67,20 +67,27 @@ class ShipmentController extends Controller
 
         Shipments::create($validatedData);
 
-        return redirect()->route('shipment.confirmation')
-            ->with('message', 'Shipment details successfully processed.');
+        return redirect()->route('shipment.confirmation', ['order' => $order->id]);
     }
 
-    public function confirmation()
+    public function showReceiptTracking(Order $order)
     {
+        $shipment = $order->shipments;
 
-        return view('payment.shipment-confirmation');
-    }
+        if (!$shipment) {
+            return redirect()->route('index')->withErrors(['Shipment not found.']);
+        }
 
-    public function showReceiptTracking()
-    {
-        return view('receipt_tracking', [
+        return view('payment.shipmentConfirmation', [
             'receipt' => session('receipt') ?? null,
+            'shipmentDetails' => [
+                'recipient_name' => $shipment->recipient_name,
+                'contact_number' => $shipment->contact_number,
+                'street' => $shipment->street,
+                'road' => $shipment->road,
+                'house_number' => $shipment->house_number,
+                'country' => $shipment->country,
+            ],
             'fakeDeliveryBoy' => [
                 "name" => "Matt",
                 "status" => "On the way",
@@ -95,25 +102,4 @@ class ShipmentController extends Controller
             ]
         ]);
     }
-
-    // public function store(Request $request)
-    // {
-    //     $validatedData = $request->validate([
-    //         'order_id' => 'required|exists:orders,id',
-    //         'recipient_name' => 'required|string|max:255',
-    //         'contact_number' => 'required|digits:8',
-    //         'street' => 'required|string|max:255',
-    //         'road' => 'required|string|max:255',
-    //         'house_number' => 'required|string|max:10',
-    //         'country' => 'required|string|in:Manama,Muharraq,Riffa,Isa Town,Sitra,Budaiya',
-    //         'receipt_ref_number' => 'nullable|string',
-    //     ]);
-
-    //     $validatedData['shipment_status'] = 'Pending'; // Set default status
-    //     $validatedData['tracking_number'] = null; // Optional: you can generate this later
-
-    //     Shipments::create($validatedData);
-
-    //     return redirect()->route('shipment.confirmation')->with('success', 'Shipment details saved successfully!');
-    // }
 }

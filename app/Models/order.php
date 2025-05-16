@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Shipments;
 
 
 class Order extends Model
@@ -27,4 +28,10 @@ class Order extends Model
             'created_at' => 'datetime'
         ];
     }
+
+      public function shipments() {
+        return $this->hasOne(Shipments::class);
+    }
+
+   
 }
