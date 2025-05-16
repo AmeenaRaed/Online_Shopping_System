@@ -14,28 +14,33 @@ use App\Models\Order;
 class PaymentController extends Controller
 {
     public function showForm($orderId)
-{
-    return view('payment.payment', ['orderId' => $orderId]);
-}
+    {
+        $order = Order::findOrFail($orderId);
+
+
+        return view('payment.payment', ['orderId' => $orderId, 'orderTotal' => $order->total + 4.99]);
+    }
 
     public function process(Request $request)
     {
+        // dd($request->all());
+
         if ($request->input('action') === 'cancel') {
             return redirect()->route('payment.cancelled')->with('message', 'Payment was cancelled.');
         }
 
         // Validation for specific payment methods is not working
-         $validated = $request->validate([
-        'sender_name' => 'required|string',
-        'amount_paid' => 'required|numeric|min:0.01',
-        'discount_code' => ['nullable', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4}$/'],
-        'payment_method' => 'required|in:master,paypal,apple',
-        // 'paypal_email' => 'required_if:payment_method,paypal|email',
-        // 'card_number' => 'required_if:payment_method,master|numeric|digits:16',
-        // 'card_cvv' => 'required_if:payment_method,master|numeric|digits:3',
-        // 'apple_account' => 'required_if:payment_method,apple|string',
-        // 'apple_password' => 'required_if:payment_method,apple|string|min:8',
-    ]);
+        $validated = $request->validate([
+            'sender_name' => 'required|string',
+            'amount_paid' => 'required|numeric|min:0.01',
+            'discount_code' => ['nullable', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4}$/'],
+            'payment_method' => 'required|in:master,paypal,apple',
+            // 'paypal_email' => 'required_if:payment_method,paypal|email',
+            // 'card_number' => 'required_if:payment_method,master|numeric|digits:16',
+            // 'card_cvv' => 'required_if:payment_method,master|numeric|digits:3',
+            // 'apple_account' => 'required_if:payment_method,apple|string',
+            // 'apple_password' => 'required_if:payment_method,apple|string|min:8',
+        ]);
 
         // Process the payment
         $ref_number = 'REF' . bin2hex(random_bytes(4));
@@ -73,7 +78,7 @@ class PaymentController extends Controller
         ]);
 
         // Update the order status to 'pending'
-        $order = Order::findOrFail($orderId); 
+        $order = Order::findOrFail($orderId);
         $order->update(['order_status' => 'pending']);
 
         // Redirect to shipment page after successful payment

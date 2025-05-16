@@ -97,7 +97,7 @@
                             <span>{{ number_format($cart->total + 4.99, 2) }} BD</span>
                         </div>
 
-                        <a href="{{ route('payment.form', ['orderId' => $cart->id]) }}">
+                        <a href="{{ route('payment.form', ['orderId' => $cart->id, "totalAmount" => $cart->total]) }}">
                             <button
                                 class="mt-6 w-full bg-peach-glow hover:bg-warm-coral text-white font-medium py-3 rounded-full transition shadow-md">
                                 Proceed to Checkout

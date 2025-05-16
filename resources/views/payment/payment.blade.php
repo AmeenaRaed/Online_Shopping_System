@@ -50,9 +50,6 @@
       <!-- Hidden order ID field -->
       <input type="hidden" name="order_id" value="{{ $orderId }}">
 
-      <p>{{ $orderId }}</p>
-
-
       <div class="mb-4">
         <label for="sender_name" class="block text-sm font-medium text-gray-700">Sender Name</label>
         <input type="text" name="sender_name" id="sender_name"
@@ -61,10 +58,12 @@
       </div>
 
       <div class="mb-4">
-        <label for="amount_paid" class="block text-sm font-medium text-gray-700">Amount Paid</label>
-        <input type="number" name="amount_paid" id="amount_paid"
-          class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-400" placeholder="Enter amount paid"
-          step="any" min="5.00" required>
+        <div id="amount_paid" class="w-full px-4 py-2 border rounded-lg bg-gray-100 text-gray-700">
+          {{ number_format($orderTotal, 2) }} BD
+        </div>
+
+        <input type="hidden" name="amount_paid" value="{{ $orderTotal }}">
+
       </div>
 
       <div class="mb-4">
@@ -177,4 +176,5 @@
     });
   </script>
 </body>
+
 </html>
