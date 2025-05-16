@@ -1,27 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Order;
-class ReportController extends Controller
-{
+use Carbon\Carbon;
+
+class ReportController extends Controller {
     public function index() {
-    $salesData = Order::selectRaw('DATE(created_at) as date, COALESCE(SUM(total), 0) as revenue')
-                  ->groupBy('date')
-                  ->orderBy('date', 'desc')
-                  ->get();
+        // Fetch ALL sales data (without filters)
+        $salesData = Order::selectRaw('DATE(created_at) as date, COALESCE(SUM(total), 0) as revenue')
+                          ->groupBy('date')
+                          ->orderBy('date', 'desc')
+                          ->get();
 
+        // Fetch ALL orders (without filters)
+        $orders = Order::latest()->paginate(10);
 
-    $orderStats = Order::selectRaw('order_status, COUNT(*) as count')
-                   ->groupBy('order_status')
-                   ->get();
+        // Fetch order status breakdown for the print function
+        $orderStats = Order::selectRaw('order_status, COUNT(*) as count')
+                           ->groupBy('order_status')
+                           ->get();
 
-
-    $orders = Order::latest()->paginate(10); // Fetch all orders
-
-    return view('admin.reports', compact('salesData', 'orderStats', 'orders'));
-}
-
-
+        return view('admin.reports', compact('salesData', 'orders', 'orderStats'));
+    }
 }
