@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\User;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -32,12 +31,6 @@ class ProfileController extends Controller
         return view('profile.dashboard', compact('user', 'orders', 'totalOrders', 'cartItemsCount'));
     }
 
-
-
-    //total number of orders by the user
-    //Total number of cart items
-    public function stats() {}
-
     public function showOrder()
     {
         $user = Auth::user();
@@ -58,9 +51,15 @@ class ProfileController extends Controller
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'phone' => 'nullable|string|max:20',
-            'dob' => 'nullable|date',
+            'phone' => 'nullable|digits:8',
+            'dob' => 'nullable|date|before:today',
+            'avatar_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        if ($request->hasFile('avatar_url')) {
+            $path = $request->file('avatar_url')->store('avatars', 'public');
+            $validated['avatar_url'] = Storage::url($path);
+        }
 
         $user->update($validated);
 

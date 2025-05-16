@@ -15,15 +15,15 @@
                                      class="w-full h-72 object-cover rounded-md mb-4" />
 
                                 <!-- Product Info -->
-                                <h3 class="text-lg font-semibold text-gray-800 text-center">{{ $product->name }}</h3>
-                                <p class="text-xl font-bold text-primary mt-2 text-center">
+                                <h3 class="text-lg font-semibold text-gray-800 text-center product-name">{{ $product->name }}</h3>
+                                <p class="text-xl font-bold text-primary mt-2 text-center product-price">
                                     {{ number_format($product->price, 2) }} BD
                                 </p>
 
                                 <!-- Stock -->
                                 <p class="mt-1 text-center">
                                     @if ($product->stock_quantity > 0)
-                                        <span class="text-green-600 font-medium">{{ $product->stock_quantity }} available</span>
+                                        <span class="text-green-600 font-medium stock-quantity">{{ $product->stock_quantity }} available</span>
                                     @else
                                         <span class="text-red-600 font-medium">Out of stock</span>
                                     @endif

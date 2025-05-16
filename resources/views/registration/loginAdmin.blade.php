@@ -23,7 +23,14 @@
                     </ul>
                 </div>
             @endif
-          <form class="space-y-4" action="{{route('loginAdmin.attempt')}}" method="POST">
+
+      @if (session('status'))
+    <div class="bg-green-100 text-green-800 p-4 rounded mb-5 text-sm">
+        {{ session('status') }}
+    </div>
+     @endif
+            
+            <form class="space-y-4" action="{{route('loginAdmin.attempt')}}" method="POST">
             @csrf
             <div>
               <label for="email" class="block text-xs font-medium text-gray-900 text-left">Email address</label>

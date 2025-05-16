@@ -20,18 +20,21 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ForgotCustomerController;
+use App\Http\Controllers\ForgotAdminController;
+use App\Http\Controllers\ForgotSupplierController;
+
 
 //get(routepath, handler function)
 
-Route::get('/', [homeController::class,'index']);
+Route::get('/', [homeController::class, 'index']);
 
-Route::post('logout', function(){
+Route::post('logout', function () {
     Auth::guard('web')->logout();
     Session::invalidate();
     Session::regenerateToken();
 
     return redirect('/');
-
 })->name('logout');
 
 Route::prefix('cart')->group(function () {
@@ -43,51 +46,51 @@ Route::prefix('cart')->group(function () {
 
 
 
-Route::get('/login/admin', function() { 
+Route::get('/login/admin', function () {
     return view('registration.loginAdmin');
 });
 
-Route::post('/login/admin' , LoginAdminController::class)->name('loginAdmin.attempt');
+Route::post('/login/admin', LoginAdminController::class)->name('loginAdmin.attempt');
 
-Route::get('/login/supplier', function() { 
+Route::get('/login/supplier', function () {
     return view('registration.loginSupplier');
 });
 
-Route::post('/login/supplier' , LoginSupplierController::class)->name('loginSupplier.attempt');
+Route::post('/login/supplier', LoginSupplierController::class)->name('loginSupplier.attempt');
 
-Route::get('/login', function() {
+Route::get('/login', function () {
     return view('registration.index');
 });
 
 Route::post('/login/customer', LoginCustomerController::class)->name('loginCustomer.attempt');
 
 
-Route::get('/login/customer', function() {
+Route::get('/login/customer', function () {
     return view('registration.loginCustomer');
 });
 
-Route::get('/login/customer/forgetpass', function() {
+Route::get('/login/customer/forgetpass', function () {
     return view('registration.forgetCustomer');
 });
 
 
-Route::get('/login/supplier/forgetpass', function() {
+Route::get('/login/supplier/forgetpass', function () {
     return view('registration.forgetSupplier');
 });
 
-Route::get('/register', function(){
+Route::get('/register', function () {
     return view('registration.register');
 });
 
-Route::post('/register' , RegisterController::class) -> name('register.store');
+Route::post('/register', RegisterController::class)->name('register.store');
 
-Route::get('/aboutus', function() {
+Route::get('/aboutus', function () {
     return view('home.aboutus');
 });
 
-Route::get('/products', [ProductController::class,'showAll']);
+Route::get('/products', [ProductController::class, 'showAll']);
 
-Route::get('/profile', function() {
+Route::get('/profile', function () {
     return view('profile.dashboard');
 });
 
@@ -103,15 +106,15 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 //     return view('admin.orders');
 // });
 
-Route::get('/login/admin/forgetpass', function() {
+Route::get('/login/admin/forgetpass', function () {
     return view('registration.forgetAdmin');
 });
 
-Route::get('/login/admin', function() { 
+Route::get('/login/admin', function () {
     return view('registration.loginAdmin');
 });
 
-Route::get('/admin',[DashboardController::class,'index']);
+Route::get('/admin', [DashboardController::class, 'index']);
 
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 
@@ -135,10 +138,13 @@ Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('ad
 
 Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
-Route::get('/supplier',[SupplierController::class, 'index'])->name('supplier.index');
-
-Route::get('/supplier/reports',[SupplierController::class, 'reports'])->name('supplier.reports');
-
+Route::prefix('/supplier')->group(function () {
+    Route::get('/', [SupplierController::class, 'index'])->name('supplier.index');
+    Route::get('/reports', [SupplierController::class, 'reports'])->name('supplier.reports');
+    Route::post('/add', [SupplierController::class, 'add'])->name('supplier.add');
+    Route::put('/edit/{productid}', [SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::delete('/delete/{productid}', [SupplierController::class, 'delete'])->name('supplier.delete');
+});
 
 // Shipment Details Page
 Route::get('/shipment', function () {
@@ -169,6 +175,36 @@ Route::get('/index', function () {
 })->name('index');
 
 
+// //forget password
+Route::get('/login/admin/forgetpass', function () {
+    return view('registration.forgetAdmin');
+})->name('admin.forgot-password');
+
+Route::get('/login/admin', function () {
+    return view('registration.loginAdmin');
+})->name('loginAdmin.show');
 
 
+Route::get('/login/supplier/forgetpass', function () {
+    return view('registration.Supplier');
+})->name('supplier.forgot-password');
 
+Route::get('/login/supplier', function () {
+    return view('registration.loginSupplier');
+})->name('loginSupplier.show');
+
+
+ Route::get('/login/customer', function () {
+    return view('registration.loginCustomer');
+})->name('loginCustomer.show');
+
+
+Route::get('/login/customer/forgetpass', function () {
+    return view('registration.forgetCustomer');
+})->name('customer.forgot-password');
+
+Route::post('/reset-password/admin', [ForgotAdminController::class, 'reset'])->name('admin.reset-password');
+
+Route::post('/reset-password/supplier', [ForgotSupplierController::class, 'reset'])->name('supplier.reset-password');
+
+Route::post('/reset-password/customer', [ForgotCustomerController::class, 'reset'])->name('customer.reset-password');

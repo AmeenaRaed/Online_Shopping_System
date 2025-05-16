@@ -103,45 +103,56 @@
 
                 {{-- settings --}}
                 <div id="slide-3-content" class="slide-item hidden mb-4 p-4 rounded-lg text-muted-rose">
-                    <form method="POST" action="{{ route('profile.update') }}" class="space-y-4 text-left">
+                    <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data"
+                        class="space-y-4 text-left " id="profile-form">
                         @csrf
                         @method('PUT')
 
-                        <div>
-                            <label for="first_name" class="block font-semibold">First Name</label>
-                            <input type="text" name="first_name" id="first_name"
-                                value="{{ old('first_name', Auth::user()->first_name) }}"
-                                class="w-full p-2 border rounded">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                            <div>
+                                <label for="first_name" class="block font-semibold">First Name</label>
+                                <input type="text" name="first_name" id="first_name"
+                                    value="{{ old('first_name', Auth::user()->first_name) }}"
+                                    class="w-full p-2 border rounded">
+                            </div>
+
+                            <div>
+                                <label for="last_name" class="block font-semibold">Last Name</label>
+                                <input type="text" name="last_name" id="last_name"
+                                    value="{{ old('last_name', Auth::user()->last_name) }}"
+                                    class="w-full p-2 border rounded">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block font-semibold">Email</label>
+                                <input type="email" name="email" id="email"
+                                    value="{{ old('email', Auth::user()->email) }}" class="w-full p-2 border rounded">
+                            </div>
+
+                            <div>
+                                <label for="phone" class="block font-semibold">Phone</label>
+                                <input type="text" name="phone" id="phone"
+                                    value="{{ old('phone', Auth::user()->phone) }}" class="w-full p-2 border rounded">
+                            </div>
+
+                            <div>
+                                <label for="dob" class="block font-semibold">Date of Birth</label>
+                                <input type="date" name="dob" id="dob" value="{{ old('dob', Auth::user()->dob) }}"
+                                    class="w-full p-2 border rounded">
+                            </div>
+
+                            <div>
+                                <label for="avatar_url" class="block font-semibold">Profile Picture</label>
+                                <input type="file" name="avatar_url" id="avatar_url" class="w-full p-2 border rounded" accept="image/*">
+                            </div>
                         </div>
 
-                        <div>
-                            <label for="last_name" class="block font-semibold">Last Name</label>
-                            <input type="text" name="last_name" id="last_name"
-                                value="{{ old('last_name', Auth::user()->last_name) }}"
-                                class="w-full p-2 border rounded">
+                        <div class="flex justify-center mt-10">
+                            <button type="submit" id="save-profile-changes-btn"
+                                class="bg-dusky-blue text-white px-4 py-2 rounded hover:bg-warm-coral transition-all">Save
+                                Changes</button>
                         </div>
-
-                        <div>
-                            <label for="email" class="block font-semibold">Email</label>
-                            <input type="email" name="email" id="email" value="{{ old('email', Auth::user()->email) }}"
-                                class="w-full p-2 border rounded">
-                        </div>
-
-                        <div>
-                            <label for="phone" class="block font-semibold">Phone</label>
-                            <input type="text" name="phone" id="phone" value="{{ old('phone', Auth::user()->phone) }}"
-                                class="w-full p-2 border rounded">
-                        </div>
-
-                        <div>
-                            <label for="dob" class="block font-semibold">Date of Birth</label>
-                            <input type="date" name="dob" id="dob" value="{{ old('dob', Auth::user()->dob) }}"
-                                class="w-full p-2 border rounded">
-                        </div>
-
-                        <button type="submit" id="save-profile-changes-btn"
-                            class="bg-dusky-blue text-white px-4 py-2 rounded hover:bg-warm-coral transition-all">Save
-                            Changes</button>
                     </form>
                 </div>
 

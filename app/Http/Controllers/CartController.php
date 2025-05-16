@@ -3,40 +3,52 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\order;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
-/* 
-    TO-DO:
-    - When adding to the cart from products page, Stay in the products page rather than going to the cart page
-    - Add Confirmation when removing an item
-    - 
+/**
+ * Class CartController
+ * 
+ * Handles cart operations such as adding, removing, updating items, and processing payments.
+ * 
+ * @author Ameena Raed
  */
 class CartController extends Controller
 {
-
-    //Displaying items
+    /**
+     * Display the current user's active cart.
+     *
+     * This method retrieves or creates an active cart associated with the authenticated user
+     * and loads its related products.
+     *
+     * @return \Illuminate\View\View The view displaying the cart contents.
+     */
     public function index()
     {
         $user = Auth::user();
 
-        // Fetch the user's active cart
+        // Fetch or create the user's cart
         $cart = Order::firstOrCreate(
             ['user_id' => $user->id, 'order_status' => 'cart'],
             ['total' => 0]
         );
 
-        $cart->load('products');  // Load the products relationship
+        // Load the associated products
+        $cart->load('products');
 
         return view('cart.index', ['cart' => $cart]);
     }
 
-    // Add items from products page
+    /**
+     * Add a product to the user's cart.
+     *
+     * This method retrieves the authenticated user's cart and adds the specified product.
+     * If the product is already in the cart, its quantity is updated.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request containing product ID and quantity.
+     * @return \Illuminate\Http\RedirectResponse Redirects back to the cart page with a success message.
+     */
     public function add(Request $request)
     {
         $user = Auth::user();
@@ -45,60 +57,62 @@ class CartController extends Controller
 
         $product = Product::findOrFail($productId);
 
-        // Fetch or create a cart
         $cart = Order::firstOrCreate(
             ['user_id' => $user->id, 'order_status' => 'cart'],
             ['total' => 0]
         );
 
-        // If already in cart, update quantity
+        // If product exists in cart, update its quantity
         if ($cart->products()->where('product_id', $productId)->exists()) {
             $existingQuantity = $cart->products()->find($productId)->pivot->quantity;
-            $cart->products()->updateExistingPivot($productId, [
-                'quantity' => $existingQuantity + $quantity,
-            ]);
+            $cart->products()->updateExistingPivot($productId, ['quantity' => $existingQuantity + $quantity]);
         } else {
             $cart->products()->attach($productId, ['quantity' => $quantity]);
         }
 
-        // Update total
         $this->updateCartTotal($cart);
 
         return redirect()->route('cart.index')->with('success', 'Product added to cart.');
     }
 
-
-    //Remove the item from cart
+    /**
+     * Remove a product from the cart.
+     *
+     * @param int $productId The ID of the product to remove.
+     * @return \Illuminate\Http\RedirectResponse Redirects back to the cart page with a success message.
+     */
     public function remove($productId)
     {
         $user = Auth::user();
 
-        // Fetch the user's active cart
-        $cart = Order::where('user_id', $user->id)
-            ->where('order_status', 'cart')
-            ->firstOrFail();
+        $cart = Order::where('user_id', $user->id)->where('order_status', 'cart')->firstOrFail();
 
-        // Remove product from cart
-        $product = $cart->products()->find($productId); // Get the product from the cart
-        if ($product) {
-            $cart->products()->detach($productId); // Detach only if it exists in the cart
+        if ($cart->products()->find($productId)) {
+            $cart->products()->detach($productId);
         }
 
-        // Update total
         $this->updateCartTotal($cart);
 
         return redirect()->route('cart.index')->with('success', 'Product removed from cart.');
     }
 
-    //Either Increase or decrease quantity
+    /**
+     * Update the quantity of a product in the cart.
+     *
+     * Users can increase or decrease the quantity of a product. If quantity goes below 1, an error is thrown.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request containing the action (increase/decrease).
+     * @param int $productId The ID of the product being updated.
+     * @return \Illuminate\Http\RedirectResponse Redirects back to the cart page with a success message.
+     */
     public function update(Request $request, $productId)
     {
         $user = Auth::user();
-        $action = $request->input('action'); // "increase" or "decrease"
+        $action = $request->input('action');
 
         $cart = Order::where('user_id', $user->id)->where('order_status', 'cart')->firstOrFail();
-
         $pivot = $cart->products()->find($productId)?->pivot;
+
         if (!$pivot) {
             return redirect()->route('cart.index')->with('error', 'Product not in cart.');
         }
@@ -120,63 +134,68 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Cart updated.');
     }
 
+    /**
+     * Recalculate and update the cart's total price.
+     *
+     * @param Order $cart The user's cart object.
+     * @return void
+     */
     private function updateCartTotal(Order $cart)
     {
         $total = 0;
 
-        // Calculate the total based on products and their quantities
         foreach ($cart->products as $product) {
             $total += $product->price * $product->pivot->quantity;
         }
 
-        // Update the cart's total and save
         $cart->total = $total;
         $cart->save();
     }
 
-    // Checkout redirect
+    /**
+     * Redirect the user to the payment page.
+     *
+     * Ensures the cart is not empty before proceeding to payment.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View Redirects or displays the payment page.
+     */
     public function payment()
     {
         $user = Auth::user();
         $cart = Order::where('user_id', $user->id)->where('order_status', 'cart')->firstOrFail();
-    
+
         if ($cart->products->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Your cart is empty. Add items before proceeding to payment.');
         }
-    
-        return view('payment.payment', ['cart' => $cart]); // Matches the correct view location
+
+        return view('payment.payment', ['cart' => $cart]);
     }
 
+    /**
+     * Process the payment for the user's order.
+     *
+     * Validates payment details before proceeding.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request containing payment details.
+     * @return \Illuminate\Http\RedirectResponse Redirects to the shipment page upon successful payment.
+     */
     public function processPayment(Request $request)
     {
         $user = Auth::user();
-    
+
         // Validate payment input
         $request->validate([
             'sender_name' => 'required|string|max:255',
             'amount_paid' => 'required|numeric|min:10.0',
             'payment_method' => 'required|in:master,paypal,apple',
         ]);
-    
-        // Fetch the user's active cart
-        $cart = Order::where('user_id', $user->id)
-                    ->where('order_status', 'cart')
-                    ->first();
-    
+
+        $cart = Order::where('user_id', $user->id)->where('order_status', 'cart')->first();
+
         if (!$cart || $cart->products->isEmpty()) {
-            return redirect()->route('cart.index')
-                             ->with('error', 'Your cart is empty. Add items before proceeding.');
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty. Add items before proceeding.');
         }
-    
-        // Payment processing logic here (e.g., saving data, sending payment request)
-        
-        // If payment processing is successful, redirect to the shipment page.
-        return redirect()->route('shipment')
-                         ->with('success', 'Payment processed successfully!');
+
+        return redirect()->route('shipment')->with('success', 'Payment processed successfully!');
     }
-    
-
-    
-
 }
-

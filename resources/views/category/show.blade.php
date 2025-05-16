@@ -1,5 +1,7 @@
 <x-layout>
 
+
+
     <div class="flex items-center justify-center">
 
         <div class="p-5">
@@ -12,21 +14,23 @@
                     <div class="product-card-wrapper">
                         <!-- Card Wrapper with the Entire Card Clickable -->
                         <a href="{{ route('product.show', $product->id) }}">
-                            <div class="product-card bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div
+                                class="product-card bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                                 <!-- Product Image -->
                                 <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
                                     class="w-full h-70 object-cover rounded-md mb-4 flex justify-center" />
 
                                 <!-- Product Name -->
-                                <h3 class="text-lg font-semibold text-gray-800 flex justify-center">{{ $product->name }}</h3>
+                                <h3 class="text-lg font-semibold text-gray-800 flex justify-center product-name">{{ $product->name }}
+                                </h3>
 
                                 <!-- Product Price -->
-                                <p class="text-xl font-bold text-primary mt-2 flex justify-center">
+                                <p class="text-xl font-bold text-primary mt-2 flex justify-center product-price">
                                     {{ number_format($product->price, 2) }} BD
                                 </p>
 
                                 @if ($product->stock_quantity > 0)
-                                    <span class="text-green-600 font-medium flex justify-center">{{ $product->stock_quantity }}
+                                    <span class="text-green-600 font-medium flex justify-center stock-quantity">{{ $product->stock_quantity }}
                                         available</span>
                                 @else
                                     <span class="text-red-600 font-medium flex justify-center">Out of stock</span>
@@ -53,3 +57,4 @@
     </div>
 
 </x-layout>
+
