@@ -65,7 +65,6 @@
 
 
 
-
     {{-- //////////////////////////////////////////////////////////////////////////////////////////// --}}
 
 
@@ -73,26 +72,48 @@
     <div class="max-w-5xl mx-auto p-5 rounded-lg mt-10 comment-input hidden">
         <form>
             <label for="chat" class="sr-only">Your message</label>
-           
-            <div
-                class="flex items-center px-3 py-3 rounded-lg bg-white border border-gray-300 shadow-sm ">
 
-                 <div>
-                <input type="image" src="{{Auth::user()->avatar_url}}" alt="" class="w-20 h-20 rounded-full">
-            </div>
-                <textarea id="chat" rows="3"
-                    class="block mx-4 p-3 w-full text-sm text-gray-900 bg-white rounded-lg border border-muted-rose resize-none placeholder-gray-400"
-                    placeholder="Add a review..."></textarea>
+            <div class="flex flex-col px-3 py-3 rounded-lg bg-white border border-gray-300 shadow-sm">
+                <!-- User Avatar -->
+                <div class="flex items-center flex-col text-center mb-4">
+                    <h1 class="mb-3 text-2xl font-bold text-muted-rose">Add a Review!!</h1>
 
-                <button type="submit"
-                    class="inline-flex justify-center p-3 text-muted-rose rounded-full cursor-pointer hover:bg-peach-glow transition duration-200">
-                    <svg class="w-6 h-6 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor" viewBox="0 0 18 20">
-                        <path
-                            d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
-                    </svg>
-                    <span class="sr-only">Send message</span>
-                </button>
+                    <!-- Rating Stars (Placed Above Input) -->
+                    <div class="flex space-x-1" id="starRating">
+                        @for ($i = 1; $i <= 3; $i++)
+                            <label class="cursor-pointer">
+                                <input type="radio" name="rating" value="{{ $i }}" class="hidden"
+                                    onclick="highlightStars({{ $i }})">
+                                <svg class="w-6 h-6 text-gray-400 star" data-value="{{ $i }}"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462
+                                    c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292
+                                    c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034
+                                    c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98
+                                    8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </label>
+                        @endfor
+                    </div>
+                </div>
+
+                <div class="relative flex items-center w-full space-x-4">
+                    <input type="image" src="{{ Auth::user()->avatar_url }}" alt="" class="w-20 h-20 rounded-full">
+
+                    <textarea id="chat" rows="3"
+                        class="block p-3 w-full text-sm text-gray-900 bg-white rounded-lg border border-muted-rose resize-none placeholder-gray-400"
+                        placeholder="Add a review..."></textarea>
+
+                    <button type="submit"
+                        class="absolute right-2 p-10 inline-flex justify-center p-3 text-muted-rose rounded-full cursor-pointer hover:bg-peach-glow transition duration-200">
+                        <svg class="w-6 h-6 rotate-90 rtl:-rotate-90" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                            <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8
+                            18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
+                        </svg>
+                        <span class="sr-only">Send message</span>
+                    </button>
+                </div>
             </div>
         </form>
     </div>
@@ -138,6 +159,19 @@
         function ShowCommentInput() {
             const commentInput = document.querySelector('.comment-input');
             commentInput.classList.toggle('hidden');
+        }
+
+        function highlightStars(value) {
+            let stars = document.querySelectorAll(".star");
+
+            stars.forEach(star => {
+                let starValue = parseInt(star.getAttribute("data-value"));
+                if (starValue <= value) {
+                    star.classList.add("text-yellow-500"); // Highlight selected stars
+                } else {
+                    star.classList.remove("text-yellow-500"); // Reset unselected stars
+                }
+            });
         }
     </script>
 
