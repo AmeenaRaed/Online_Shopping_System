@@ -9,27 +9,29 @@ use App\Models\Review;
 
 class ReviewController extends Controller
 {
-    public function AllReviews()
-    {
-        return review::all();
-    }
+    // public function ShowReviews()
+    // {
+    //     return review::all();
+    // }
 
-    public function AddReview(Request $request)
-    {
-        $user = Auth::user();
+   public function AddReview(Request $request, $id)
+{
 
-        $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string|max:500',
-        ]);
+    $user = Auth::user();
+    $validated = $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'rating' => 'required|integer|min:1|max:5',
+        'comment' => 'nullable|string|max:500',
+    ]);
 
-        Review::create(array_merge($validated, [
-            'user_id' => $user->id,
-        ]));
+    Review::create([
+        'user_id' => $user->id,
+        'product_id' => $id, // Use the route ID
+        'rating' => $request->rating,
+        'comment' => $request->comment,
+    ]);
 
-        return redirect()->back()->with( 'success', 'Profile updated successfully.');
-
-    }
+    return redirect()->back()->with('success', 'Review added successfully.');
+}
     //
 }

@@ -23,7 +23,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ForgotCustomerController;
 use App\Http\Controllers\ForgotAdminController;
 use App\Http\Controllers\ForgotSupplierController;
-
+use App\Http\Controllers\ReviewController;
 
 //get(routepath, handler function)
 
@@ -39,7 +39,7 @@ Route::post('logout', function () {
 
 Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'add'])->name('cart.add');
-    Route::put('/update/{productId}', [CartController::class, 'update'])->name('cart.update'); // Ensure the correct method and productId parameter
+    Route::put('/update/{productId}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
 });
@@ -98,6 +98,8 @@ Route::get('/profile', function () {
 Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+Route::post('/product/{id}/review', [ProductController::class, 'addReview'])->name('addReview');
 
 // //Admin Routes Goes Here:
 // Route::post('/login/admin' , LoginAdminController::class)->name('loginAdmin.attempt');
@@ -185,7 +187,7 @@ Route::get('/login/supplier', function () {
 })->name('loginSupplier.show');
 
 
- Route::get('/login/customer', function () {
+Route::get('/login/customer', function () {
     return view('registration.loginCustomer');
 })->name('loginCustomer.show');
 
