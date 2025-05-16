@@ -54,7 +54,7 @@
        .shipment-container button {
            padding: 12px;
            background-color: var(--warm-coral);
-           color: white;
+           color: black;
            cursor: pointer;
            transition: background 0.3s ease;
            border: none;
@@ -91,7 +91,7 @@
        if (session()->has('receipt')) {
            $receipt = session('receipt');
            ?>
-           <div class="alert" style="background-color:rgb(255, 235, 253);"> <!-- You may adjust the color as needed -->
+           <div class="alert" style="background-color:--muted-rose;">
                <h3>Payment Receipt</h3>
                <p><strong>Reference Number:</strong> <?php echo htmlspecialchars($receipt['ref_number']); ?></p>
                <p><strong>Payment Time:</strong> <?php echo htmlspecialchars($receipt['payment_time']); ?></p>
