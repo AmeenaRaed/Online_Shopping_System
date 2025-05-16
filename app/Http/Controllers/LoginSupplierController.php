@@ -43,7 +43,7 @@ class LoginSupplierController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/supplier');
+        return redirect()->intended('/supplier')->with('welcome', 'Welcome, Supplier! Manage your products and orders efficiently.');
     }
     //
 }
