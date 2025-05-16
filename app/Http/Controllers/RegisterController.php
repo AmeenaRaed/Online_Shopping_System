@@ -12,14 +12,14 @@ class RegisterController extends Controller
     public function __invoke(Request $request)
     {
         $userData = $request->validate([
-            "first_name" => "required|string|max:255",
-            "last_name" => "required|string|max:255",
-            "dob" => "required|date|before:today",
+            "first_name" => "required|string|max:50",
+            "last_name" => "required|string|max:50",
+            "dob" => "nullable|date|before:today",
             "phone" => "required|digits:8",
             "email" => "required|email|unique:users,email",
             "password" => "required|string|min:8|confirmed",
             "username" => "required|string|max:255|unique:users,username",
-            "avatar_url" => "nullable|image|max:2048",
+            'avatar_url' =>'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('avatar_url')) {
