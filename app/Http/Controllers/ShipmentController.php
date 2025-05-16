@@ -50,6 +50,16 @@ class ShipmentController extends Controller
         ]);
 
         Session::forget('receipt'); // Clear any stored payment receipt
+        foreach ($order->products as $product) {
+            $orderedQty = $product->pivot->quantity;
+            if ($product->stock_quantity < $orderedQty) {
+                return back()->withErrors(['stock' => "Not enough stock for {$product->name}."]);
+            }
+            $product->stock_quantity -= $orderedQty;
+            $product->save();
+        }
+
+        $order->status = 'Shipped';
 
         $validatedData['order_id'] = $order->id;
         $validatedData['shipment_status'] = 'Pending';
@@ -86,24 +96,24 @@ class ShipmentController extends Controller
         ]);
     }
 
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'order_id' => 'required|exists:orders,id',
-            'recipient_name' => 'required|string|max:255',
-            'contact_number' => 'required|digits:8',
-            'street' => 'required|string|max:255',
-            'road' => 'required|string|max:255',
-            'house_number' => 'required|string|max:10',
-            'country' => 'required|string|in:Manama,Muharraq,Riffa,Isa Town,Sitra,Budaiya',
-            'receipt_ref_number' => 'nullable|string',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'order_id' => 'required|exists:orders,id',
+    //         'recipient_name' => 'required|string|max:255',
+    //         'contact_number' => 'required|digits:8',
+    //         'street' => 'required|string|max:255',
+    //         'road' => 'required|string|max:255',
+    //         'house_number' => 'required|string|max:10',
+    //         'country' => 'required|string|in:Manama,Muharraq,Riffa,Isa Town,Sitra,Budaiya',
+    //         'receipt_ref_number' => 'nullable|string',
+    //     ]);
 
-        $validatedData['shipment_status'] = 'Pending'; // Set default status
-        $validatedData['tracking_number'] = null; // Optional: you can generate this later
+    //     $validatedData['shipment_status'] = 'Pending'; // Set default status
+    //     $validatedData['tracking_number'] = null; // Optional: you can generate this later
 
-        Shipments::create($validatedData);
+    //     Shipments::create($validatedData);
 
-        return redirect()->route('shipment.confirmation')->with('success', 'Shipment details saved successfully!');
-    }
+    //     return redirect()->route('shipment.confirmation')->with('success', 'Shipment details saved successfully!');
+    // }
 }

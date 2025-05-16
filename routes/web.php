@@ -23,7 +23,6 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ForgotCustomerController;
 use App\Http\Controllers\ForgotAdminController;
 use App\Http\Controllers\ForgotSupplierController;
-use App\Http\Controllers\ReviewController;
 
 //get(routepath, handler function)
 
@@ -167,10 +166,10 @@ Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.s
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
 
-Route::post('/shipments/confirmation', [ShipmentController::class, 'store'])->name('shipment.store');
-Route::get('/shipment/confirmation', function () {
-    return view('payment.shipment-confirmation');
-})->name('shipment.confirmation');
+// Route::post('/shipments/confirmation', [ShipmentController::class, 'store'])->name('shipment.store');
+// Route::get('/shipment/confirmation', function () {
+//     return view('payment.shipment-confirmation');
+// })->name('shipment.confirmation');
 
 Route::get('/index', function () {
     return view('index');
