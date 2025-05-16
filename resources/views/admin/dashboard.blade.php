@@ -1,6 +1,7 @@
 <x-layoutGuest>
 
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shipment Confirmation</title>
@@ -9,6 +10,20 @@
   </head>
   <!-- Main Container -->
   <div class="flex h-screen w-screen">
+
+        <!-- Walcome message -->
+        <div class="flex justify-center relative mb-10">
+            @if (session('welcome'))
+    <div 
+        x-data="{ show: true }" 
+        x-init="setTimeout(() => show = false, 4000)" 
+        x-show="show"
+        x-transition
+        class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-pink-200 text-pink-900 px-6 py-3 rounded-lg shadow-lg z-50 border border-pink-300"
+    >
+        {{ session('welcome') }}
+    </div>
+@endif
 
     <!-- Sidebar -->
     <div class="fixed left-0 top-0 h-screen w-[15rem] bg-black text-white p-6 shadow-lg">
