@@ -55,6 +55,7 @@ class ShipmentController extends Controller
 
     public function confirmation()
     {
+        
         return view('payment.shipment-confirmation');
     }
 
@@ -89,7 +90,7 @@ class ShipmentController extends Controller
             'receipt_ref_number' => 'nullable|string',
         ]);
 
-        shipments::create($validatedData);
+        Shipments::create($validatedData);
 
         return redirect()->route('shipment.confirmation')->with('success', 'Shipment details saved successfully!');
     }
