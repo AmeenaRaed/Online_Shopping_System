@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\shipments;
+use App\Models\Order;
 
 class ShipmentController extends Controller
 {
-    public function show() {
-        return view("payment.shipment");
+    public function show(Order $order)
+    {
+        return view("payment.shipment", compact('order'));
     }
 
-    public function processShipment(Request $request)
+    public function processShipment(Request $request, Order $order)
     {
         $validatedData = $request->validate([
             'recipient_name' => 'required|string|max:255',
@@ -49,13 +51,19 @@ class ShipmentController extends Controller
 
         Session::forget('receipt'); // Clear any stored payment receipt
 
+        $validatedData['order_id'] = $order->id;
+        $validatedData['shipment_status'] = 'Pending';
+        $validatedData['tracking_number'] = null;
+
+        Shipments::create($validatedData);
+
         return redirect()->route('shipment.confirmation')
             ->with('message', 'Shipment details successfully processed.');
     }
 
     public function confirmation()
     {
-        
+
         return view('payment.shipment-confirmation');
     }
 
@@ -81,14 +89,18 @@ class ShipmentController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'order_id' => 'required|exists:orders,id',
             'recipient_name' => 'required|string|max:255',
             'contact_number' => 'required|digits:8',
             'street' => 'required|string|max:255',
             'road' => 'required|string|max:255',
             'house_number' => 'required|string|max:10',
-            'country' => 'required|string', // Fixed field name from 'region' to 'country'
+            'country' => 'required|string|in:Manama,Muharraq,Riffa,Isa Town,Sitra,Budaiya',
             'receipt_ref_number' => 'nullable|string',
         ]);
+
+        $validatedData['shipment_status'] = 'Pending'; // Set default status
+        $validatedData['tracking_number'] = null; // Optional: you can generate this later
 
         Shipments::create($validatedData);
 

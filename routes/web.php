@@ -160,8 +160,8 @@ Route::post('/payment/store', [PaymentController::class, 'store'])->name('paymen
 Route::post('/payment/cancel', [PaymentController::class, 'cancelPayment'])->name('payment.cancelled');
 Route::get('/payment/{orderId}', [PaymentController::class, 'showForm'])->name('payment.form');
 
-Route::get('/shipment', [ShipmentController::class, 'show'])->name('shipment.show');
-Route::post('/shipment/process', [ShipmentController::class, 'processShipment'])->name('shipment.process');
+Route::get('/shipment/{order}', [ShipmentController::class, 'show'])->name('shipment.show');
+Route::post('/shipment/process/{order}', [ShipmentController::class, 'processShipment'])->name('shipment.process');
 Route::get('/shipment/confirmation', [ShipmentController::class, 'confirmation'])->name('shipment.confirmation');
 Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.show')->middleware('auth');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -169,7 +169,7 @@ Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.sum
 
 Route::post('/shipments/confirmation', [ShipmentController::class, 'store'])->name('shipment.store');
 Route::get('/shipment/confirmation', function () {
-    return view('shipment.confirmation');
+    return view('payment.shipment-confirmation');
 })->name('shipment.confirmation');
 
 Route::get('/index', function () {

@@ -82,7 +82,7 @@ class PaymentController extends Controller
         $order->update(['order_status' => 'pending']);
 
         // Redirect to shipment page after successful payment
-        return redirect()->route('shipment.show');
+        return redirect()->route('shipment.show' , $order);
     }
 
     public function store(Request $request)
