@@ -43,7 +43,7 @@ class LoginAdminController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/admin');
+        return redirect()->intended('/admin')->with('welcome', 'Welcome back, Admin! Keep everything running smoothly.');
     }
     //
 }
