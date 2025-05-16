@@ -149,7 +149,7 @@ Route::get('/payment/{orderId}', [PaymentController::class, 'showForm'])->name('
 Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 Route::get('/payment/receipt', [PaymentController::class, 'receipt'])->name('payment.receipt');
 Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
-Route::post('/payment/cancel', [PaymentController::class, 'cancelPayment'])->name('payment.cancel');
+Route::post('/payment/cancel', [PaymentController::class, 'cancelPayment'])->name('payment.cancelled');
 Route::get('/payment/{orderId}', [PaymentController::class, 'showForm'])->name('payment.form');
 
 Route::get('/shipment', [ShipmentController::class, 'show'])->name('shipment.show');
@@ -158,6 +158,15 @@ Route::get('/shipment/confirmation', [ShipmentController::class, 'confirmation']
 Route::get('/profile', [ProfileController::class, 'showOrder'])->name('profile.show')->middleware('auth');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::get('/profile', [ProfileController::class, 'summary'])->name('profile.summary');
+
+Route::post('/shipments/confirmation', [ShipmentController::class, 'store'])->name('shipment.store');
+Route::get('/shipment/confirmation', function () {
+    return view('shipment.confirmation');
+})->name('shipment.confirmation');
+
+Route::get('/index', function () {
+    return view('index');
+})->name('index');
 
 
 
