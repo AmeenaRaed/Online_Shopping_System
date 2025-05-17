@@ -19,7 +19,7 @@
 <body class="bg-very-light-pink">
 
     <header>
-        <div class="felx flex-col justify-center items-center gap-4 mx-4 p-2">
+        <div class=" flex-col justify-center items-center gap-4 mx-4 p-2">
             <div class=" flex justify-between items-center mx-10">
                 <!-- Left-aligned logo -->
                 <div class="flex">
@@ -79,7 +79,7 @@
     </header>
 
 
-    <main class="container pb-24">
+    <main class="container w-full max-w-screen-xl mx-auto px-4">
         {{ $slot }}
     </main>
 
