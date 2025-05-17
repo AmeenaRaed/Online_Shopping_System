@@ -11,7 +11,7 @@
             @if (session('welcome'))
     <div 
         x-data="{ show: true }" 
-        x-init="setTimeout(() => show = false, 4000)" 
+        x-init="setTimeout(() => show = false, 10000)" 
         x-show="show"
         x-transition
         class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-pink-200 text-pink-900 px-6 py-3 rounded-lg shadow-lg z-50 border border-pink-300"
