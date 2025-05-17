@@ -172,11 +172,6 @@
 <div id="editOrderModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-[30rem]">
         <h2 class="text-2xl font-bold mb-4">Update Order Status</h2>
-
-        <!-- Order ID (Read-Only) -->
-        <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
-        <p><strong>Customer Name:</strong> <span id="modalCustomerName"></span></p>
-
         <!-- Status Dropdown -->
         <div class="mt-4">
             <label class="font-bold">Change Status:</label>
