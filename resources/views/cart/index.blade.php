@@ -48,7 +48,7 @@
 
                                     </div>
                                     <span
-                                        class="text-muted-rose font-medium">{{ number_format($product->price * $product->pivot->quantity, 2) }}
+                                        class="text-muted-rose font-medium">{{ number_format($product->price, 2) }}
                                         BD</span>
                                 </div>
                             </div>
