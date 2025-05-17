@@ -129,6 +129,7 @@ class CartController extends Controller
         $currentCartQty = $pivot->quantity;
 
         if ($action === 'increase') {
+
             if ($currentCartQty >= $availableStock) {
                 return redirect()->route('cart.index')->with('error', 'Cannot increase quantity beyond available stock.');
             }
@@ -142,8 +143,11 @@ class CartController extends Controller
             return redirect()->route('cart.index')->with('error', 'Invalid action.');
         }
 
+
         // Update quantity in pivot table
         $cart->products()->updateExistingPivot($productId, ['quantity' => $currentCartQty]);
+
+        $cart->load('products');
 
         $this->updateCartTotal($cart);
 
@@ -158,6 +162,7 @@ class CartController extends Controller
      */
     private function updateCartTotal(Order $cart)
     {
+
         $total = 0;
 
         foreach ($cart->products as $product) {
@@ -165,6 +170,7 @@ class CartController extends Controller
         }
 
         $cart->total = $total;
+
         $cart->save();
     }
 

@@ -85,24 +85,7 @@
         <!-- Main Content -->
         <div class="ml-13 flex-box w-310 h-screen p-6 bg-white">
             <div class="flex justify-between items-center p-4 bg-black rounded-lg shadow-md">
-                <div class="flex items-center gap-2">
-                    <input type="date" id="startDate" class="p-2 border bg-white rounded-md">
-                    <input type="date" id="endDate" class="p-2 border bg-white rounded-md">
-                    <select id="orderStatusFilter" class="p-2 border bg-white rounded-md text-center">
-                        <option value="all">All Orders</option>
-                        <option value="pending">Pending</option>
-                        <option value="shipped">Shipped</option>
-                        <option value="delivered">Delivered</option>
-                    </select>
-
-                    <button onclick="filterReports()" class="bg-purple-300 px-4 py-2 rounded hover:bg-purple-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg>
-                    </button>
-                </div>
+                
                 <button onclick="printReport()" class="bg-green-300  px-4 py-2 rounded hover:bg-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-printer-fill" viewBox="0 0 16 16">
@@ -114,14 +97,15 @@
                 </button>
             </div>
             @if($salesData->isEmpty())
-                <div class=" flex-grow p-6 bg-white shadow-md rounded-lg mt-5 mb-5">
-                    <p class="text-gray-500 text-center p-4">No sales data available yet</p>
-                </div>
-            @else
-                <div class="mx-auto">
-                    <canvas id="salesChart"></canvas>
-                </div>
-            @endif
+    <div class="p-6 bg-white shadow-md rounded-lg mt-5 mb-5">
+        <p class="text-gray-500 text-center p-4">No sales data available yet</p>
+    </div>
+@else
+    <div class="mx-auto">
+        <canvas id="salesChart"></canvas>
+    </div>
+@endif
+
 
             <h2 class="text-xl font-bold mb-4 text-center">Order Summary</h2>
 
@@ -136,27 +120,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(isset($orders) && $orders->count() > 0)
-                        @foreach ($orders as $order)
-                            <tr class="border-t">
-                                <td class="p-3 text-center">{{ $order->id }}</td>
-                                <td class="p-3 text-center">{{ $order->user->name ?? 'Guest' }}</td>
-                                <td class="p-3 text-center">${{ number_format($order->total, 2) }}</td>
-                                <td class="p-3 text-center">{{ ucfirst($order->order_status) }}</td>
-                                <td class="p-3 text-center">{{ $order->created_at->format('Y-m-d') }}</td>
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="5" class="text-gray-500 text-center p-4">There is no order summary yet</td>
-                        </tr>
-                    @endif
+                    @if($orders->count() > 0)
+    @foreach ($orders as $order)
+        <tr class="border-t">
+            <td class="p-3 text-center">{{ $order->id }}</td>
+            <td class="p-3 text-center">{{ $order->user->username ?? 'Guest' }}</td>
+            <td class="p-3 text-center">${{ number_format($order->total, 2) }}</td>
+            <td class="p-3 text-center">{{ ucfirst($order->order_status) }}</td>
+            <td class="p-3 text-center">{{ $order->created_at ? $order->created_at->format('Y-m-d') : 'N/A' }}</td>
+        </tr>
+    @endforeach
+@else
+    <tr>
+        <td colspan="5" class="text-gray-500 text-center p-4">There is no order summary yet</td>
+    </tr>
+@endif
+
+
+
+
                 </tbody>
             </table>
         </div>
 
     </div>
     <script>
+       function filterReports() {
+    let startDate = document.getElementById("startDate").value;
+    let endDate = document.getElementById("endDate").value;
+    let status = document.getElementById("orderStatusFilter").value;
+
+    window.location.href = `/admin/reports?start_date=${startDate}&end_date=${endDate}&status=${status}`;
+}
+
+
         function printReport() {
             const reportContent = document.getElementById("printableReport").innerHTML;
             const printWindow = window.open("", "", "width=800,height=600");
@@ -191,29 +188,6 @@
                 maintainAspectRatio: false
             }
         });
-        const orderStats = @json($orderStats);
-
-        const statusLabels = orderStats.map(order => order.order_status);
-        const statusCounts = orderStats.map(order => order.count);
-
-        const statusCtx = document.getElementById("orderStatusChart").getContext("2d");
-        new Chart(statusCtx, {
-            type: "pie",
-            data: {
-                labels: statusLabels,
-                datasets: [{
-                    label: "Order Status Breakdown",
-                    data: statusCounts,
-                    backgroundColor: ["#f39c12", "#3498db", "#2ecc71"],
-                    borderColor: "#fff",
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        });
 
 
     </script>
@@ -229,7 +203,7 @@
                 <thead>
                     <tr class="bg-gray-200">
                         <th class="p-3 text-left">Order ID</th>
-                        <th class="p-3 text-left">Customer Name</th>
+                        <th class="p-3 text-left">Customer Username</th>
                         <th class="p-3 text-left">Total</th>
                         <th class="p-3 text-left">Status</th>
                         <th class="p-3 text-left">Date</th>
@@ -239,7 +213,7 @@
                     @foreach ($orders as $order)
                         <tr class="border-t">
                             <td class="p-3">{{ $order->id }}</td>
-                            <td class="p-3">{{ $order->user->name ?? 'Guest' }}</td>
+                            <td class="p-3">{{ $order->user->username ?? 'Guest' }}</td>
                             <td class="p-3">${{ number_format($order->total, 2) }}</td>
                             <td class="p-3">{{ ucfirst($order->order_status) }}</td>
                             <td class="p-3">{{ $order->created_at->format('Y-m-d') }}</td>
@@ -248,10 +222,5 @@
                 </tbody>
             </table>
         @endif
-
-        <div class="w-[400px] mx-auto mt-6">
-            <canvas id="salesChart"></canvas>
-        </div>
-    </div>
 
 </x-layoutGuest>
