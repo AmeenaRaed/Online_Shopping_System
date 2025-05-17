@@ -146,7 +146,7 @@
       </div>
 
       <div class="flex space-x-4 mt-4">
-        <button type="submit" action="{{ route('payment.form', ['order' => $order->id]) }}" name="action" value="pay"
+        <button type="submit" name="action" value="pay"
           class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
           Pay
         </button>
