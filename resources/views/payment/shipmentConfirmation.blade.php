@@ -160,7 +160,7 @@
             @endif
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57265.269766784215!2d50.630105634278316!3d26.22661080226398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49af722776a62d%3A0x8b6738a6070f60c2!2z2KfZhNmF2YbYp9mF2Kk!5e0!3m2!1sar!2sbh!4v1747481545747!5m2!1sar!2sbh" width="910" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            <div  id="tracking-map"></div>
 
-            <a href="index" class="btn btn-primary mt-4" name="button">Back to home</a>
+            <a href="/" class="btn btn-primary mt-4" name="button">Back to home</a>
         </div>
      
 </body>
