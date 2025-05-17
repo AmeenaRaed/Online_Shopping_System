@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shipment Confirmation</title>
-    <iframe id="tracking-map"width="600" height="450" style="border:0" loading="lazy" allowfullscreen
-     referrerpolicy="no-referrer-when-downgrade" src=""></iframe>
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         :root {
@@ -69,7 +68,7 @@
 </head>
 
 <body>
-        <div class="container mt-5">
+        <div class="container">
 
             @if(isset($receipt) && !empty($receipt))
                 <div class="receipt-summary">
