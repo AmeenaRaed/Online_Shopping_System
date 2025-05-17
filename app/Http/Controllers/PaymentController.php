@@ -26,7 +26,7 @@ class PaymentController extends Controller
         // dd($request->all());
 
         if ($request->input('action') === 'cancel') {
-            return redirect()->route('payment.cancelled')->with('message', 'Payment was cancelled.');
+           return redirect()->back()->with('message', 'Payment was cancelled.');
         }
 
         // Validation for specific payment methods is not working

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shipment Confirmation</title>
+    <iframe id="tracking-map"width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+     referrerpolicy="no-referrer-when-downgrade" src=""></iframe>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         :root {
@@ -47,7 +49,7 @@
         button {
             background-color: var(--warm-coral);
             color: var(--very-light-pink);
-            border: 2px solid var(--dusky-blue);
+            border: 2px solid var(--very-light-pink);
             padding: 10px 20px;
             cursor: pointer;
         }
@@ -56,6 +58,13 @@
             background-color: var(--muted-rose);
             border-color: var(--soft-lilac);
         }
+
+        .btn-primary
+        {
+            background-color: var(--warm-coral);
+            border-color: var(--very-light-pink);
+        }
+            
     </style>
 </head>
 
@@ -148,43 +157,12 @@
 
             @if(isset($fakeDeliveryBoy) && is_array($fakeDeliveryBoy))
                 <div class="delivery-details">
-                    <h3>{{ $fakeDeliveryBoy['name'] }}</h3>
-                    <p>Delivery Boy</p>
-                    <ul>
-                        @foreach ($orderProcess as $step)
-                            <li>{{ $step['step'] }} ({{ $step['estimate'] ?? $step['location'] }})</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <p>Delivery Boy: Matt</p>
             @endif
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57265.269766784215!2d50.630105634278316!3d26.22661080226398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49af722776a62d%3A0x8b6738a6070f60c2!2z2KfZhNmF2YbYp9mF2Kk!5e0!3m2!1sar!2sbh!4v1747481545747!5m2!1sar!2sbh" width="910" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            <div  id="tracking-map"></div>
 
-            <div id="tracking-map" style="height: 400px; width: 100%;"></div>
-
-            <a href="/" class="btn btn-primary mt-4">Back to home</a>
+            <a href="index" class="btn btn-primary mt-4" name="button">Back to home</a>
         </div>
-
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-        <script>
-            function initMap() {
-                var deliveryLocation = @json($fakeDeliveryBoy['location'] ?? null);
-                if (!deliveryLocation) {
-                    console.error("Delivery location data not available.");
-                    return;
-                }
-                if (Array.isArray(deliveryLocation)) {
-                    deliveryLocation = { lat: deliveryLocation[0], lng: deliveryLocation[1] };
-                }
-                var map = new google.maps.Map(document.getElementById('tracking-map'), {
-                    zoom: 14,
-                    center: deliveryLocation
-                });
-                new google.maps.Marker({ position: deliveryLocation, map: map });
-            }
-        </script>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
+     
 </body>
-
 </html>

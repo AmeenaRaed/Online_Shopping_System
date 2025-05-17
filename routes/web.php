@@ -130,9 +130,9 @@ Route::put('/admin/users/edit/{user}', [UserController::class, 'update'])->name(
 Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders');
 
 
-Route::get('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
+Route::put('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
 
-Route::put('/admin/orders/edit/{id}', [OrderController::class, 'update'])->name('admin.orders.update');
+Route::put('/admin/orders/edit/{order}', [OrderController::class, 'update'])->name('admin.orders.update');
 
 Route::get('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
 Route::put('/admin/profile', [AdminProfileController::class, 'index'])->name('admin.profile');
