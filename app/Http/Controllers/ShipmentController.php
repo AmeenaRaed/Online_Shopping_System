@@ -67,6 +67,7 @@ class ShipmentController extends Controller
 
         Shipments::create($validatedData);
 
+
         return redirect()->route('shipment.confirmation', ['order' => $order->id]);
     }
 
@@ -78,8 +79,17 @@ class ShipmentController extends Controller
             return redirect()->route('index')->withErrors(['Shipment not found.']);
         }
 
+        $payment = $order->payment;
+
+        $paymentDetails = $payment ? [
+            'method' => $payment->method,
+            'amount' => $payment->amount,
+            'paid_at' => $payment->paid_at ,
+            'payment_status' => $payment->payment_status,
+        ] : null;
+
         return view('payment.shipmentConfirmation', [
-            'receipt' => session('receipt') ?? null,
+            'receipt' => $paymentDetails,
             'shipmentDetails' => [
                 'recipient_name' => $shipment->recipient_name,
                 'contact_number' => $shipment->contact_number,

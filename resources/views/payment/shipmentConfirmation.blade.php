@@ -74,36 +74,21 @@
                 <div class="receipt-summary">
                     <h2>Payment Receipt</h2>
                     <table class="table table-bordered">
-                        <tr>
-                            <th>Reference Number</th>
-                            <td>{{ $receipt['ref_number'] }}</td>
-                        </tr>
+                      
                         <tr>
                             <th>Payment Time</th>
-                            <td>{{ $receipt['payment_time'] }}</td>
+                            <td>{{ $receipt['paid_at'] }}</td>
                         </tr>
                         <tr>
                             <th>Payment Method</th>
-                            <td>{{ $receipt['payment_method_label'] }}</td>
+                            <td>{{ $receipt['method'] }}</td>
                         </tr>
-                        <tr>
-                            <th>Sender Name</th>
-                            <td>{{ $receipt['sender_name'] }}</td>
-                        </tr>
+                    
                         <tr>
                             <th>Amount Paid</th>
-                            <td>${{ number_format($receipt['amount_paid'], 2) }}</td>
+                            <td>${{ number_format($receipt['amount'], 2) }}</td>
                         </tr>
-                        @if (!empty($receipt['discount_code']))
-                            <tr>
-                                <th>Discount Code</th>
-                                <td>{{ $receipt['discount_code'] }}</td>
-                            </tr>
-                        @endif
-                        <tr>
-                            <th>Admin Fee</th>
-                            <td>${{ number_format($receipt['admin_fee'], 2) }}</td>
-                        </tr>
+                     
                         <tr>
                             <th>Payment Status</th>
                             <td>{{ $receipt['payment_status'] }}</td>

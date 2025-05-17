@@ -19,9 +19,10 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity');
     }
-    public function user() {
-    return $this->belongsTo(User::class, 'user_id');
-}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     protected function casts(): array
     {
         return [
@@ -29,9 +30,13 @@ class Order extends Model
         ];
     }
 
-      public function shipments() {
+    public function shipments()
+    {
         return $this->hasOne(Shipments::class);
     }
 
-   
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }
