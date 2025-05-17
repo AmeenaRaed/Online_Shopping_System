@@ -1,11 +1,11 @@
 <x-layoutGuest>
 
     <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipment Confirmation</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shipment Confirmation</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     </head>
     <!-- Main Container -->
     <div class="flex h-screen w-screen">
@@ -17,12 +17,13 @@
 
                 <!--Dashboard-->
                 <a href="/admin" class="text-white text-decoration-none">
-                <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                    class="w-5 h-5">
-                    <path fill-rule="evenodd"
-                      d="M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z"
-                      clip-rule="evenodd"></path>
-                  </svg>&nbsp; Dashboard</div>
+                    <div class="flex items-center p-3 rounded-lg hover:bg-gray-700"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            aria-hidden="true" class="w-5 h-5">
+                            <path fill-rule="evenodd"
+                                d="M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.04 16.5l.5-1.5h6.42l.5 1.5H8.29zm7.46-12a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0v-6zm-3 2.25a.75.75 0 00-1.5 0v3.75a.75.75 0 001.5 0V9zm-3 2.25a.75.75 0 00-1.5 0v1.5a.75.75 0 001.5 0v-1.5z"
+                                clip-rule="evenodd"></path>
+                        </svg>&nbsp; Dashboard</div>
                 </a>
                 <!-- Profile -->
                 <a href="/admin/profile" class="text-white text-decoration-none">
@@ -66,15 +67,17 @@
                         </svg>&nbsp;Reports</div>
                 </a>
                 <!--Logout-->
-                <a href="/login/admin" class="text-white text-decoration-none">
-                    <div class="flex items-center p-3 rounded-lg hover:bg-red-600"><svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            aria-hidden="true" class="w-5 h-5">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>&nbsp;Logout</div>
-                </a>
+                <div class="flex items-center p-3 rounded-lg hover:bg-red-600"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-5 h-5">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>&nbsp;
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="button" id="logout-btn">Logout</button>
+                    </form>
+                </div>
             </nav>
         </div>
 
@@ -123,42 +126,50 @@
                 @csrf
                 @method('PUT')
 
-            <div class="grid grid-cols-2 gap-4">
-                <input type="text" name="first_name" id="editFirstName" value="{{ $user->first_name }}" class="p-2 border border-gray-300 rounded-md">
-                <input type="text" name="last_name" id="editLastName" value="{{ $user->last_name }}" class="p-2 border border-gray-300 rounded-md">
-                <input type="date" name="dob" id="editDOB" value="{{ $user->dob }}" class="p-2 border border-gray-300 rounded-md">
-                <input type="text" name="phone" id="editPhone" value="{{ $user->phone }}" class="p-2 border border-gray-300 rounded-md">
-                <input type="email" name="email" id="editEmail" value="{{ $user->email }}" class="p-2 border border-gray-300 rounded-md">
-                <input type="text" name="username" id="editUsername" value="{{ $user->username }}" class="p-2 border border-gray-300 rounded-md">
-                <input type="file" name="avatar" accept="image/*" class="p-2 border border-gray-300 rounded-md">
-            </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" name="first_name" id="editFirstName" value="{{ $user->first_name }}"
+                        class="p-2 border border-gray-300 rounded-md">
+                    <input type="text" name="last_name" id="editLastName" value="{{ $user->last_name }}"
+                        class="p-2 border border-gray-300 rounded-md">
+                    <input type="date" name="dob" id="editDOB" value="{{ $user->dob }}"
+                        class="p-2 border border-gray-300 rounded-md">
+                    <input type="text" name="phone" id="editPhone" value="{{ $user->phone }}"
+                        class="p-2 border border-gray-300 rounded-md">
+                    <input type="email" name="email" id="editEmail" value="{{ $user->email }}"
+                        class="p-2 border border-gray-300 rounded-md">
+                    <input type="text" name="username" id="editUsername" value="{{ $user->username }}"
+                        class="p-2 border border-gray-300 rounded-md">
+                    <input type="file" name="avatar" accept="image/*" class="p-2 border border-gray-300 rounded-md">
+                </div>
 
-            <!-- Address Field -->
-            <textarea name="address" id="editAddress" class="w-full p-2 border border-gray-300 rounded-md mt-4">{{ $user->address }}</textarea>
+                <!-- Address Field -->
+                <textarea name="address" id="editAddress"
+                    class="w-full p-2 border border-gray-300 rounded-md mt-4">{{ $user->address }}</textarea>
 
-            <!-- Buttons -->
-            <div class="flex justify-between mt-4">
-                <button type="button" onclick="closeEditProfileModal()" class="bg-gray-500 text-white px-6 py-3 rounded hover:bg-gray-600">
-                    Cancel
-                </button>
-                <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600">
-                    Save Changes
-                </button>
-            </div>
-        </form>
+                <!-- Buttons -->
+                <div class="flex justify-between mt-4">
+                    <button type="button" onclick="closeEditProfileModal()"
+                        class="bg-gray-500 text-white px-6 py-3 rounded hover:bg-gray-600">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 
     </div>
     <script>
-   function openEditProfileModal() {
-    document.getElementById("editProfileModal").classList.remove("hidden");
-}
+        function openEditProfileModal() {
+            document.getElementById("editProfileModal").classList.remove("hidden");
+        }
 
-function closeEditProfileModal() {
-    document.getElementById("editProfileModal").classList.add("hidden");
-}
+        function closeEditProfileModal() {
+            document.getElementById("editProfileModal").classList.add("hidden");
+        }
 
 
     </script>

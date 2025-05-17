@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Shipment Confirmation</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        
+
     </head>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -70,22 +70,24 @@
                         </svg>&nbsp;Reports</div>
                 </a>
                 <!--Logout-->
-                <a href="/login/admin" class="text-white text-decoration-none">
-                    <div class="flex items-center p-3 rounded-lg hover:bg-red-600"><svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            aria-hidden="true" class="w-5 h-5">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>&nbsp;Logout</div>
-                </a>
+                <div class="flex items-center p-3 rounded-lg hover:bg-red-600"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-5 h-5">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>&nbsp;
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="button" id="logout-btn">Logout</button>
+                    </form>
+                </div>
             </nav>
         </div>
 
         <!-- Main Content -->
         <div class="ml-13 flex-box w-310 h-screen p-6 bg-white">
             <div class="flex justify-between items-center p-4 bg-black rounded-lg shadow-md">
-                
+
                 <button onclick="printReport()" class="bg-green-300  px-4 py-2 rounded hover:bg-green-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-printer-fill" viewBox="0 0 16 16">
@@ -97,14 +99,14 @@
                 </button>
             </div>
             @if($salesData->isEmpty())
-    <div class="p-6 bg-white shadow-md rounded-lg mt-5 mb-5">
-        <p class="text-gray-500 text-center p-4">No sales data available yet</p>
-    </div>
-@else
-    <div class="mx-auto">
-        <canvas id="salesChart"></canvas>
-    </div>
-@endif
+                <div class="p-6 bg-white shadow-md rounded-lg mt-5 mb-5">
+                    <p class="text-gray-500 text-center p-4">No sales data available yet</p>
+                </div>
+            @else
+                <div class="mx-auto">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            @endif
 
 
             <h2 class="text-xl font-bold mb-4 text-center">Order Summary</h2>
@@ -121,20 +123,21 @@
                 </thead>
                 <tbody>
                     @if($orders->count() > 0)
-    @foreach ($orders as $order)
-        <tr class="border-t">
-            <td class="p-3 text-center">{{ $order->id }}</td>
-            <td class="p-3 text-center">{{ $order->user->username ?? 'Guest' }}</td>
-            <td class="p-3 text-center">${{ number_format($order->total, 2) }}</td>
-            <td class="p-3 text-center">{{ ucfirst($order->order_status) }}</td>
-            <td class="p-3 text-center">{{ $order->created_at ? $order->created_at->format('Y-m-d') : 'N/A' }}</td>
-        </tr>
-    @endforeach
-@else
-    <tr>
-        <td colspan="5" class="text-gray-500 text-center p-4">There is no order summary yet</td>
-    </tr>
-@endif
+                        @foreach ($orders as $order)
+                            <tr class="border-t">
+                                <td class="p-3 text-center">{{ $order->id }}</td>
+                                <td class="p-3 text-center">{{ $order->user->username ?? 'Guest' }}</td>
+                                <td class="p-3 text-center">${{ number_format($order->total, 2) }}</td>
+                                <td class="p-3 text-center">{{ ucfirst($order->order_status) }}</td>
+                                <td class="p-3 text-center">
+                                    {{ $order->created_at ? $order->created_at->format('Y-m-d') : 'N/A' }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="5" class="text-gray-500 text-center p-4">There is no order summary yet</td>
+                        </tr>
+                    @endif
 
 
 
@@ -145,13 +148,13 @@
 
     </div>
     <script>
-       function filterReports() {
-    let startDate = document.getElementById("startDate").value;
-    let endDate = document.getElementById("endDate").value;
-    let status = document.getElementById("orderStatusFilter").value;
+        function filterReports() {
+            let startDate = document.getElementById("startDate").value;
+            let endDate = document.getElementById("endDate").value;
+            let status = document.getElementById("orderStatusFilter").value;
 
-    window.location.href = `/admin/reports?start_date=${startDate}&end_date=${endDate}&status=${status}`;
-}
+            window.location.href = `/admin/reports?start_date=${startDate}&end_date=${endDate}&status=${status}`;
+        }
 
 
         function printReport() {

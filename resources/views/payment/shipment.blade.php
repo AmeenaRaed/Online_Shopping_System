@@ -130,8 +130,6 @@ if (session()->has('receipt')) {
         </div>
         <?php endif; ?>
 
-        <p>TEST ORDER ID = {{$order->id}}</p>
-
         <form method="POST" action=" {{route('shipment.process', $order)}}">
             @csrf
             <input type="hidden" name="order_id" value="{{ $order->id }}">

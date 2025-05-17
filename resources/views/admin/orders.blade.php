@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Shipment Confirmation</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        
+
     </head>
     <!-- Main Container -->
     <div class="flex h-screen w-screen">
@@ -68,15 +68,17 @@
                         </svg>&nbsp;Reports</div>
                 </a>
                 <!--Logout-->
-                <a href="/login/admin" class="text-white text-decoration-none">
-                    <div class="flex items-center p-3 rounded-lg hover:bg-red-600"><svg
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            aria-hidden="true" class="w-5 h-5">
-                            <path fill-rule="evenodd"
-                                d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>&nbsp;Logout</div>
-                </a>
+                <div class="flex items-center p-3 rounded-lg hover:bg-red-600"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-5 h-5">
+                        <path fill-rule="evenodd"
+                            d="M12 2.25a.75.75 0 01.75.75v9a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 010 1.06 8.25 8.25 0 1011.668 0 .75.75 0 111.06-1.06c3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788a.75.75 0 011.06 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>&nbsp;
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="button" id="logout-btn">Logout</button>
+                    </form>
+                </div>
             </nav>
         </div>
 
@@ -144,151 +146,156 @@
 
         </div>
         <!-- View Order Modal -->
-<div id="viewOrderModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
-        <h2 class="text-2xl font-bold mb-4">Order Details</h2>
+        <div id="viewOrderModal"
+            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-[40rem]">
+                <h2 class="text-2xl font-bold mb-4">Order Details</h2>
 
-        <!-- Order Info Grid -->
-        <div class="grid grid-cols-2 gap-4">
-            <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
-            <p><strong>Username:</strong> <span id="modalCustomerName"></span></p>
-            <p><strong>Discount ID:</strong> <span id="modalDiscountId"></span></p>
-            <p><strong>Total:</strong> <span id="modalTotal"></span></p>
-            <p><strong>Status:</strong> <span id="modalOrderStatus"></span></p>
-            <p><strong>Created At:</strong> <span id="modalCreatedAt"></span></p>
-            <p><strong>Updated At:</strong> <span id="modalUpdatedAt"></span></p>
-        </div>
+                <!-- Order Info Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+                    <p><strong>Username:</strong> <span id="modalCustomerName"></span></p>
+                    <p><strong>Discount ID:</strong> <span id="modalDiscountId"></span></p>
+                    <p><strong>Total:</strong> <span id="modalTotal"></span></p>
+                    <p><strong>Status:</strong> <span id="modalOrderStatus"></span></p>
+                    <p><strong>Created At:</strong> <span id="modalCreatedAt"></span></p>
+                    <p><strong>Updated At:</strong> <span id="modalUpdatedAt"></span></p>
+                </div>
 
-        <!-- Close Button -->
-        <div class="flex justify-end mt-4">
-            <button onclick="closeViewOrderModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
-                Close
-            </button>
+                <!-- Close Button -->
+                <div class="flex justify-end mt-4">
+                    <button onclick="closeViewOrderModal()"
+                        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <!-- Edit Order Modal -->
-<div id="editOrderModal" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-[30rem]">
-        <h2 class="text-2xl font-bold mb-4">Update Order Status</h2>
-        <!-- Status Dropdown -->
-        <div class="mt-4">
-            <label class="font-bold">Change Status:</label>
-            <select id="editOrderStatus" class="w-full p-2 border border-gray-300 rounded-md">
-                <option value="pending">Pending</option>
-                <option value="shipped">Shipped</option>
-                <option value="delivered">Delivered</option>
-            </select>
+        <div id="editOrderModal"
+            class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-[30rem]">
+                <h2 class="text-2xl font-bold mb-4">Update Order Status</h2>
+                <!-- Status Dropdown -->
+                <div class="mt-4">
+                    <label class="font-bold">Change Status:</label>
+                    <select id="editOrderStatus" class="w-full p-2 border border-gray-300 rounded-md">
+                        <option value="pending">Pending</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                    </select>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex justify-between mt-4">
+                    <button onclick="closeEditOrderModal()"
+                        class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-4">
+                        Cancel
+                    </button>
+                    <button onclick="updateOrderStatus()"
+                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Update Status
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <!-- Buttons -->
-    <div class="flex justify-between mt-4">
-    <button onclick="closeEditOrderModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-4">
-        Cancel
-    </button>
-    <button onclick="updateOrderStatus()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-        Update Status
-    </button>
-</div>
     </div>
-</div>
-
-        </div>
 
     </div>
     <script>
         function searchOrders() {
-    let searchId = document.getElementById("searchOrderId").value.trim();
-    let searchDate = document.getElementById("searchOrderDate").value;
-    let searchStatus = document.getElementById("searchOrderStatus").value;
+            let searchId = document.getElementById("searchOrderId").value.trim();
+            let searchDate = document.getElementById("searchOrderDate").value;
+            let searchStatus = document.getElementById("searchOrderStatus").value;
 
-    window.location.href = `/admin/orders?search_id=${searchId}&search_date=${searchDate}&search_status=${searchStatus}`;
-}
+            window.location.href = `/admin/orders?search_id=${searchId}&search_date=${searchDate}&search_status=${searchStatus}`;
+        }
 
 
         function viewOrderDetails(orderId) {
-    fetch(`/admin/orders/show/${orderId}`)
-        .then(response => response.json())
-        .then(order => {
-            document.getElementById("modalOrderId").innerText = order.id;
-            document.getElementById("modalCustomerName").innerText = order.username;
-            document.getElementById("modalDiscountId").innerText = order.discount_id;
-            document.getElementById("modalTotal").innerText = order.total;
-            document.getElementById("modalOrderStatus").innerText = order.order_status;
-            document.getElementById("modalCreatedAt").innerText = order.created_at;
-            document.getElementById("modalUpdatedAt").innerText = order.updated_at;
+            fetch(`/admin/orders/show/${orderId}`)
+                .then(response => response.json())
+                .then(order => {
+                    document.getElementById("modalOrderId").innerText = order.id;
+                    document.getElementById("modalCustomerName").innerText = order.username;
+                    document.getElementById("modalDiscountId").innerText = order.discount_id;
+                    document.getElementById("modalTotal").innerText = order.total;
+                    document.getElementById("modalOrderStatus").innerText = order.order_status;
+                    document.getElementById("modalCreatedAt").innerText = order.created_at;
+                    document.getElementById("modalUpdatedAt").innerText = order.updated_at;
 
-            document.getElementById("viewOrderModal").classList.remove("hidden");
-        })
-        .catch(error => {
-            console.error("Error fetching order details:", error);
-            alert("Failed to fetch order details. Please try again.");
-        });
-}
+                    document.getElementById("viewOrderModal").classList.remove("hidden");
+                })
+                .catch(error => {
+                    console.error("Error fetching order details:", error);
+                    alert("Failed to fetch order details. Please try again.");
+                });
+        }
 
-function closeViewOrderModal() {
-    document.getElementById("viewOrderModal").classList.add("hidden");
-}
+        function closeViewOrderModal() {
+            document.getElementById("viewOrderModal").classList.add("hidden");
+        }
 
-       function editOrderDetails(orderId) {
-    fetch(`/admin/orders/show/${orderId}`)
-        .then(response => response.json())
-        .then(order => {
-            document.getElementById("modalOrderId").innerText = order.id;
-            document.getElementById("modalCustomerName").innerText = order.username;
-            document.getElementById("editOrderStatus").value = order.order_status;
+        function editOrderDetails(orderId) {
+            fetch(`/admin/orders/show/${orderId}`)
+                .then(response => response.json())
+                .then(order => {
+                    document.getElementById("modalOrderId").innerText = order.id;
+                    document.getElementById("modalCustomerName").innerText = order.username;
+                    document.getElementById("editOrderStatus").value = order.order_status;
 
-            document.getElementById("editOrderModal").classList.remove("hidden");
-        })
-        .catch(error => {
-            console.error("Error fetching order details:", error);
-            alert("Failed to fetch order details. Please try again.");
-        });
-}
+                    document.getElementById("editOrderModal").classList.remove("hidden");
+                })
+                .catch(error => {
+                    console.error("Error fetching order details:", error);
+                    alert("Failed to fetch order details. Please try again.");
+                });
+        }
 
-function closeEditOrderModal() {
-    document.getElementById("editOrderModal").classList.add("hidden");
-}
+        function closeEditOrderModal() {
+            document.getElementById("editOrderModal").classList.add("hidden");
+        }
 
 
-       function updateOrderStatus() {
-    let orderIdElement = document.getElementById("modalOrderId");
-    
-    if (!orderIdElement) {
-        console.error("Error: modalOrderId element not found!");
-        return;
-    }
-    
-    let orderId = orderIdElement.innerText;
-    let newStatus = document.getElementById("editOrderStatus").value;
+        function updateOrderStatus() {
+            let orderIdElement = document.getElementById("modalOrderId");
 
-    let csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
-    
-    if (!csrfTokenElement) {
-        console.error("Error: CSRF token meta tag missing!");
-        return;
-    }
-    
-    let csrfToken = csrfTokenElement.getAttribute("content");
+            if (!orderIdElement) {
+                console.error("Error: modalOrderId element not found!");
+                return;
+            }
 
-    fetch(`/admin/orders/edit/${orderId}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": csrfToken
-        },
-        body: JSON.stringify({ order_status: newStatus })
-    }).then(response => response.json())
-      .then(data => {
-          console.log("Order status updated successfully!");
-          closeEditOrderModal();
-          location.reload();
-      }).catch(error => {
-          console.error("Error updating order status:", error);
-          alert("Failed to update order status. Please try again.");
-      });
-}
+            let orderId = orderIdElement.innerText;
+            let newStatus = document.getElementById("editOrderStatus").value;
+
+            let csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+
+            if (!csrfTokenElement) {
+                console.error("Error: CSRF token meta tag missing!");
+                return;
+            }
+
+            let csrfToken = csrfTokenElement.getAttribute("content");
+
+            fetch(`/admin/orders/edit/${orderId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken
+                },
+                body: JSON.stringify({ order_status: newStatus })
+            }).then(response => response.json())
+                .then(data => {
+                    console.log("Order status updated successfully!");
+                    closeEditOrderModal();
+                    location.reload();
+                }).catch(error => {
+                    console.error("Error updating order status:", error);
+                    alert("Failed to update order status. Please try again.");
+                });
+        }
 
     </script>
 
