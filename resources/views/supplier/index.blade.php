@@ -1,8 +1,10 @@
 <x-layoutGuest>
     <x-SupplierSideBar />
-   <head>
+
+
+    <head>
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-   </head>
+    </head>
 
     {{-- TO-DO
     Fetch dropdown categories from the database ✔
@@ -10,21 +12,12 @@
     --}}
 
     <div class="ml-[15rem] p-8 space-y-10">
-
-  <!-- Walcome message -->
-        <div class="flex justify-center relative mb-10">
-            @if (session('welcome'))
-    <div 
-        x-data="{ show: true }" 
-        x-init="setTimeout(() => show = false, 10000)" 
-        x-show="show"
-        x-transition
-        class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-pink-200 text-pink-900 px-6 py-3 rounded-lg shadow-lg z-50 border border-pink-300"
-    >
-        {{ session('welcome') }}
-    </div>
-@endif
-        
+        @if (session('welcome'))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 10000)" x-show="show" x-transition
+                class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-pink-200 text-pink-900 px-6 py-3 rounded-lg shadow-lg z-50 border border-pink-300">
+                {{ session('welcome') }}
+            </div>
+        @endif
         @if (session('success'))
             <div class="bg-green-100 text-green-800 p-2 rounded mb-4">
                 {{ session('success') }}
