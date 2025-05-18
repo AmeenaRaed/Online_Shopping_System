@@ -1,5 +1,24 @@
 <x-layoutGuest>
-
+<div class=" flex-col justify-center items-center gap-4 mx-4 p-2">
+            <div class=" flex justify-between items-center mx-10">
+                <!-- Left-aligned logo -->
+                <div class="flex">
+                    <img src="{{ asset('images/shoplogo.png') }}" alt="Logo" class="w-full max-w-[100px] h-auto" />
+                </div>
+                <!-- Right-aligned icon -->
+                <div class="flex gap-7 items-center mx-5">
+                </div>
+              </div>
+            <hr class="border-b-1 m-4 border-gray-200" />
+            <div class="mb-5 flex justify-between items-center mx-10">
+                <!-- Left-aligned navigation -->
+                <nav class="flex gap-10 flex-wrap">
+                  <ul class="flex space-x-4">
+                    <li><a href="/" class="px-4 py-2 rounded-md hover:bg-peach-glow">Home</a></li>
+                  </ul>
+                </nav>
+        </div>
+        </div>
     <div class="flex justify-center">
         <div class="w-[800px] rounded-xl p-6">
 
