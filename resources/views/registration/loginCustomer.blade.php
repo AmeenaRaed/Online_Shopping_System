@@ -31,15 +31,7 @@
                 @endif
             
                 {{-- Existing error display --}}
-                @if ($errors->any())
-                    <div class="bg-red-100 text-red-800 p-4 rounded mb-5">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+          
                 
                 <form class="space-y-4" action="{{route('loginCustomer.attempt')}}" method="POST">
                     @csrf

@@ -37,7 +37,7 @@
                                 @endif
 
                                 <!-- Add to Cart Button inside the clickable card -->
-                                @if ($product->stock_quantity > 0)
+                                @if ($product->stock_quantity > 0 && auth()->check())
                                     <form action="{{ route('cart.add') }}" method="POST" class="mt-4">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">

@@ -29,8 +29,9 @@
                                     @endif
                                 </p>
 
+
                                 <!-- Add to Cart -->
-                                @if ($product->stock_quantity > 0)
+                                @if ($product->stock_quantity > 0 && auth()->check())
                                     <form action="{{ route('cart.add') }}" method="POST" class="mt-4 w-full">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">

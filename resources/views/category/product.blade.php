@@ -37,7 +37,7 @@
                             <p class="text-gray-500">Supplier: {{$product->supplier->first()->username}}</p>
 
                             <div class="flex justify-center mt-4">
-                                @if ($product->stock_quantity > 0)
+                                @if ($product->stock_quantity > 0 && auth()->check())
                                     <form action="{{ route('cart.add') }}" method="POST"
                                         class=" w-full max-w-xs flex justify-center">
                                         @csrf
@@ -61,6 +61,7 @@
 
     {{-- //////////////////////////////////////////////////////////////////////////////////////////// --}}
 
+@if (auth()->check())     
 
     {{-- input area --}}
     <div class="max-w-5xl mx-auto p-5 rounded-lg mt-10 comment-input ">
@@ -69,6 +70,7 @@
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <div class="flex flex-col px-3 py-3 rounded-lg bg-white border border-gray-300 shadow-sm">
                 <!-- User Avatar -->
+                
                 <div class="flex items-center flex-col text-center mb-4">
                     <h1 class="mb-3 text-2xl font-bold text-muted-rose">Add a Review!!</h1>
 
@@ -146,6 +148,9 @@
             @endforeach
         @endif
     </div>
+@endif
+
+    {{-- //////////////////////////////////////////////////////////////////////////////////////////// --}}
 
 
     <script>
